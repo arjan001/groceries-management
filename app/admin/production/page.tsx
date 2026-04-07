@@ -185,7 +185,7 @@ export default function ProductionPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Delete this production run?')) {
+    if (confirm('Delete this procurement batch?')) {
       const deletedRun = runs.find(r => r.id === id);
       await supabase.from('production_runs').delete().eq('id', id);
       logAudit({
@@ -214,26 +214,26 @@ export default function ProductionPage() {
   return (
     <div className="p-8">
       <div className="mb-6">
-        <h1 className="mb-2">Production Runs</h1>
-        <p className="text-muted-foreground">Schedule, track, and record daily baking batches from start to finish</p>
+        <h1 className="mb-2">Procurement Batches</h1>
+        <p className="text-muted-foreground">Schedule, track, and record daily procurement batches from start to finish</p>
       </div>
 
-      {/* What is a Production Run? */}
+      {/* What is a Procurement Batch? */}
       <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 flex gap-4">
         <span className="text-2xl mt-0.5">🏭</span>
         <div>
-          <p className="font-semibold text-amber-900 mb-1">What is a Production Run?</p>
+          <p className="font-semibold text-amber-900 mb-1">What is a Procurement Batch?</p>
           <p className="text-sm text-amber-800 leading-relaxed">
-            A <strong>Production Run</strong> (also called a <strong>batch</strong>) is a single baking session for a specific recipe.
-            For example: <em>&quot;Batch of 200 White Bread Loaves — started 5:00 AM, finished 8:00 AM, yielded 195 loaves.&quot;</em>
+            A <strong>Procurement Batch</strong> is a single procurement order for a specific product.
+            For example: <em>&quot;Batch of 200 Milk Cartons — ordered 5:00 AM, received 8:00 AM, yielded 195 units.&quot;</em>
           </p>
           <ul className="mt-2 text-sm text-amber-800 space-y-1 list-disc list-inside">
-            <li><strong>Batch Size</strong> — how many units you planned to make (e.g. 200 loaves)</li>
-            <li><strong>Yield</strong> — how many units actually came out good (e.g. 195 loaves)</li>
-            <li><strong>Loss</strong> — the difference (e.g. 5 loaves wasted/burned)</li>
+            <li><strong>Batch Size</strong> — how many units you planned to procure (e.g. 200 units)</li>
+            <li><strong>Yield</strong> — how many units actually arrived in good condition (e.g. 195 units)</li>
+            <li><strong>Loss</strong> — the difference (e.g. 5 units damaged/missing)</li>
             <li><strong>Efficiency</strong> — yield ÷ batch size as a percentage (e.g. 97.5%)</li>
           </ul>
-          <p className="mt-2 text-xs text-amber-700">Track every run to monitor waste, efficiency, and production output over time.</p>
+          <p className="mt-2 text-xs text-amber-700">Track every batch to monitor waste, efficiency, and procurement output over time.</p>
         </div>
       </div>
 
@@ -265,22 +265,22 @@ export default function ProductionPage() {
           }}
           className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 font-medium"
         >
-          + New Production Run
+          + New Procurement Batch
         </button>
       </div>
 
       <Modal
         isOpen={showForm}
         onClose={() => { setShowForm(false); setEditId(null); }}
-        title={editId ? 'Edit Production Run' : 'Create Production Run'}
+        title={editId ? 'Edit Procurement Batch' : 'Create Procurement Batch'}
         size="lg"
       >
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             {/* Recipe Search / Autocomplete */}
             <div className="col-span-2">
-              <label className="block text-sm font-medium mb-1">Recipe</label>
-              <p className="text-xs text-muted-foreground mb-2">Type to search recipes by name, code, or category. Select a recipe to auto-fill batch size and yield.</p>
+              <label className="block text-sm font-medium mb-1">Product</label>
+              <p className="text-xs text-muted-foreground mb-2">Type to search products by name, code, or category. Select a product to auto-fill batch size and yield.</p>
               <div className="relative">
                 <input
                   ref={recipeInputRef}
@@ -295,7 +295,7 @@ export default function ProductionPage() {
                     }
                   }}
                   onFocus={() => setShowRecipeDropdown(true)}
-                  placeholder="Search recipes by name or code..."
+                  placeholder="Search products by name or code..."
                   className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/50 outline-none"
                   required
                 />
@@ -312,11 +312,11 @@ export default function ProductionPage() {
                       <div className="px-3 py-4 text-center text-sm text-muted-foreground">
                         {recipes.length === 0 ? (
                           <div>
-                            <p className="font-medium">No recipes found in database</p>
-                            <p className="text-xs mt-1">Add recipes in the Recipes module first, or type a recipe code manually below.</p>
+                            <p className="font-medium">No products found in database</p>
+                            <p className="text-xs mt-1">Add products in the Product Catalog first, or type a product code manually below.</p>
                           </div>
                         ) : (
-                          <p>No recipes match &quot;{recipeSearch}&quot;</p>
+                          <p>No products match &quot;{recipeSearch}&quot;</p>
                         )}
                       </div>
                     ) : (
@@ -353,7 +353,7 @@ export default function ProductionPage() {
                         }}
                         className="w-full text-left px-3 py-2.5 hover:bg-secondary/70 transition-colors text-sm text-primary font-medium border-t border-border"
                       >
-                        Use &quot;{recipeSearch}&quot; as custom recipe code
+                        Use &quot;{recipeSearch}&quot; as custom product code
                       </button>
                     )}
                   </div>
@@ -454,7 +454,7 @@ export default function ProductionPage() {
         <table className="w-full text-sm">
           <thead className="bg-secondary border-b border-border">
             <tr>
-              <th className="px-4 py-3 text-left font-semibold">Recipe</th>
+              <th className="px-4 py-3 text-left font-semibold">Product</th>
               <th className="px-4 py-3 text-left font-semibold">Operator</th>
               <th className="px-4 py-3 text-left font-semibold">Batch</th>
               <th className="px-4 py-3 text-left font-semibold">Yield</th>
@@ -469,7 +469,7 @@ export default function ProductionPage() {
             {runs.length === 0 ? (
               <tr>
                 <td colSpan={9} className="px-4 py-8 text-center text-muted-foreground">
-                  No production runs found
+                  No procurement batches found
                 </td>
               </tr>
             ) : (

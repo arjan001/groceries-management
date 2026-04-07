@@ -34,8 +34,8 @@ export default function ContactPage() {
               <a href="tel:0733675267" className="text-orange-600 font-bold text-lg hover:underline block mb-2">
                 0733 67 52 67
               </a>
-              <a href="mailto:sales@snackoh-bakers.com" className="text-gray-600 text-sm hover:text-orange-600 transition-colors">
-                sales@snackoh-bakers.com
+              <a href="mailto:sales@freshcart-groceries.com" className="text-gray-600 text-sm hover:text-orange-600 transition-colors">
+                sales@freshcart-groceries.com
               </a>
             </div>
 
@@ -54,8 +54,8 @@ export default function ContactPage() {
               <a href="tel:0799559434" className="text-orange-600 font-bold text-lg hover:underline block mb-2">
                 0799 55 94 34
               </a>
-              <a href="mailto:feedback@snackoh-bakers.com" className="text-gray-600 text-sm hover:text-orange-600 transition-colors">
-                feedback@snackoh-bakers.com
+              <a href="mailto:feedback@freshcart-groceries.com" className="text-gray-600 text-sm hover:text-orange-600 transition-colors">
+                feedback@freshcart-groceries.com
               </a>
             </div>
 
@@ -68,11 +68,11 @@ export default function ContactPage() {
               <p className="text-gray-500 text-sm mb-4">
                 For partnerships, careers, media, or reaching out to leadership.
               </p>
-              <a href="mailto:ceo@snackoh-bakers.com" className="text-gray-600 text-sm hover:text-orange-600 transition-colors block mb-1">
-                ceo@snackoh-bakers.com
+              <a href="mailto:ceo@freshcart-groceries.com" className="text-gray-600 text-sm hover:text-orange-600 transition-colors block mb-1">
+                ceo@freshcart-groceries.com
               </a>
-              <a href="mailto:sales@snackoh-bakers.com" className="text-gray-600 text-sm hover:text-orange-600 transition-colors block">
-                sales@snackoh-bakers.com
+              <a href="mailto:sales@freshcart-groceries.com" className="text-gray-600 text-sm hover:text-orange-600 transition-colors block">
+                sales@freshcart-groceries.com
               </a>
             </div>
           </div>
@@ -126,20 +126,20 @@ export default function ContactPage() {
               <div className="space-y-4">
                 <div>
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Sales</p>
-                  <a href="mailto:sales@snackoh-bakers.com" className="text-gray-800 font-semibold hover:text-orange-600 transition-colors">
-                    sales@snackoh-bakers.com
+                  <a href="mailto:sales@freshcart-groceries.com" className="text-gray-800 font-semibold hover:text-orange-600 transition-colors">
+                    sales@freshcart-groceries.com
                   </a>
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Leadership</p>
-                  <a href="mailto:ceo@snackoh-bakers.com" className="text-gray-800 font-semibold hover:text-orange-600 transition-colors">
-                    ceo@snackoh-bakers.com
+                  <a href="mailto:ceo@freshcart-groceries.com" className="text-gray-800 font-semibold hover:text-orange-600 transition-colors">
+                    ceo@freshcart-groceries.com
                   </a>
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Feedback</p>
-                  <a href="mailto:feedback@snackoh-bakers.com" className="text-gray-800 font-semibold hover:text-orange-600 transition-colors">
-                    feedback@snackoh-bakers.com
+                  <a href="mailto:feedback@freshcart-groceries.com" className="text-gray-800 font-semibold hover:text-orange-600 transition-colors">
+                    feedback@freshcart-groceries.com
                   </a>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function ContactPage() {
                 <h3 className="font-bold text-gray-900">Location</h3>
               </div>
               <p className="text-gray-700 font-semibold">Nairobi, Kenya</p>
-              <p className="text-gray-500 text-sm mt-1">Visit us for fresh baked goods daily.</p>
+              <p className="text-gray-500 text-sm mt-1">Visit us for fresh groceries daily.</p>
             </div>
 
             {/* Hours */}
@@ -185,7 +185,7 @@ export default function ContactPage() {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-black text-gray-900 mb-4">Ready to Order?</h2>
           <p className="text-gray-500 text-sm mb-8">
-            Browse our full range of freshly baked goods and place your order online. Free delivery on orders over KES 2,000.
+            Browse our full range of fresh groceries and place your order online. Free delivery on orders over KES 2,000.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/shop"

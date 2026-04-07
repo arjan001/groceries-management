@@ -399,7 +399,7 @@ export default function CatalogUploadPage() {
             <Upload size={48} className="mx-auto text-muted-foreground" />
             <div>
               <p className="text-lg font-medium text-foreground">Drop your CSV file here</p>
-              <p className="text-sm text-muted-foreground mt-1">or click to browse. Supports the Snackoh catalogue format.</p>
+              <p className="text-sm text-muted-foreground mt-1">or click to browse. Supports the FreshCart catalogue format.</p>
             </div>
             <input
               ref={fileInputRef}

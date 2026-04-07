@@ -2,9 +2,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Snackoh Bakers',
+  title: 'Privacy Policy | FreshCart Groceries',
   description:
-    'Learn how Snackoh Bakers collects, uses, and protects your personal information in compliance with the Kenya Data Protection Act 2019.',
+    'Learn how FreshCart Groceries collects, uses, and protects your personal information in compliance with the Kenya Data Protection Act 2019.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
           {/* Introduction */}
           <section>
             <p className="text-gray-600 leading-relaxed text-sm">
-              Snackoh Bakers (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;)
+              FreshCart Groceries (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;)
               is committed to protecting and respecting your privacy. This
               Privacy Policy explains how we collect, use, disclose, and
               safeguard your personal information when you visit our website,
@@ -336,7 +336,7 @@ export default function PrivacyPolicyPage() {
               Privacy Policy or our data practices, please contact us:
             </p>
             <div className="bg-gray-50 rounded-xl p-6 text-sm text-gray-700 space-y-1.5">
-              <p className="font-bold text-gray-900">Snackoh Bakers</p>
+              <p className="font-bold text-gray-900">FreshCart Groceries</p>
               <p>Nairobi, Kenya</p>
               <p>
                 For up-to-date contact details, please refer to the business

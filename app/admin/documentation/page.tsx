@@ -6,11 +6,11 @@ import remarkGfm from 'remark-gfm';
 import { BookOpenText, ExternalLink, ArrowUp, Download } from 'lucide-react';
 
 
-const markdownContent = `# Snackoh Bakers - Employee Training Manual
+const markdownContent = `# FreshCart Groceries - Employee Training Manual
 
 ## System Overview
 
-The Snackoh Bakers Management System is a comprehensive bakery ERP (Enterprise Resource Planning) and e-commerce platform purpose-built for bakery operations of all sizes. It integrates every aspect of the business into a single, unified system -- from recipe development and production scheduling to point-of-sale transactions, delivery logistics, multi-branch management, and financial accounting.
+The FreshCart Groceries Management System is a comprehensive grocery store ERP (Enterprise Resource Planning) and e-commerce platform purpose-built for grocery store operations of all sizes. It integrates every aspect of the business into a single, unified system -- from recipe development and production scheduling to point-of-sale transactions, delivery logistics, multi-branch management, and financial accounting.
 
 The platform is designed around role-based access control, ensuring each employee sees only the tools and data relevant to their job. Whether you are a baker managing production runs, a cashier processing in-store sales, a delivery rider tracking assignments, or an administrator overseeing the entire operation, the system adapts to your needs.
 
@@ -18,7 +18,7 @@ The platform is designed around role-based access control, ensuring each employe
 - **Production Pipeline:** Manage recipes, schedule production batches, generate picking lists, and track lot numbers for full traceability from raw ingredients to finished products.
 - **Sales & Commerce:** Process in-store sales via the POS system, manage online orders with M-Pesa payments, track order status, and handle delivery logistics end-to-end.
 - **Inventory Management:** Track raw materials, packaging, and finished goods across all locations. Automated reorder alerts, supplier management, purchase orders, and asset tracking keep operations running smoothly.
-- **Multi-Branch Operations:** Manage multiple bakery outlets with independent inventory, product catalogs, requisition workflows, employee assignments, and branch-level reporting.
+- **Multi-Branch Operations:** Manage multiple grocery store outlets with independent inventory, product catalogs, requisition workflows, employee assignments, and branch-level reporting.
 - **Financial Management:** Record and categorize expenses, manage debtors and creditors, generate financial reports, and maintain a general ledger for accounting.
 - **People & Compliance:** Comprehensive employee management, productivity reporting, granular roles and permissions, full audit logging, and food safety documentation.
 - **E-Commerce Storefront:** A public-facing website where customers can browse products, place orders, and pay via M-Pesa with real-time order tracking.
@@ -50,11 +50,11 @@ The platform is designed around role-based access control, ensuring each employe
 
 ## 1. Getting Started
 
-This section walks you through the essential first steps to begin using the Snackoh Bakers Management System, from logging in for the first time to navigating the interface and installing the system as a standalone application on your device.
+This section walks you through the essential first steps to begin using the FreshCart Groceries Management System, from logging in for the first time to navigating the interface and installing the system as a standalone application on your device.
 
 ### Logging In
 
-1. Open your web browser and navigate to the Snackoh Bakers system URL.
+1. Open your web browser and navigate to the FreshCart Groceries system URL.
 2. Click the **Staff Admin** icon (person icon) in the top-right of the website, or go directly to \`/auth/login\`.
 3. Enter your **email address** and **password** provided by your administrator.
 4. Click **Sign In**.
@@ -93,7 +93,7 @@ The system can be installed as an app on your phone or computer:
 
 ## 2. System Setup Guide (First-Time Setup)
 
-This section is the step-by-step process guide for setting up the Snackoh Bakers system from scratch. Follow these phases in order. Each phase builds on the previous one, so do not skip ahead. By the end, your products will appear on the public-facing website and the bakery will be ready for daily operations.
+This section is the step-by-step process guide for setting up the FreshCart Groceries system from scratch. Follow these phases in order. Each phase builds on the previous one, so do not skip ahead. By the end, your products will appear on the public-facing website and the grocery store will be ready for daily operations.
 
 > **Important:** You do not need to wait for production batches to display products on the website. As long as a product is registered in the Product Catalogue (Food Info), it will appear on the shop -- even with zero stock. Products with zero inventory show as "Sold Out" and customers can still view them, they just cannot add them to the cart until stock is available.
 
@@ -143,7 +143,7 @@ This section is the step-by-step process guide for setting up the Snackoh Bakers
 
 ---
 
-### Phase 3: Main Bakery Outlet Setup
+### Phase 3: Main Store Outlet Setup
 
 **What you need:** Phase 2 complete.
 
@@ -152,8 +152,8 @@ This section is the step-by-step process guide for setting up the Snackoh Bakers
 **Steps:**
 
 1. Go to **Admin > Branch Management** (under Outlets).
-2. Create the **main bakery** as your primary outlet. Set the type to "Bakery" and mark it as the primary location.
-3. Add the bakery's address, phone number, and operating hours.
+2. Create the **main store** as your primary outlet. Set the type to "Grocery Store" and mark it as the primary location.
+3. Add the grocery store's address, phone number, and operating hours.
 4. If you have additional branches (coffee shops, retail outlets, satellite kitchens), add those as secondary outlets.
 5. Go to **Branch Employees** and assign employees to their respective outlets.
 
@@ -212,7 +212,7 @@ This section is the step-by-step process guide for setting up the Snackoh Bakers
    - The total batch cost and cost-per-unit are calculated automatically.
 5. Repeat for every product you make.
 
-**Tip:** Use the **AI Recipe Generation** tool to speed things up -- it can auto-generate ingredient lists and costing estimates for common bakery products. You can then refine the generated recipe to match your exact formulations.
+**Tip:** Use the **AI Recipe Generation** tool to speed things up -- it can auto-generate ingredient lists and costing estimates for common grocery store products. You can then refine the generated recipe to match your exact formulations.
 
 **Result:** All your product recipes are defined with accurate ingredient costs. The system knows exactly what goes into each product and what it costs to produce.
 
@@ -338,7 +338,7 @@ This section is the step-by-step process guide for setting up the Snackoh Bakers
 |-------|--------|-----------|------------|
 | 1 | Login / Auth | Create administrator account | Database deployed |
 | 2 | Roles & Permissions, Employees | Set up roles, add employees with system access | Phase 1 |
-| 3 | Branch Management | Create main bakery outlet, assign employees | Phase 2 |
+| 3 | Branch Management | Create main store outlet, assign employees | Phase 2 |
 | 4 | Suppliers, Inventory | Add suppliers, raw materials with costs | Phase 3 |
 | 5 | Recipes & Products | Create recipes with ingredients from inventory | Phase 4 |
 | 6 | Pricing | Set retail, wholesale, and cost prices per product | Phase 5 |
@@ -358,7 +358,7 @@ This section is the step-by-step process guide for setting up the Snackoh Bakers
 
 ## 3. Employee Roles
 
-The Snackoh Bakers Management System uses a role-based access control (RBAC) model to ensure that every employee sees only the modules and data relevant to their responsibilities. Each employee is assigned a single login role that determines their default module access, and administrators can further fine-tune access using granular permissions. This approach maximizes security while keeping the interface clean and focused for each user.
+The FreshCart Groceries Management System uses a role-based access control (RBAC) model to ensure that every employee sees only the modules and data relevant to their responsibilities. Each employee is assigned a single login role that determines their default module access, and administrators can further fine-tune access using granular permissions. This approach maximizes security while keeping the interface clean and focused for each user.
 
 Each employee is assigned a role that determines what they can see and do in the system. Here are the standard roles:
 
@@ -424,7 +424,7 @@ The Dashboard is the first screen employees see after logging in and serves as t
 
 **Who can see this:** Cashier, POS Attendant, Admin (or anyone with "Access POS" permission)
 
-The Point of Sale (POS) module is the system's in-store sales processing hub, designed for fast and efficient transaction handling during busy bakery hours. It provides a full-screen, touch-friendly interface optimized for both desktop monitors and tablet devices, allowing cashiers to process sales quickly while minimizing errors.
+The Point of Sale (POS) module is the system's in-store sales processing hub, designed for fast and efficient transaction handling during busy grocery store hours. It provides a full-screen, touch-friendly interface optimized for both desktop monitors and tablet devices, allowing cashiers to process sales quickly while minimizing errors.
 
 **Core capabilities:**
 - **Process Sales:** Browse or search the product catalog, add items to the cart, adjust quantities, and apply discounts or special pricing. The product grid highlights frequently sold items for quick access.
@@ -450,10 +450,10 @@ The Point of Sale (POS) module is the system's in-store sales processing hub, de
 
 **Who can see this:** Baker, Admin (or anyone with "Manage Recipes" permission)
 
-The Production module group forms the backbone of the bakery's manufacturing operations. These interconnected modules manage the entire production pipeline -- from defining recipes and their ingredient costs, through scheduling and executing production batches, to tracking finished goods with full lot-level traceability. Together, they ensure consistent product quality, minimize waste, and provide complete visibility into what is being produced, when, and at what cost.
+The Production module group forms the backbone of the grocery store's manufacturing operations. These interconnected modules manage the entire production pipeline -- from defining recipes and their ingredient costs, through scheduling and executing production batches, to tracking finished goods with full lot-level traceability. Together, they ensure consistent product quality, minimize waste, and provide complete visibility into what is being produced, when, and at what cost.
 
 ### 6.1 Recipes & Products
-The Recipe Management module is where all product recipes are defined, costed, and maintained. Each recipe documents the exact ingredients, quantities, preparation steps, and associated costs required to produce a specific bakery product.
+The Recipe Management module is where all product recipes are defined, costed, and maintained. Each recipe documents the exact ingredients, quantities, preparation steps, and associated costs required to produce a specific grocery store product.
 
 **Key features:**
 - Create and manage recipes with detailed ingredient lists, quantities, units of measurement, and per-unit costs. The system automatically calculates the total cost per batch and cost per unit.
@@ -489,7 +489,7 @@ The Product Catalogue serves as the master product database for the entire syste
 *Figure 8: Adding a new product to the catalogue with allergen details, nutritional information, and dietary labels.*
 
 ### 6.3 Production Runs
-Production Runs is the scheduling and execution engine for bakery production. It allows production managers and bakers to plan daily or weekly production batches, track their progress in real time, and record actual output against planned targets for performance analysis.
+Production Runs is the scheduling and execution engine for grocery store production. It allows production managers and bakers to plan daily or weekly production batches, track their progress in real time, and record actual output against planned targets for performance analysis.
 
 **Key features:**
 - Schedule production batches for the day or week with specific product targets, quantities, and timelines.
@@ -517,7 +517,7 @@ Picking Lists bridge the gap between production planning and execution. When a p
 *Figure 11: Adding a new picking list to prepare ingredients for a production batch.*
 
 ### 6.5 Lot Tracking
-Lot Tracking provides complete traceability for every production batch, enabling the bakery to trace any finished product back to its exact production date, batch number, ingredients used, and expiry date. This is essential for food safety compliance, quality assurance, and rapid response to any quality issues.
+Lot Tracking provides complete traceability for every production batch, enabling the grocery store to trace any finished product back to its exact production date, batch number, ingredients used, and expiry date. This is essential for food safety compliance, quality assurance, and rapid response to any quality issues.
 
 **Key features:**
 - Track production batch numbers (lot numbers) for every finished product, creating a permanent traceability record.
@@ -615,7 +615,7 @@ Order Tracking provides a real-time, visual overview of where every order stands
 ### 7.4 Delivery
 **Who can see this:** Sales, Rider, Admin (or anyone with "Manage Deliveries" permission)
 
-The Delivery module manages the logistics of getting orders from the bakery to the customer's doorstep. It coordinates rider/driver assignments, delivery scheduling, route management, and delivery completion tracking.
+The Delivery module manages the logistics of getting orders from the grocery store to the customer's doorstep. It coordinates rider/driver assignments, delivery scheduling, route management, and delivery completion tracking.
 
 **Key features:**
 - Schedule deliveries for orders that require dispatch, setting pickup times and delivery windows.
@@ -672,10 +672,10 @@ The Pricing module provides centralized control over all product pricing across 
 
 **Who can see this:** Admin (or anyone with "Manage Inventory" permission)
 
-The Inventory module group provides end-to-end supply chain management for the bakery. From tracking raw materials and finished goods across all storage locations, to managing supplier relationships, purchase orders, and business assets, these modules ensure the bakery always has the right materials at the right time while controlling costs.
+The Inventory module group provides end-to-end supply chain management for the grocery store. From tracking raw materials and finished goods across all storage locations, to managing supplier relationships, purchase orders, and business assets, these modules ensure the grocery store always has the right materials at the right time while controlling costs.
 
 ### 8.1 Inventory
-The core Inventory module tracks every item the bakery holds in stock -- raw materials (flour, sugar, eggs, etc.), packaging supplies, and finished goods ready for sale. It provides real-time visibility into stock levels with automated alerts when items run low.
+The core Inventory module tracks every item the grocery store holds in stock -- raw materials (flour, sugar, eggs, etc.), packaging supplies, and finished goods ready for sale. It provides real-time visibility into stock levels with automated alerts when items run low.
 
 **Key features:**
 - Track stock levels for raw materials, packaging, and finished goods with real-time quantity updates as items are received, used in production, or sold.
@@ -723,7 +723,7 @@ The Purchasing module manages the full purchase order lifecycle from creating or
 *Figure 30: Creating a new purchase order with supplier selection, item quantities, and pricing details.*
 
 ### 8.4 Suppliers
-The Supplier Management module maintains a database of all vendors and suppliers the bakery works with. It tracks contact information, pricing agreements, payment terms, and supplier performance to support informed procurement decisions.
+The Supplier Management module maintains a database of all vendors and suppliers the grocery store works with. It tracks contact information, pricing agreements, payment terms, and supplier performance to support informed procurement decisions.
 
 **Key features:**
 - Manage comprehensive supplier profiles with contact information, physical addresses, and primary contact persons.
@@ -733,7 +733,7 @@ The Supplier Management module maintains a database of all vendors and suppliers
 - Link suppliers to specific inventory items and purchase orders for complete procurement traceability.
 
 ### 8.5 Distributors & Distribution
-The Distributors module manages the bakery's wholesale distribution network -- the agents and resellers who purchase products in bulk and distribute them to retail outlets, shops, and other points of sale beyond the bakery's own branches.
+The Distributors module manages the grocery store's wholesale distribution network -- the agents and resellers who purchase products in bulk and distribute them to retail outlets, shops, and other points of sale beyond the grocery store's own branches.
 
 **Key features:**
 - Manage distributor agent profiles with full contact information, ID documentation, assigned territory, and GPS coordinates for geographic mapping.
@@ -757,7 +757,7 @@ The Asset Management module tracks all physical business assets including produc
 - Maintain a complete register of all business assets with descriptions, serial numbers, purchase dates, and original costs.
 - Track asset depreciation schedules to understand current book value and plan for replacements.
 - Record maintenance schedules and repair history for each asset, ensuring equipment stays in good working condition.
-- Categorize assets by type (equipment, vehicle, furniture, IT, etc.) and location (main bakery, branches).
+- Categorize assets by type (equipment, vehicle, furniture, IT, etc.) and location (main store, branches).
 - Track asset disposal, transfer between locations, and insurance details.
 
 ![Asset Management — View and manage all business assets, equipment, and vehicles](/docs/asset-manage.png)
@@ -772,12 +772,12 @@ The Asset Management module tracks all physical business assets including produc
 
 **Who can see this:** Admin (or anyone with "Manage Outlets" or "View Outlets" permission)
 
-The Outlet module group is designed for bakeries operating multiple physical locations. It provides a complete set of tools for managing each branch as a semi-independent operation while maintaining centralized control and visibility. Each outlet can have its own inventory, product catalog, employee roster, pricing, and performance reporting, while the main bakery retains oversight of all branches through consolidated dashboards and approval workflows.
+The Outlet module group is designed for grocery stores operating multiple physical locations. It provides a complete set of tools for managing each branch as a semi-independent operation while maintaining centralized control and visibility. Each outlet can have its own inventory, product catalog, employee roster, pricing, and performance reporting, while the main store retains oversight of all branches through consolidated dashboards and approval workflows.
 
 These modules are particularly important for Outlet Admins and Branch Managers, who automatically gain access to all outlet-related modules for their assigned branch:
 
 ### 9.1 Branch Management
-Branch Management is the central configuration module for all outlet locations. It handles the setup, configuration, and ongoing management of each physical bakery branch.
+Branch Management is the central configuration module for all outlet locations. It handles the setup, configuration, and ongoing management of each physical grocery store branch.
 
 **Key features:**
 - Create and manage branch outlets (e.g., CBD Branch, Westlands Branch, Karen Branch) with detailed location information.
@@ -786,36 +786,36 @@ Branch Management is the central configuration module for all outlet locations. 
 - Monitor branch status (Active, Temporarily Closed, Permanently Closed) across the entire network.
 - View a centralized dashboard of all branches with key performance indicators.
 
-![Branch Overview — View all bakery branch outlets and their details](/docs/branch.png)
+![Branch Overview — View all grocery store branch outlets and their details](/docs/branch.png)
 *Figure 35: The Branch Management page listing all outlet locations with their status and details.*
 
 ![Add Branch — Create a new branch outlet with location and operating details](/docs/branch-add.png)
 *Figure 36: Adding a new branch outlet with name, location, and manager assignment.*
 
 ### 9.2 Outlet Inventory
-Outlet Inventory provides branch-level stock management, giving each outlet visibility into its own stock levels independently from the main bakery's inventory.
+Outlet Inventory provides branch-level stock management, giving each outlet visibility into its own stock levels independently from the main store's inventory.
 
 **Key features:**
 - Track stock levels at each individual branch location, showing available quantities for all products and materials.
 - Compare inventory across branches side-by-side to identify imbalances or redistribution opportunities.
-- Record stock movements between the main bakery and branches, including dispatches, receipts, and returns.
+- Record stock movements between the main store and branches, including dispatches, receipts, and returns.
 
 ![Outlet Inventory — Track and manage stock levels at each branch location](/docs/outlet-inventory.png)
 *Figure 37: The Outlet Inventory page showing stock levels per branch with comparison and movement tracking.*
 
 ### 9.3 Outlet Requisitions
-Outlet Requisitions is the formal product ordering system between branch outlets and the main bakery. It ensures branches receive the products they need through a structured request-and-approval workflow.
+Outlet Requisitions is the formal product ordering system between branch outlets and the main store. It ensures branches receive the products they need through a structured request-and-approval workflow.
 
 **Key features:**
 - Branches submit product requests specifying the items and quantities needed, with delivery date preferences.
 - Managers and administrators can review, approve, or reject requisitions based on availability and business needs.
-- Track requisition status through the complete lifecycle: **Pending** (submitted, awaiting review) → **Approved** (authorized by management) → **Dispatched** (sent from main bakery) → **Received** (confirmed by the branch).
+- Track requisition status through the complete lifecycle: **Pending** (submitted, awaiting review) → **Approved** (authorized by management) → **Dispatched** (sent from main store) → **Received** (confirmed by the branch).
 - View requisition history for auditing and planning purposes.
 
 ![Outlet Requisitions — View and manage product requests from branch outlets](/docs/outlet-requisition.png)
 *Figure 38: The Outlet Requisitions page showing all branch product requests with their approval status.*
 
-![Add Outlet Requisition — Submit a new product request from a branch to the main bakery](/docs/outlet-requisition-add.png)
+![Add Outlet Requisition — Submit a new product request from a branch to the main store](/docs/outlet-requisition-add.png)
 *Figure 39: Creating a new outlet requisition with product selection, quantities, and delivery preferences.*
 
 ### How to Submit a Requisition:
@@ -823,18 +823,18 @@ Outlet Requisitions is the formal product ordering system between branch outlets
 2. Click **New Requisition**.
 3. Select the products and quantities needed.
 4. Submit for approval.
-5. The main bakery will review and dispatch the items.
+5. The main store will review and dispatch the items.
 
 ### 9.4 Outlet Returns
-Outlet Returns manages the reverse flow of products from branches back to the main bakery, ensuring proper documentation and accountability for returned items.
+Outlet Returns manages the reverse flow of products from branches back to the main store, ensuring proper documentation and accountability for returned items.
 
 **Key features:**
-- Process returns of unsold, expired, damaged, or excess products from branches to the main bakery.
+- Process returns of unsold, expired, damaged, or excess products from branches to the main store.
 - Document return reasons and quantities for each item, maintaining a clear audit trail.
 - Track return processing status to ensure items are properly received and accounted for.
 - Feed return data into waste tracking and inventory adjustment systems to maintain accurate records.
 
-![Outlet Returns — Track and manage product returns from branch outlets to the main bakery](/docs/outlet-returns.png)
+![Outlet Returns — Track and manage product returns from branch outlets to the main store](/docs/outlet-returns.png)
 *Figure 40: The Outlet Returns page showing returned items with reasons, quantities, and processing status.*
 
 ### 9.5 Outlet Products
@@ -893,7 +893,7 @@ Branch Settings allows each outlet to be configured independently with its own r
 **Key features:**
 - Customize receipt templates per branch, including header text, footer messages, and branding elements.
 - Configure POS settings specific to each branch, such as default payment methods and tax handling.
-- Set branch-specific display options and operational parameters that differ from the main bakery's defaults.
+- Set branch-specific display options and operational parameters that differ from the main store's defaults.
 
 ![Branch Settings — Configure receipt templates and POS settings for each branch](/docs/branch-settings.png)
 *Figure 46: Branch Settings page where managers can configure receipts and operating parameters.*
@@ -904,7 +904,7 @@ Branch Settings allows each outlet to be configured independently with its own r
 
 **Who can see this:** Admin (or anyone with "Manage Finance" permission)
 
-The Finance module group provides comprehensive financial management capabilities for the bakery. It covers all aspects of business accounting -- from recording daily expenses and tracking money owed by customers (debtors) to managing amounts payable to suppliers (creditors) and generating credit invoices for wholesale and credit customers. These modules work together to give management clear visibility into the bakery's financial health.
+The Finance module group provides comprehensive financial management capabilities for the grocery store. It covers all aspects of business accounting -- from recording daily expenses and tracking money owed by customers (debtors) to managing amounts payable to suppliers (creditors) and generating credit invoices for wholesale and credit customers. These modules work together to give management clear visibility into the grocery store's financial health.
 
 ### 10.1 Expenses
 The Expenses module records and categorizes all business expenditures, providing a clear picture of where money is being spent and supporting financial reporting and tax preparation.
@@ -936,7 +936,7 @@ The Debtors module tracks all credit sales -- customers who have purchased produ
 *Figure 49: Adding a new debtor record with customer information, amount owed, and payment terms.*
 
 ### 10.3 Creditors
-The Creditors module tracks all amounts owed by the bakery to its suppliers and service providers. It ensures timely payment of supplier invoices and provides visibility into the bakery's outstanding financial obligations.
+The Creditors module tracks all amounts owed by the grocery store to its suppliers and service providers. It ensures timely payment of supplier invoices and provides visibility into the grocery store's outstanding financial obligations.
 
 **Key features:**
 - Track all amounts owed to suppliers with individual balance tracking per creditor.
@@ -965,12 +965,12 @@ The Credit Invoices module handles invoice generation and management for credit-
 
 ## 11. People Management Modules
 
-The People Management module group handles all aspects of human resource management within the bakery. From onboarding new employees and managing their profiles to tracking productivity, managing roles and permissions, and controlling system access, these modules ensure the right people have the right access and that employee performance is visible and measurable.
+The People Management module group handles all aspects of human resource management within the grocery store. From onboarding new employees and managing their profiles to tracking productivity, managing roles and permissions, and controlling system access, these modules ensure the right people have the right access and that employee performance is visible and measurable.
 
 ### 11.1 Employees
 **Who can see this:** Admin (or anyone with "Manage Employees" permission)
 
-The Employee Management module is the central HR hub for the bakery. It maintains comprehensive staff records and controls who can access the system.
+The Employee Management module is the central HR hub for the grocery store. It maintains comprehensive staff records and controls who can access the system.
 
 **Key features:**
 - Manage complete staff profiles including personal details, emergency contacts, next-of-kin information, and government ID numbers.
@@ -1011,7 +1011,7 @@ The Productivity Report module provides data-driven insights into employee perfo
 The Roles & Permissions module is where administrators define and manage the access control structure for the entire system. It provides granular control over which modules, features, and data each role can access.
 
 **Key features:**
-- Create custom roles with descriptive names (e.g., "Branch Manager", "Inventory Clerk", "Senior Baker") to match the bakery's organizational structure.
+- Create custom roles with descriptive names (e.g., "Branch Manager", "Inventory Clerk", "Senior Baker") to match the grocery store's organizational structure.
 - Assign granular permissions to each role from a comprehensive list of 19+ individual permissions covering every module in the system.
 - View which employees are assigned to each role and how many active users each role has.
 - See the full guide for creating roles, assigning permissions, and understanding the role hierarchy in [Section 13](#13-roles--permissions-guide).
@@ -1034,7 +1034,7 @@ The System & Settings modules provide the administrative backbone of the platfor
 ### 12.1 Reports & Ledger
 **Who can see this:** Admin (or anyone with "View Reports" permission)
 
-The Reports & Ledger module is the bakery's financial reporting center. It generates key financial statements, provides ledger views for accounting, and supports data export for external accounting tools.
+The Reports & Ledger module is the grocery store's financial reporting center. It generates key financial statements, provides ledger views for accounting, and supports data export for external accounting tools.
 
 **Key features:**
 - Generate standard financial reports including Profit & Loss statements, Revenue reports, Sales summaries, and Expense breakdowns.
@@ -1082,7 +1082,7 @@ The Settings module is the system-wide configuration center where administrators
 
 ## 13. E-Commerce Website
 
-The public-facing e-commerce website is an integral part of the Snackoh Bakers platform, allowing customers to browse the full product catalog, place orders online, and pay seamlessly via M-Pesa -- all without needing to visit a physical bakery location. The website is fully responsive (works on mobile, tablet, and desktop) and can be installed as a Progressive Web App (PWA) for a native app-like experience.
+The public-facing e-commerce website is an integral part of the FreshCart Groceries platform, allowing customers to browse the full product catalog, place orders online, and pay seamlessly via M-Pesa -- all without needing to visit a physical grocery store location. The website is fully responsive (works on mobile, tablet, and desktop) and can be installed as a Progressive Web App (PWA) for a native app-like experience.
 
 ### Pages:
 - **Home:** A visually rich landing page featuring best-selling products, seasonal promotions, customer testimonials, and quick navigation to the shop. Includes the announcement bar for special offers.
@@ -1090,7 +1090,7 @@ The public-facing e-commerce website is an integral part of the Snackoh Bakers p
 - **Product Detail:** An in-depth product page showing high-quality images, full description, pricing, nutritional information, allergen warnings, dietary labels, and related product suggestions.
 - **Cart:** A review page where customers can see all items in their cart, adjust quantities, view subtotals, see delivery fee calculations, and proceed to checkout.
 - **Checkout:** The final step where customers enter their contact email, select delivery or pickup, provide a delivery address, and complete payment via M-Pesa STK Push.
-- **About:** The bakery's story, mission, values, and background information for customers who want to learn more about the business.
+- **About:** The grocery store's story, mission, values, and background information for customers who want to learn more about the business.
 - **Contact:** Full contact information including phone numbers, email addresses, physical address, and operating hours for customer inquiries and support.
 
 ### Checkout Process (Customer View):
@@ -1194,7 +1194,7 @@ Custom Roles
 
 ## 15. Security Best Practices
 
-The Snackoh Bakers Management System handles sensitive business data, financial information, and customer personal details. Following these security practices is essential for protecting the business, its customers, and your own account. Every employee shares responsibility for maintaining system security.
+The FreshCart Groceries Management System handles sensitive business data, financial information, and customer personal details. Following these security practices is essential for protecting the business, its customers, and your own account. Every employee shares responsibility for maintaining system security.
 
 ### Password Safety
 - Use a strong password with at least 8 characters, including uppercase, lowercase, numbers, and a symbol.
@@ -1252,7 +1252,7 @@ If you notice any of the following, report it to your administrator right away:
 - **Bulk Actions:** Select multiple orders to perform batch status updates.
 
 ### Branch Management Tips
-- **Requisition Planning:** Submit requisitions early in the day so the main bakery can include them in the current production run.
+- **Requisition Planning:** Submit requisitions early in the day so the main store can include them in the current production run.
 - **Stock Counts:** Regularly compare your outlet inventory with the system records to catch discrepancies early.
 - **End-of-Day Returns:** Process returns before end of day to keep inventory accurate for the next morning.
 
@@ -1335,14 +1335,14 @@ If you notice any of the following, report it to your administrator right away:
 | **M-Pesa** | A mobile money transfer service widely used in Kenya for payments. |
 | **STK Push** | A payment prompt sent directly to a customer's phone by M-Pesa during checkout. |
 | **KPI** | Key Performance Indicator -- a metric used to evaluate business performance. |
-| **Requisition** | A formal request from a branch outlet to the main bakery for products or materials. |
+| **Requisition** | A formal request from a branch outlet to the main store for products or materials. |
 | **Lot Tracking** | Recording production batch numbers and expiry dates for traceability and quality control. |
 | **Picking List** | A list of ingredients needed for a production run, used to gather materials before baking. |
 | **RLS** | Row-Level Security -- a database feature that restricts data access based on user identity. |
 | **Audit Log** | A chronological record of all actions performed in the system for accountability and compliance. |
 | **Debtor** | A customer who has purchased on credit and owes money to the business. |
 | **Creditor** | A supplier to whom the business owes money for goods or services received. |
-| **Branch / Outlet** | A physical bakery location separate from the main production facility. |
+| **Branch / Outlet** | A physical grocery store location separate from the main production facility. |
 | **Production Run** | A scheduled batch of products to be baked, with planned quantities and timelines. |
 | **Waste Control** | The process of recording and analyzing product loss due to overproduction, damage, or expiry. |
 | **Login Role** | The role assigned to an employee's system account that determines their module access. |
@@ -1373,9 +1373,9 @@ If you notice any of the following, report it to your administrator right away:
 
 ## Contact & Support
 
-- **Online Orders:** 0733 67 52 67 | sales@snackoh-bakers.com
-- **Complaints & Compliments:** 0722 587 222 | 0799 55 94 34 | feedback@snackoh-bakers.com
-- **Leadership:** ceo@snackoh-bakers.com
+- **Online Orders:** 0733 67 52 67 | sales@freshcart-groceries.com
+- **Complaints & Compliments:** 0722 587 222 | 0799 55 94 34 | feedback@freshcart-groceries.com
+- **Leadership:** ceo@freshcart-groceries.com
 
 **Operating Hours:**
 - Monday - Saturday: 6:00 AM - 8:00 PM
@@ -1383,7 +1383,7 @@ If you notice any of the following, report it to your administrator right away:
 
 ---
 
-*Snackoh Bakers Management System v2.0*
+*FreshCart Groceries Management System v2.0*
 *Last Updated: February 2026*
 `;
 
@@ -1409,7 +1409,7 @@ export default function DocumentationPage() {
       const html2pdf = (await import('html2pdf.js')).default;
       const options = {
         margin: [10, 10, 10, 10],
-        filename: 'Snackoh-Bakers-Documentation.pdf',
+        filename: 'FreshCart-Groceries-Documentation.pdf',
         image: { type: 'jpeg', quality: 0.95 },
         html2canvas: { scale: 2, useCORS: true, logging: false },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
@@ -1600,7 +1600,7 @@ export default function DocumentationPage() {
 
         {/* Footer */}
         <div className="mt-12 pt-6 border-t border-border text-center text-sm text-muted-foreground">
-          <p>Snackoh Bakers Management System v2.0 &mdash; Employee Training Manual</p>
+          <p>FreshCart Groceries Management System v2.0 &mdash; Employee Training Manual</p>
         </div>
       </div>
 

@@ -491,7 +491,7 @@ export default function PickingListsPage() {
           <table className="w-full text-sm">
             <thead className="bg-secondary border-b border-border">
               <tr>
-                <th className="px-4 py-3 text-left font-semibold">Recipe</th>
+                <th className="px-4 py-3 text-left font-semibold">Product</th>
                 <th className="px-4 py-3 text-left font-semibold">Batch</th>
                 <th className="px-4 py-3 text-left font-semibold">Assigned To</th>
                 <th className="px-4 py-3 text-center font-semibold">Priority</th>
@@ -669,20 +669,20 @@ export default function PickingListsPage() {
         <div className="p-6">
           <h2 className="text-lg font-semibold mb-3">What are Picking Lists?</h2>
           <p className="text-muted-foreground mb-4">
-            Picking lists are essential documents in bakery production that specify exactly which
-            ingredients and quantities need to be gathered from inventory before a production batch
-            can begin. They serve as the bridge between recipe planning and actual production,
-            ensuring that every ingredient is measured, prepared, and ready before mixing starts.
+            Picking lists are essential documents in grocery procurement that specify exactly which
+            ingredients and quantities need to be gathered from inventory before a procurement batch
+            can begin. They serve as the bridge between product planning and actual procurement,
+            ensuring that every item is measured, prepared, and ready before processing starts.
           </p>
 
-          <h3 className="font-semibold mb-2">How They Work in the Bakery Production Flow</h3>
+          <h3 className="font-semibold mb-2">How They Work in the Grocery Procurement Flow</h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="bg-secondary/50 rounded-lg p-4 text-center">
               <div className="text-2xl mb-2 font-bold text-primary">1</div>
-              <h4 className="font-semibold text-sm mb-1">Recipe Selection</h4>
+              <h4 className="font-semibold text-sm mb-1">Product Selection</h4>
               <p className="text-xs text-muted-foreground">
-                Choose a recipe from your recipe library. All ingredients are automatically
-                populated based on the recipe definition, scaled to your batch size.
+                Choose a product from your product catalog. All ingredients are automatically
+                populated based on the product definition, scaled to your batch size.
               </p>
             </div>
             <div className="bg-secondary/50 rounded-lg p-4 text-center">
@@ -718,9 +718,9 @@ export default function PickingListsPage() {
                 R
               </div>
               <div>
-                <p className="font-medium text-sm">Recipe Linking</p>
+                <p className="font-medium text-sm">Product Linking</p>
                 <p className="text-xs text-muted-foreground">
-                  Select a recipe and all ingredients are auto-populated with correct quantities
+                  Select a product and all ingredients are auto-populated with correct quantities
                   scaled to your batch size.
                 </p>
               </div>
@@ -837,7 +837,7 @@ export default function PickingListsPage() {
         <div>
           <h1 className="mb-2">Picking Lists</h1>
           <p className="text-muted-foreground">
-            Generate and manage ingredient picking lists for bakery production batches
+            Generate and manage ingredient picking lists for grocery procurement batches
           </p>
         </div>
         <button
@@ -902,14 +902,14 @@ export default function PickingListsPage() {
           {/* Recipe Selection */}
           <div className="border border-border rounded-lg p-4 bg-secondary/30">
             <label className="block text-sm font-semibold mb-2">
-              Link to Recipe (auto-populate ingredients)
+              Link to Product (auto-populate ingredients)
             </label>
             <select
               value={selectedRecipeId}
               onChange={(e) => handleRecipeSelect(e.target.value)}
               className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/50 outline-none"
             >
-              <option value="">-- Select a recipe (optional) --</option>
+              <option value="">-- Select a product (optional) --</option>
               {recipes.map((r) => (
                 <option key={r.id} value={r.id}>
                   {r.name} ({r.code}) - {r.ingredients.length} ingredients
@@ -918,7 +918,7 @@ export default function PickingListsPage() {
             </select>
             {recipes.length === 0 && (
               <p className="text-xs text-muted-foreground mt-1">
-                No active recipes found. Create recipes first, or add ingredients manually below.
+                No active products found. Create products first, or add ingredients manually below.
               </p>
             )}
           </div>
@@ -926,7 +926,7 @@ export default function PickingListsPage() {
           {/* Core Fields */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Recipe Code *</label>
+              <label className="block text-sm font-medium mb-1">Product Code *</label>
               <input
                 type="text"
                 value={formData.recipeCode}
@@ -937,13 +937,13 @@ export default function PickingListsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Recipe Name</label>
+              <label className="block text-sm font-medium mb-1">Product Name</label>
               <input
                 type="text"
                 value={formData.recipeName}
                 onChange={(e) => setFormData({ ...formData, recipeName: e.target.value })}
                 className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/50 outline-none"
-                placeholder="e.g. White Bread"
+                placeholder="e.g. Whole Milk"
               />
             </div>
           </div>
@@ -1121,7 +1121,7 @@ export default function PickingListsPage() {
 
             {formData.items.length === 0 && (
               <p className="text-sm text-muted-foreground text-center py-4">
-                No ingredients added yet. Select a recipe above to auto-populate, or add items
+                No ingredients added yet. Select a product above to auto-populate, or add items
                 manually.
               </p>
             )}

@@ -508,7 +508,7 @@ export default function LotTrackingPage() {
           <div>
             <h2 className="text-xl font-bold text-blue-900 mb-2">Lot Tracking & Traceability</h2>
             <p className="text-blue-800 leading-relaxed">
-              The Lot Tracking module provides end-to-end traceability for all product batches in your bakery operations.
+              The Lot Tracking module provides end-to-end traceability for all product batches in your grocery operations.
               Every ingredient and finished product is assigned a unique lot number, enabling you to trace products from
               supplier receipt through production to final delivery. This is critical for food safety compliance,
               quality assurance, and rapid response to any recall situations.

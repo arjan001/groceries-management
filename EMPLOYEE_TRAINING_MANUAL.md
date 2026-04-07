@@ -1,10 +1,10 @@
-# Snackoh Bakers - Employee Training Manual
+# FreshCart Groceries - Employee Training Manual
 
 ## System Overview
 
-The Snackoh Bakers Management System is a comprehensive bakery ERP (Enterprise Resource Planning) and e-commerce platform purpose-built for bakery operations of all sizes. It integrates every aspect of the business into a single, unified system -- from recipe development and production scheduling to point-of-sale transactions, delivery logistics, multi-branch management, and financial accounting.
+The FreshCart Grocery Management System is a comprehensive grocery ERP (Enterprise Resource Planning) and e-commerce platform purpose-built for grocery operations of all sizes. It integrates every aspect of the business into a single, unified system -- from product catalog management and procurement scheduling to point-of-sale transactions, delivery logistics, multi-branch management, and financial accounting.
 
-The platform is designed around role-based access control, ensuring each employee sees only the tools and data relevant to their job. Whether you are a baker managing production runs, a cashier processing in-store sales, a delivery rider tracking assignments, or an administrator overseeing the entire operation, the system adapts to your needs.
+The platform is designed around role-based access control, ensuring each employee sees only the tools and data relevant to their job. Whether you are a stock manager handling procurement runs, a cashier processing in-store sales, a delivery rider tracking assignments, or an administrator overseeing the entire operation, the system adapts to your needs.
 
 **Key system capabilities include:**
 - **Production Pipeline:** Manage recipes, schedule production batches, generate picking lists, and track lot numbers for full traceability from raw ingredients to finished products.

@@ -82,7 +82,7 @@ function ShopContent() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
 
-  // Load products from main bakery inventory — only real products, no dummy fallback
+  // Load products from grocery inventory — only real products, no dummy fallback
   useEffect(() => {
     async function loadProducts() {
       try {

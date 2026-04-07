@@ -136,7 +136,7 @@ function dbToOutletEmployee(row: Record<string, unknown>): OutletEmployee {
 }
 
 const OUTLET_TYPES: { value: Outlet['outlet_type']; label: string }[] = [
-  { value: 'bakery', label: 'Bakery' },
+  { value: 'bakery', label: 'Grocery Store' },
   { value: 'coffee_shop', label: 'Coffee Shop' },
   { value: 'retail', label: 'Retail Store' },
   { value: 'restaurant', label: 'Restaurant' },
@@ -283,7 +283,7 @@ export default function OutletsPage() {
         setOutlets([]);
       } else {
         const mapped = (data || []).map((r: Record<string, unknown>) => dbToOutlet(r));
-        // Auto-setup: If no outlets exist, create the default main bakery
+        // Auto-setup: If no outlets exist, create the default main store
         if (mapped.length === 0) {
           await setupDefaultMainOutlet();
           return; // fetchOutlets will be called again after setup
@@ -297,7 +297,7 @@ export default function OutletsPage() {
     setLoading(false);
   }, []);
 
-  // Auto-create a default "Main Bakery" outlet when no outlets exist
+  // Auto-create a default "Main Store" outlet when no outlets exist
   const setupDefaultMainOutlet = async () => {
     try {
       const { data: existing } = await supabase
@@ -309,7 +309,7 @@ export default function OutletsPage() {
       const { error } = await supabase
         .from('outlets')
         .insert({
-          name: 'Main Bakery',
+          name: 'Main Store',
           code: 'OTL-MAIN-001',
           outlet_type: 'bakery',
           is_main_branch: true,
@@ -319,12 +319,12 @@ export default function OutletsPage() {
           email: '',
           opening_hours: '',
           status: 'Active',
-          notes: 'Default main bakery outlet. This is the central production hub from which all other branches source their products.',
+          notes: 'Default main store outlet. This is the central distribution hub from which all other branches source their products.',
         });
       if (error) {
         console.error('Failed to create default main outlet:', error);
       } else {
-        showToast('Main Bakery outlet has been set up as your default branch', 'success');
+        showToast('Main Store outlet has been set up as your default branch', 'success');
       }
       // Re-fetch to load the newly created outlet
       const { data: freshData } = await supabase
@@ -607,7 +607,7 @@ export default function OutletsPage() {
   const handleDelete = async (id: string) => {
     const outlet = outlets.find(o => o.id === id);
     if (outlet?.is_main_branch) {
-      showToast('Cannot delete the main bakery branch. Set another outlet as main branch first.', 'error');
+      showToast('Cannot delete the main store branch. Set another outlet as main branch first.', 'error');
       setShowDeleteConfirm(null);
       return;
     }
@@ -824,7 +824,7 @@ export default function OutletsPage() {
           <h1 className="text-2xl font-bold">Branch Management</h1>
         </div>
         <p className="text-muted-foreground">
-          Manage your bakery branches and outlets. The <strong>Main Bakery</strong> is the central production hub &mdash; all other branches (coffee shops, retail outlets, etc.) source their products from it via requisitions.
+          Manage your store branches and outlets. The <strong>Main Store</strong> is the central distribution hub &mdash; all other branches (coffee shops, retail outlets, etc.) source their products from it via requisitions.
         </p>
       </div>
 
@@ -969,7 +969,7 @@ export default function OutletsPage() {
                     <div>
                       <p className="text-sm font-semibold text-orange-900">Branch of {mainBranch.name}</p>
                       <p className="text-xs text-orange-700 mt-0.5">
-                        This outlet sources products from the main bakery via requisitions. Use the Requisitions tab to request stock.
+                        This outlet sources products from the main store via requisitions. Use the Requisitions tab to request stock.
                       </p>
                     </div>
                   </div>
@@ -982,9 +982,9 @@ export default function OutletsPage() {
                       <Home className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-blue-900">Central Production Hub</p>
+                      <p className="text-sm font-semibold text-blue-900">Central Distribution Hub</p>
                       <p className="text-xs text-blue-700 mt-0.5">
-                        This is your main bakery &mdash; the production center that supplies products to all other branches.
+                        This is your main store &mdash; the distribution center that supplies products to all other branches.
                         {outlets.filter(o => !o.is_main_branch && o.status === 'Active').length > 0
                           ? ` Currently supplying ${outlets.filter(o => !o.is_main_branch && o.status === 'Active').length} active branch(es).`
                           : ' No other branches have been added yet.'}
@@ -1355,12 +1355,12 @@ export default function OutletsPage() {
             <div className="text-center py-12 border border-border rounded-lg bg-card">
               <Building2 className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
               <p className="text-muted-foreground font-medium">
-                {selectedOutlet.is_main_branch ? 'Main Bakery Inventory' : 'Branch Inventory'}
+                {selectedOutlet.is_main_branch ? 'Main Store Inventory' : 'Branch Inventory'}
               </p>
               <p className="text-sm text-muted-foreground mt-1 max-w-md mx-auto">
                 {selectedOutlet.is_main_branch
-                  ? 'Manage the central production inventory. Raw materials, packaging, and finished goods available to distribute to branches.'
-                  : `This branch receives products from ${mainBranch?.name || 'the main bakery'}. Track stock levels, transfers, and local inventory movements.`
+                  ? 'Manage the central store inventory. Products, packaging, and goods available to distribute to branches.'
+                  : `This branch receives products from ${mainBranch?.name || 'the main store'}. Track stock levels, transfers, and local inventory movements.`
                 }
               </p>
               <a
@@ -1382,7 +1382,7 @@ export default function OutletsPage() {
               <p className="text-sm text-muted-foreground mt-1 max-w-md mx-auto">
                 {selectedOutlet.is_main_branch
                   ? 'View and approve product requests from all branches. Manage fulfillment and delivery of stock to outlets.'
-                  : `Request products from ${mainBranch?.name || 'the main bakery'}. Track order status and delivery to this branch.`
+                  : `Request products from ${mainBranch?.name || 'the main store'}. Track order status and delivery to this branch.`
                 }
               </p>
               <a
@@ -1449,8 +1449,8 @@ export default function OutletsPage() {
           {!loading && outlets.length === 0 && (
             <div className="text-center py-16 border border-border rounded-lg bg-card">
               <Store className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-              <p className="text-lg font-medium text-muted-foreground">Setting up your bakery...</p>
-              <p className="text-sm text-muted-foreground mt-1">Your main bakery branch is being created as the default production hub.</p>
+              <p className="text-lg font-medium text-muted-foreground">Setting up your store...</p>
+              <p className="text-sm text-muted-foreground mt-1">Your main store branch is being created as the default distribution hub.</p>
             </div>
           )}
 
@@ -1504,9 +1504,9 @@ export default function OutletsPage() {
                             <div>
                               <p className="font-medium">{outlet.name}</p>
                               {outlet.is_main_branch ? (
-                                <span className="text-xs text-amber-600 font-medium">Main Bakery (Production Hub)</span>
+                                <span className="text-xs text-amber-600 font-medium">Main Store (Distribution Hub)</span>
                               ) : (
-                                <span className="text-xs text-muted-foreground">Branch &bull; Sources from {mainBranch?.name || 'Main Bakery'}</span>
+                                <span className="text-xs text-muted-foreground">Branch &bull; Sources from {mainBranch?.name || 'Main Store'}</span>
                               )}
                             </div>
                           </div>
@@ -1892,7 +1892,7 @@ export default function OutletsPage() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/50 outline-none"
-                placeholder="outlet@bakery.com"
+                placeholder="outlet@store.com"
               />
             </div>
           </div>
@@ -1985,7 +1985,7 @@ export default function OutletsPage() {
                   </p>
                   {outlets.find(o => o.id === showDeleteConfirm)?.is_main_branch && (
                     <p className="text-xs text-red-600 mt-1 font-medium">
-                      This is the main bakery branch and cannot be deleted. Set another outlet as main branch first.
+                      This is the main store branch and cannot be deleted. Set another outlet as main branch first.
                     </p>
                   )}
                   {getOutletEmployeeCount(showDeleteConfirm) > 0 && (

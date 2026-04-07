@@ -443,7 +443,7 @@ export default function FoodInfoPage() {
 
       <div className="mb-8">
         <h1 className="text-2xl font-bold mb-2">Product & Inventory Management</h1>
-        <p className="text-muted-foreground">Manage products, nutritional info, recipes, stock levels (MOQ, FIFO), and raw materials</p>
+        <p className="text-muted-foreground">Manage products, nutritional info, stock levels (MOQ, FIFO), and raw materials</p>
       </div>
 
       {/* Stats */}
@@ -453,7 +453,7 @@ export default function FoodInfoPage() {
           <p className="text-2xl font-bold">{items.length}</p>
         </div>
         <div className="border border-border rounded-lg p-4 bg-card">
-          <p className="text-sm text-muted-foreground">With Recipes</p>
+          <p className="text-sm text-muted-foreground">With Products</p>
           <p className="text-2xl font-bold text-blue-600">{items.filter(i => i.recipeId).length}</p>
         </div>
         <div className="border border-border rounded-lg p-4 bg-card">
@@ -477,7 +477,7 @@ export default function FoodInfoPage() {
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
               type="text"
-              placeholder="Search products, codes, recipes..."
+              placeholder="Search products, codes..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               className="w-full pl-9 pr-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary/50 outline-none"
@@ -511,7 +511,7 @@ export default function FoodInfoPage() {
           {/* Tabs */}
           <div className="flex gap-2 border-b border-border pb-2">
             {([
-              { id: 'basic' as const, label: 'Product & Recipe' },
+              { id: 'basic' as const, label: 'Product Details' },
               { id: 'nutrition' as const, label: 'Nutrition & Allergens' },
               { id: 'inventory' as const, label: 'Inventory (MOQ/FIFO)' },
             ]).map(tab => (
@@ -534,7 +534,7 @@ export default function FoodInfoPage() {
 
           <div className="max-h-[60vh] overflow-y-auto space-y-4 pr-1">
 
-            {/* Tab 1: Product & Recipe */}
+            {/* Tab 1: Product Details */}
             {activeTab === 'basic' && (
               <>
                 <div className="rounded-xl border-2 border-blue-200 bg-blue-50/50 p-5">
@@ -547,7 +547,7 @@ export default function FoodInfoPage() {
                         value={formData.productName}
                         onChange={(e) => handleProductNameChange(e.target.value)}
                         className="w-full px-3 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none bg-white"
-                        placeholder="e.g. White Bread Loaf"
+                        placeholder="e.g. Whole Milk 1L"
                       />
                     </div>
                     <div>
@@ -631,16 +631,16 @@ export default function FoodInfoPage() {
                   </div>
                 </div>
 
-                {/* Recipe Selection */}
+                {/* Product Linking */}
                 <div className="rounded-xl border-2 border-green-200 bg-green-50/50 p-5">
-                  <p className="text-sm font-bold text-green-900 mb-3">Recipe Selection</p>
-                  <p className="text-xs text-green-700 mb-3">Select the recipe used to produce this product. This links raw material requirements and production costs.</p>
+                  <p className="text-sm font-bold text-green-900 mb-3">Product Linking</p>
+                  <p className="text-xs text-green-700 mb-3">Select the product used for sourcing. This links raw material requirements and procurement costs.</p>
                   <select
                     value={formData.recipeId}
                     onChange={(e) => handleRecipeSelect(e.target.value)}
                     className="w-full px-3 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-400 outline-none bg-white"
                   >
-                    <option value="">-- No recipe linked --</option>
+                    <option value="">-- No product linked --</option>
                     {recipes.map(r => (
                       <option key={r.id} value={r.id}>
                         {r.name} ({r.code}) - Output: {r.expectedOutput} {r.outputUnit}
@@ -651,7 +651,7 @@ export default function FoodInfoPage() {
                   {selectedRecipe && (
                     <div className="mt-4 space-y-3">
                       <div className="bg-green-100 rounded-lg p-3">
-                        <p className="text-sm font-semibold text-green-900">Recipe: {selectedRecipe.name}</p>
+                        <p className="text-sm font-semibold text-green-900">Product: {selectedRecipe.name}</p>
                         <p className="text-xs text-green-700">Output: {selectedRecipe.expectedOutput} {selectedRecipe.outputUnit} per batch</p>
                       </div>
                       <div className="border border-green-200 rounded-lg overflow-hidden">
@@ -835,7 +835,7 @@ export default function FoodInfoPage() {
                   {selectedRecipe ? (
                     <div className="space-y-2">
                       <p className="text-xs text-indigo-700">
-                        Based on recipe <strong>{selectedRecipe.name}</strong>, producing <strong>{formData.moq || selectedRecipe.expectedOutput}</strong> {formData.stockUnit} requires:
+                        Based on product <strong>{selectedRecipe.name}</strong>, procuring <strong>{formData.moq || selectedRecipe.expectedOutput}</strong> {formData.stockUnit} requires:
                       </p>
                       <div className="bg-indigo-100/50 rounded-lg p-3">
                         {selectedRecipe.ingredients.map((ing, idx) => {
@@ -854,7 +854,7 @@ export default function FoodInfoPage() {
                       </p>
                     </div>
                   ) : (
-                    <p className="text-xs text-indigo-500">Select a recipe in the &quot;Product &amp; Recipe&quot; tab to see raw material requirements.</p>
+                    <p className="text-xs text-indigo-500">Select a product in the &quot;Product Details&quot; tab to see raw material requirements.</p>
                   )}
                 </div>
               </>
@@ -884,7 +884,7 @@ export default function FoodInfoPage() {
               </th>
               <th className="px-4 py-3 text-left font-semibold">Product</th>
               <th className="px-4 py-3 text-left font-semibold">Code</th>
-              <th className="px-4 py-3 text-left font-semibold">Recipe</th>
+              <th className="px-4 py-3 text-left font-semibold">Linked Product</th>
               <th className="px-4 py-3 text-left font-semibold">Allergens</th>
               <th className="px-4 py-3 text-center font-semibold">Stock</th>
               <th className="px-4 py-3 text-center font-semibold">MOQ</th>

@@ -259,7 +259,7 @@ export async function POST(request: NextRequest) {
       PartyB: shortcode,
       PhoneNumber: formattedPhone,
       CallBackURL: callbackUrl,
-      AccountReference: (accountReference || 'SNACKOH').substring(0, 12),
+      AccountReference: (accountReference || 'FRESHCART').substring(0, 12),
       TransactionDesc: (description || 'Payment').substring(0, 13),
     };
 
@@ -292,7 +292,7 @@ export async function POST(request: NextRequest) {
             merchant_request_id: data.MerchantRequestID,
             phone: formattedPhone,
             amount: Math.ceil(amount),
-            account_reference: accountReference || 'SNACKOH',
+            account_reference: accountReference || 'FRESHCART',
             status: 'pending',
           });
         } catch (e) {
@@ -498,7 +498,7 @@ async function handleStkRetry(checkoutRequestId: string) {
     PartyB: shortcode,
     PhoneNumber: txn.phone,
     CallBackURL: callbackUrl,
-    AccountReference: txn.account_reference || 'SNACKOH',
+    AccountReference: txn.account_reference || 'FRESHCART',
     TransactionDesc: 'Payment Retry',
   };
 
@@ -522,7 +522,7 @@ async function handleStkRetry(checkoutRequestId: string) {
         merchant_request_id: data.MerchantRequestID,
         phone: txn.phone,
         amount: txn.amount,
-        account_reference: txn.account_reference || 'SNACKOH',
+        account_reference: txn.account_reference || 'FRESHCART',
         status: 'pending',
       });
     } catch (e) {

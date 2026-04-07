@@ -139,8 +139,8 @@ export default function Dashboard() {
   return (
     <div className="p-4 md:p-6 lg:p-8">
       <div className="mb-4 md:mb-6">
-        <h1 className="text-lg md:text-xl font-bold mb-1">Snackoh Bakers Dashboard</h1>
-        <p className="text-xs md:text-sm text-muted-foreground">Welcome to Snackoh Bakers Management System</p>
+        <h1 className="text-lg md:text-xl font-bold mb-1">FreshCart Groceries Dashboard</h1>
+        <p className="text-xs md:text-sm text-muted-foreground">Welcome to FreshCart Grocery Management System</p>
       </div>
 
       {loading && (
@@ -218,7 +218,7 @@ export default function Dashboard() {
           {/* ── Operations Overview ── */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3 mb-6">
             <div className="border border-border rounded-lg p-3 bg-card">
-              <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Recipes</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Product Lines</p>
               <p className="text-sm md:text-lg font-bold">{stats.recipes}</p>
             </div>
             <div className="border border-border rounded-lg p-3 bg-card">
@@ -226,7 +226,7 @@ export default function Dashboard() {
               <p className="text-sm md:text-lg font-bold">{stats.products}</p>
             </div>
             <div className="border border-border rounded-lg p-3 bg-card">
-              <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Production Runs</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Procurement Batches</p>
               <p className="text-sm md:text-lg font-bold">{productionStats.completedRuns}<span className="text-xs text-muted-foreground">/{productionStats.totalRuns}</span></p>
             </div>
             <div className={`border rounded-lg p-3 bg-card ${stockAlerts.lowStock > 0 ? 'border-amber-300' : 'border-border'}`}>
@@ -335,7 +335,7 @@ export default function Dashboard() {
                   <a href="/admin/shifts" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Shift Management</a>
                   <a href="/admin/stock-take" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Stock Take</a>
                   <a href="/admin/orders" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Create Order</a>
-                  <a href="/admin/production" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Start Production</a>
+                  <a href="/admin/production" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Procurement Batches</a>
                   <a href="/admin/insurance" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Insurance</a>
                   <a href="/admin/outlets" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-orange-50 text-orange-700 rounded-lg hover:bg-orange-100 transition-colors font-medium border border-orange-200">Manage Branches</a>
                   <a href="/admin/settings" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Settings</a>

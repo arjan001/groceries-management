@@ -44,9 +44,9 @@ function AnnouncementBar() {
 
   const defaultItems = [
     'FREE DELIVERY ON ORDERS OVER KES 2,000',
-    'FRESHLY BAKED DAILY',
+    'FRESH GROCERIES DAILY',
     'ORDER BY 5PM FOR NEXT-DAY DELIVERY',
-    'CUSTOM CAKES — ORDER 48 HRS IN ADVANCE',
+    'FARM-FRESH PRODUCE SOURCED LOCALLY',
     'WHOLESALE ORDERS AVAILABLE',
   ];
 
@@ -82,7 +82,7 @@ function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [logoUrl, setLogoUrl] = useState('');
-  const [businessName, setBusinessName] = useState('SNACKOH');
+  const [businessName, setBusinessName] = useState('FRESHCART');
   const [logoHeight, setLogoHeight] = useState(40);
   const [logoPosition, setLogoPosition] = useState<'left' | 'center'>('left');
   const router = useRouter();
@@ -269,7 +269,7 @@ function Navbar() {
             <form onSubmit={handleSearch} className="flex-1 flex items-center gap-3">
               <Search size={18} className="text-gray-400 shrink-0" />
               <input autoFocus type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                placeholder="Search breads, cakes, pastries…"
+                placeholder="Search groceries, produce, dairy…"
                 className="flex-1 outline-none text-sm text-gray-800 placeholder-gray-400" />
               <button type="submit" className="text-xs font-bold text-orange-600 hover:underline">Search</button>
               <button type="button" onClick={() => setSearchOpen(false)}>
@@ -285,7 +285,7 @@ function Navbar() {
         <div className="fixed inset-0 z-50 bg-black/50" onClick={() => setMenuOpen(false)}>
           <div className="absolute left-0 top-0 h-full w-72 bg-white shadow-xl" onClick={e => e.stopPropagation()}>
             <div className="p-5 border-b flex justify-between items-center">
-              <span className="text-xl font-black">SNACKOH</span>
+              <span className="text-xl font-black">FRESHCART</span>
               <button onClick={() => setMenuOpen(false)}><X size={20} /></button>
             </div>
             <nav className="p-5 space-y-4">
@@ -504,7 +504,7 @@ function NewsletterModal() {
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
               </svg>
               <p className="text-xl font-black tracking-tight text-center">Stay In The Loop</p>
-              <p className="text-sm opacity-80 mt-1 text-center">Fresh deals & baked goodness</p>
+              <p className="text-sm opacity-80 mt-1 text-center">Fresh deals & grocery savings</p>
             </div>
           )}
         </div>
@@ -589,28 +589,28 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <h3 className="text-white text-2xl font-black mb-4">SNACKOH</h3>
+            <h3 className="text-white text-2xl font-black mb-4">FRESHCART</h3>
             <p className="text-sm leading-relaxed text-gray-400 mb-4">
-              Artisan baked goods crafted with love. From our oven to your table, fresh daily.
+              Fresh groceries delivered to your doorstep. Quality produce, dairy, meats, and household essentials.
             </p>
             <p className="text-xs text-gray-500">Nairobi, Kenya</p>
             <p className="text-xs text-gray-500 mt-1">0733 67 52 67 (Orders)</p>
             <p className="text-xs text-gray-500 mt-1">0722 587 222 (Feedback)</p>
-            <p className="text-xs text-gray-500 mt-1">sales@snackoh-bakers.com</p>
+            <p className="text-xs text-gray-500 mt-1">support@freshcart-groceries.com</p>
             <div className="flex gap-3 mt-4">
-              <a href="https://www.instagram.com/snackohbites" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.instagram.com/freshcartgroceries" target="_blank" rel="noopener noreferrer"
                 className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors" title="Instagram">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
                 </svg>
               </a>
-              <a href="https://www.tiktok.com/@snackohbites" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.tiktok.com/@freshcartgroceries" target="_blank" rel="noopener noreferrer"
                 className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors" title="TikTok">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-white">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.66a8.21 8.21 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.09z"/>
                 </svg>
               </a>
-              <a href="https://www.facebook.com/SnackohBites" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.facebook.com/FreshCartGroceries" target="_blank" rel="noopener noreferrer"
                 className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors" title="Facebook">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-white">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -640,7 +640,7 @@ function Footer() {
           <div>
             <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">Categories</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
-              {['Breads', 'Pastries', 'Cakes', 'Cookies', 'Donuts', 'Custom Orders'].map(l => (
+              {['Fruits & Vegetables', 'Dairy & Eggs', 'Meat & Seafood', 'Beverages', 'Pantry Staples', 'Household'].map(l => (
                 <li key={l}><Link href="/shop" className="hover:text-orange-400 transition-colors">{l}</Link></li>
               ))}
             </ul>
@@ -655,7 +655,7 @@ function Footer() {
                 { label: 'Order Tracking', href: '#' },
                 { label: 'FAQs', href: '#' },
                 { label: 'Refund Policy', href: '/refund-policy' },
-                { label: 'Custom Cakes', href: '#' },
+                { label: 'Bulk Orders', href: '/contact' },
               ].map(l => (
                 <li key={l.label}><Link href={l.href} className="hover:text-orange-400 transition-colors">{l.label}</Link></li>
               ))}
@@ -684,7 +684,7 @@ function Footer() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 pb-5 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-gray-600">&copy; {new Date().getFullYear()} Snackoh Bakers &middot; All rights reserved</p>
+          <p className="text-xs text-gray-600">&copy; {new Date().getFullYear()} FreshCart Groceries &middot; All rights reserved</p>
           <div className="flex items-center gap-3">
             <span className="text-xs text-gray-600">We accept:</span>
             <img src="/visa-cards.png" alt="Visa & Mastercard" className="h-10 object-contain" />

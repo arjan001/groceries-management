@@ -188,7 +188,7 @@ export function PwaInstallPrompt({ children }: { children?: React.ReactNode }) {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Smartphone size={20} className="text-orange-600" />
-            <h3 className="text-lg font-bold text-gray-900">Install Snackoh App</h3>
+            <h3 className="text-lg font-bold text-gray-900">Install FreshCart App</h3>
           </div>
           <button onClick={() => setShowInstructionsModal(false)} className="p-1 rounded-full hover:bg-gray-100">
             <X size={18} />
@@ -308,7 +308,7 @@ export function PwaInstallPrompt({ children }: { children?: React.ReactNode }) {
           <div className="w-16 h-16 bg-white rounded-2xl shadow-lg mx-auto mb-3 flex items-center justify-center">
             <Monitor size={28} className="text-orange-600" />
           </div>
-          <h3 className="text-lg font-bold">Install Snackoh App</h3>
+          <h3 className="text-lg font-bold">Install FreshCart App</h3>
           <p className="text-orange-100 text-sm mt-1">Get the full app experience</p>
         </div>
 

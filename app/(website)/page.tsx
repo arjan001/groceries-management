@@ -109,19 +109,19 @@ function AdsCarousel() {
   // Default offers if none configured
   const defaultOffers: { title: string; description: string; badge: string; link: string; image: string; discount: string }[] = [
     {
-      title: 'Weekend Special Sale',
-      description: 'Up to 30% off on selected baked goods. Fresh from the oven, curated for you.',
+      title: 'Weekend Fresh Deals',
+      description: 'Up to 30% off on fresh produce, dairy, and pantry essentials. Farm-fresh quality guaranteed.',
       badge: 'LIMITED OFFER',
       link: '/shop',
-      image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80&fit=crop',
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80&fit=crop',
       discount: '30% OFF',
     },
     {
       title: 'New Arrivals This Week',
-      description: 'Fresh pastries and cakes added weekly. Discover our latest creations.',
+      description: 'Fresh seasonal produce and imported specialties. Discover the latest additions to our store.',
       badge: 'JUST DROPPED',
       link: '/shop',
-      image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80&fit=crop',
+      image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=800&q=80&fit=crop',
       discount: '',
     },
   ];
@@ -241,7 +241,7 @@ function OffersSection() {
         <div className="text-center mb-8">
           <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Special Deals</p>
           <h2 className="text-3xl font-black text-gray-900">Offers & Promotions</h2>
-          <p className="text-gray-500 mt-2 text-sm max-w-lg mx-auto">Check out our current deals, wholesale offers, and upcoming promotions. Save big on your favourite bakes!</p>
+          <p className="text-gray-500 mt-2 text-sm max-w-lg mx-auto">Check out our current deals, wholesale offers, and upcoming promotions. Save big on your weekly groceries!</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {/* Current Offers */}
@@ -251,8 +251,8 @@ function OffersSection() {
             </div>
             <h3 className="font-black text-gray-900 text-lg mb-2">Current Offers</h3>
             <ul className="space-y-2 text-sm text-gray-600 mb-4">
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-orange-400 rounded-full shrink-0" /> 15% off all pastries this weekend</li>
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-orange-400 rounded-full shrink-0" /> Buy 2 loaves, get 1 free</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-orange-400 rounded-full shrink-0" /> 20% off all fresh produce this weekend</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-orange-400 rounded-full shrink-0" /> Buy 2 dairy items, get 1 free</li>
               <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-orange-400 rounded-full shrink-0" /> Free delivery over KES 2,000</li>
             </ul>
             <Link href="/shop" className="text-xs font-bold text-orange-600 hover:underline flex items-center gap-1">
@@ -283,8 +283,8 @@ function OffersSection() {
             </div>
             <h3 className="font-black text-gray-900 text-lg mb-2">Coming Soon</h3>
             <ul className="space-y-2 text-sm text-gray-600 mb-4">
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0" /> Valentine&apos;s Day specials</li>
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0" /> Custom cake design contest</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0" /> Seasonal harvest specials</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0" /> Organic produce range launch</li>
               <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0" /> Loyalty rewards program</li>
             </ul>
             <span className="text-xs font-bold text-blue-600 flex items-center gap-1">
@@ -302,7 +302,7 @@ export default function HomePage() {
   const [dynamicProducts, setDynamicProducts] = useState<Product[]>([]);
   const [freshProducts, setFreshProducts] = useState<Product[]>([]);
 
-  // Fetch products from main bakery inventory (food_info table) — only real products, no dummy fallback
+  // Fetch products from grocery inventory (food_info table) — only real products, no dummy fallback
   useEffect(() => {
     async function loadProducts() {
       try {
@@ -334,14 +334,14 @@ export default function HomePage() {
               FREE DELIVERY ON ORDERS OVER KES 2,000
             </p>
             <h1 className="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-5">
-              Award-Winning<br />
-              <span className="text-orange-600">Baked Goods</span><br />
+              Farm-Fresh<br />
+              <span className="text-orange-600">Groceries</span><br />
               Delivered Daily
             </h1>
             <p className="text-gray-500 text-base leading-relaxed mb-4 max-w-md">
               We cater for both <strong className="text-gray-700">retail and wholesale</strong> customers.
-              From fresh breads, kaimati, cakes, pastries, donuts, and so much more —
-              handcrafted with love by our master bakers, fresh every morning.
+              From fresh produce, dairy, meats, pantry staples, and household essentials —
+              sourced locally and delivered fresh to your door.
             </p>
             <div className="flex items-center gap-4 mb-8">
               <div className="flex items-center gap-2 text-xs bg-orange-50 text-orange-700 font-semibold px-3 py-1.5 rounded-full border border-orange-200">
@@ -358,14 +358,14 @@ export default function HomePage() {
               </Link>
               <Link href="/shop?category=Cake"
                 className="px-8 py-3.5 border-2 border-gray-200 text-gray-800 font-bold text-sm rounded-full hover:border-orange-400 transition-colors">
-                Custom Cakes
+                Fresh Produce
               </Link>
             </div>
             {/* Trust badges */}
             <div className="flex flex-wrap gap-5 mt-10">
               {[
                 { icon: Truck, label: 'Same-Day Delivery' },
-                { icon: Clock, label: 'Baked Fresh Daily' },
+                { icon: Clock, label: 'Fresh Daily' },
                 { icon: Shield, label: 'Quality Guaranteed' },
               ].map(b => (
                 <div key={b.label} className="flex items-center gap-2 text-xs text-gray-500 font-medium">
@@ -379,24 +379,24 @@ export default function HomePage() {
           <div className="hidden md:grid grid-cols-2 gap-3 h-[480px]">
             <div className="rounded-3xl overflow-hidden row-span-2">
               <img
-                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80&fit=crop"
-                alt="Chocolate Cake" className="w-full h-full object-cover" />
+                src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80&fit=crop"
+                alt="Fresh Groceries" className="w-full h-full object-cover" />
             </div>
             <div className="rounded-3xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80&fit=crop"
-                alt="Croissant" className="w-full h-full object-cover" />
+                src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80&fit=crop"
+                alt="Fresh Fruits" className="w-full h-full object-cover" />
             </div>
             <div className="rounded-3xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80&fit=crop"
-                alt="Bread" className="w-full h-full object-cover" />
+                src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&q=80&fit=crop"
+                alt="Fresh Vegetables" className="w-full h-full object-cover" />
             </div>
           </div>
           {/* Mobile hero image */}
           <div className="md:hidden rounded-3xl overflow-hidden aspect-video">
-            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80&fit=crop"
-              alt="Bakery" className="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80&fit=crop"
+              alt="Fresh Groceries" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
@@ -428,15 +428,15 @@ export default function HomePage() {
             <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Retail &amp; Wholesale</p>
             <h2 className="text-3xl font-black text-gray-900">What We Offer</h2>
             <p className="text-gray-500 mt-2 text-sm max-w-lg mx-auto">
-              Whether you&apos;re buying for your home or stocking your shop, we&apos;ve got you covered with fresh baked goods every day.
+              Whether you&apos;re buying for your home or stocking your shop, we&apos;ve got you covered with fresh groceries every day.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { name: 'Fresh Breads', desc: 'White, brown, whole wheat & more', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80&fit=crop' },
-              { name: 'Kaimati', desc: 'Traditional Kenyan sweet dumplings', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80&fit=crop' },
-              { name: 'Cakes & Pastries', desc: 'Custom cakes, croissants & tarts', image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80&fit=crop' },
-              { name: 'Donuts & Cookies', desc: 'Glazed donuts, butter cookies & more', image: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&q=80&fit=crop' },
+              { name: 'Fresh Produce', desc: 'Fruits, vegetables & herbs', image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80&fit=crop' },
+              { name: 'Dairy & Eggs', desc: 'Milk, cheese, yoghurt & eggs', image: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=400&q=80&fit=crop' },
+              { name: 'Meat & Seafood', desc: 'Chicken, beef, fish & more', image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=400&q=80&fit=crop' },
+              { name: 'Pantry Essentials', desc: 'Rice, oil, flour, spices & more', image: 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400&q=80&fit=crop' },
             ].map(item => (
               <Link key={item.name} href="/shop" className="group relative rounded-2xl overflow-hidden aspect-square block">
                 <img src={item.image} alt={item.name}
@@ -486,15 +486,15 @@ export default function HomePage() {
       <section className="py-4 px-6">
         <div className="max-w-7xl mx-auto rounded-3xl overflow-hidden bg-amber-950 relative h-64 md:h-80 flex items-center">
           <img
-            src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=1200&q=80&fit=crop"
-            alt="Bakery" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+            src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=1200&q=80&fit=crop"
+            alt="Fresh Groceries" className="absolute inset-0 w-full h-full object-cover opacity-40" />
           <div className="relative z-10 px-10 md:px-16 max-w-xl">
             <p className="text-orange-300 text-xs font-bold tracking-widest uppercase mb-2">Limited Time</p>
             <h2 className="text-3xl md:text-4xl font-black text-white leading-tight mb-4">
-              The Perfect Bakes<br />For Any Occasion
+              The Freshest Picks<br />For Your Kitchen
             </h2>
             <p className="text-white/70 text-sm mb-6">
-              From graduation to anniversary — our seasonal creations are here for a limited time only.
+              From weeknight dinners to weekend feasts — our seasonal specials are here for a limited time only.
             </p>
             <Link href="/shop"
               className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-bold text-sm rounded-full hover:bg-orange-600 hover:text-white transition-colors">
@@ -508,17 +508,17 @@ export default function HomePage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
-            <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Celebrate with Us</p>
-            <h2 className="text-3xl font-black text-gray-900">Gifts for Every Occasion!</h2>
+            <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Shop by Need</p>
+            <h2 className="text-3xl font-black text-gray-900">For Every Occasion!</h2>
             <p className="text-gray-500 mt-2 text-sm max-w-md mx-auto">
-              Whether it&apos;s a birthday or a thank-you, you&apos;ll find the perfect baked gift here.
+              Whether it&apos;s a family dinner, party prep, or weekly restock — we&apos;ve got everything you need.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { label: 'BIRTHDAYS', image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80&fit=crop', href: '/shop?category=Cake' },
-              { label: 'THANK YOU', image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&q=80&fit=crop', href: '/shop?category=Cookies' },
-              { label: 'CELEBRATIONS', image: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80&fit=crop', href: '/shop?category=Cake' },
+              { label: 'FAMILY DINNERS', image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=600&q=80&fit=crop', href: '/shop?category=Meat+%26+Seafood' },
+              { label: 'HEALTHY LIVING', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80&fit=crop', href: '/shop?category=Fruits+%26+Vegetables' },
+              { label: 'PARTY PREP', image: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&q=80&fit=crop', href: '/shop?category=Beverages' },
             ].map(item => (
               <Link key={item.label} href={item.href}
                 className="group relative rounded-2xl overflow-hidden aspect-[3/4] block">
@@ -541,8 +541,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Baked Today</p>
-              <h2 className="text-3xl font-black text-gray-900">Fresh Today</h2>
+              <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Stocked Today</p>
+              <h2 className="text-3xl font-black text-gray-900">Fresh Arrivals</h2>
             </div>
             <Link href="/shop" className="text-sm font-bold text-gray-600 hover:text-orange-600 flex items-center gap-1">
               View all <ChevronRight size={14} />
@@ -564,12 +564,12 @@ export default function HomePage() {
       <section className="py-5 bg-orange-600">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
-            <p className="text-2xl font-black text-white">25% OFF CUSTOM CAKE ORDERS</p>
-            <p className="text-orange-100 text-sm">Mix and match flavours, get 25% off. This week only.</p>
+            <p className="text-2xl font-black text-white">25% OFF FRESH PRODUCE ORDERS</p>
+            <p className="text-orange-100 text-sm">Stock up on fruits and vegetables, get 25% off. This week only.</p>
           </div>
           <Link href="/shop?category=Cake"
             className="shrink-0 px-6 py-3 bg-white text-orange-600 font-black text-sm rounded-full hover:bg-gray-100 transition-colors">
-            SHOP NOW
+            SHOP PRODUCE
           </Link>
         </div>
       </section>
@@ -579,17 +579,17 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-2">About Snackoh Bakers</p>
-              <h2 className="text-3xl font-black text-gray-900 mb-6">Committed to Health, Quality &amp; Freshness</h2>
+              <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-2">About FreshCart Groceries</p>
+              <h2 className="text-3xl font-black text-gray-900 mb-6">Committed to Freshness, Quality &amp; Value</h2>
               <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
                 <p>
-                  At Snackoh Bakers, we believe that every bite should be a testament to quality. Our bakery is built on a foundation of health-conscious baking, using premium ingredients sourced from trusted suppliers to ensure every product meets the highest standards.
+                  At FreshCart Groceries, we believe that every meal starts with quality ingredients. Our store is built on a foundation of sourcing the freshest produce, dairy, meats, and pantry essentials from trusted local farms and suppliers.
                 </p>
                 <p>
-                  We are committed to maintaining strict quality control at every step — from selecting the finest flours and natural ingredients to our carefully monitored baking processes. Freshness is not just a promise; it&apos;s our daily practice. Every loaf, pastry, and cake is baked fresh to order.
+                  We are committed to maintaining strict quality control at every step — from selecting farm-fresh produce and verified suppliers to our carefully managed cold-chain logistics. Freshness is not just a promise; it&apos;s our daily practice. Every item is sourced and delivered fresh.
                 </p>
                 <p>
-                  Whether you&apos;re a <strong className="text-gray-800">retail customer</strong> looking for your daily bread or a <strong className="text-gray-800">wholesale partner</strong> stocking your shelves, we serve both with the same dedication to excellence. We supply shops, restaurants, hotels, events, and corporate clients across Nairobi.
+                  Whether you&apos;re a <strong className="text-gray-800">retail customer</strong> doing your weekly grocery run or a <strong className="text-gray-800">wholesale partner</strong> stocking your restaurant or shop, we serve both with the same dedication to quality. We supply homes, restaurants, hotels, and corporate kitchens across Nairobi.
                 </p>
               </div>
               <div className="mt-6 p-4 bg-orange-50 border border-orange-100 rounded-xl">
@@ -603,10 +603,10 @@ export default function HomePage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-2xl overflow-hidden aspect-[3/4]">
-                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80&fit=crop" alt="Fresh breads" className="w-full h-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80&fit=crop" alt="Fresh groceries" className="w-full h-full object-cover" />
               </div>
               <div className="rounded-2xl overflow-hidden aspect-[3/4] mt-8">
-                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80&fit=crop" alt="Cakes and pastries" className="w-full h-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80&fit=crop" alt="Fresh produce" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
@@ -621,9 +621,9 @@ export default function HomePage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { name: 'Grace M.', review: 'The chocolate fudge cake was absolutely divine! Ordered for my son\'s birthday and everyone was asking where it came from.', rating: 5 },
-              { name: 'James K.', review: 'Croissants are the best in Nairobi! Flaky, buttery perfection. I order every Saturday morning.', rating: 5 },
-              { name: 'Amina W.', review: 'Custom red velvet cake for our wedding. It was stunning and delicious. Cannot recommend enough!', rating: 5 },
+              { name: 'Grace M.', review: 'The freshest vegetables I\'ve found anywhere! The avocados are always perfectly ripe and the delivery is so fast.', rating: 5 },
+              { name: 'James K.', review: 'Best grocery delivery in Nairobi! Everything arrives fresh and well-packed. I order every week without fail.', rating: 5 },
+              { name: 'Amina W.', review: 'Stocked my entire restaurant kitchen through FreshCart. Quality produce, competitive wholesale prices, and reliable delivery!', rating: 5 },
             ].map(r => (
               <div key={r.name} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex mb-3">

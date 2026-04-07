@@ -2,9 +2,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Refund Policy | Snackoh Bakers',
+  title: 'Refund Policy | FreshCart Groceries',
   description:
-    'Understand the refund, return, exchange, and cancellation policies for orders placed with Snackoh Bakers in Nairobi, Kenya.',
+    'Understand the refund, return, exchange, and cancellation policies for orders placed with FreshCart Groceries in Nairobi, Kenya.',
 };
 
 export default function RefundPolicyPage() {
@@ -39,12 +39,12 @@ export default function RefundPolicyPage() {
               1. Overview
             </h2>
             <p className="text-gray-600 leading-relaxed text-sm">
-              At Snackoh Bakers, we take great pride in the quality of our baked
-              goods and strive to ensure every customer is satisfied with their
+              At FreshCart Groceries, we take great pride in the quality of our
+              groceries and strive to ensure every customer is satisfied with their
               order. We understand, however, that issues may arise from time to
               time. This Refund Policy outlines the circumstances under which
               refunds, exchanges, or replacements may be issued for products
-              purchased from Snackoh Bakers. By placing an order with us, you
+              purchased from FreshCart Groceries. By placing an order with us, you
               agree to the terms of this policy.
             </p>
           </section>
@@ -60,7 +60,7 @@ export default function RefundPolicyPage() {
             <ul className="list-disc list-inside text-gray-600 text-sm space-y-1.5 ml-2">
               <li>
                 <strong>Quality issues:</strong> If you receive a product that
-                is stale, spoiled, undercooked, or does not meet our standard
+                is stale, spoiled, damaged, or does not meet our standard
                 quality expectations, you may request a refund or replacement
                 within <strong>2 hours</strong> of delivery or collection.
               </li>
@@ -83,7 +83,7 @@ export default function RefundPolicyPage() {
             </ul>
             <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 mt-4">
               <p className="text-sm text-orange-800 font-medium">
-                Important: Due to the perishable nature of baked goods, all
+                Important: Due to the perishable nature of groceries, all
                 refund requests must be made within{' '}
                 <strong>2 hours of delivery</strong>. Requests made after this
                 window may not be honoured.
@@ -102,11 +102,11 @@ export default function RefundPolicyPage() {
             </p>
             <ul className="list-disc list-inside text-gray-600 text-sm space-y-1.5 ml-2">
               <li>
-                <strong>Custom cakes and special orders:</strong> Cakes and
-                products made to your specific design, flavour, or dietary
-                requirements are non-refundable once production has commenced.
-                This includes birthday cakes, wedding cakes, celebration cakes,
-                and any customised baked goods.
+                <strong>Custom and special orders:</strong> Products
+                ordered to your specific requirements are non-refundable once
+                preparation has commenced.
+                This includes specially sourced items, bulk orders,
+                and any customised grocery orders.
               </li>
               <li>
                 <strong>Perishable goods after delivery:</strong> Products that
@@ -271,12 +271,12 @@ export default function RefundPolicyPage() {
                 full refund, provided production has not yet started.
               </li>
               <li>
-                <strong>Custom cakes and special orders:</strong> Cancellations
+                <strong>Custom and special orders:</strong> Cancellations
                 must be made at least <strong>24 hours</strong> before the
                 scheduled delivery date to receive a full refund. Cancellations
                 made less than 24 hours before delivery may incur a cancellation
                 fee of up to <strong>50%</strong> of the order value to cover
-                ingredients and labour already expended.
+                preparation and labour already expended.
               </li>
               <li>
                 <strong>Orders already in transit:</strong> Orders that have
@@ -301,7 +301,7 @@ export default function RefundPolicyPage() {
               policy, please do not hesitate to reach out to us:
             </p>
             <div className="bg-gray-50 rounded-xl p-6 text-sm text-gray-700 space-y-1.5">
-              <p className="font-bold text-gray-900">Snackoh Bakers</p>
+              <p className="font-bold text-gray-900">FreshCart Groceries</p>
               <p>Nairobi, Kenya</p>
               <p>
                 For up-to-date contact details, please refer to the business
