@@ -16,13 +16,12 @@ interface DailySales {
 
 export default function Dashboard() {
   const { isAdmin } = useUserPermissions();
-  const [stats, setStats] = useState({ recipes: 0, products: 0, employees: 0, revenue: 0, orders: 0, inventory: 0, outlets: 0, pendingRequisitions: 0 });
+  const [stats, setStats] = useState({ products: 0, employees: 0, revenue: 0, orders: 0, inventory: 0, outlets: 0, pendingRequisitions: 0 });
   const [recentSales, setRecentSales] = useState<{ receipt: string; customer: string; total: number; method: string; date: string }[]>([]);
   const [outletsList, setOutletsList] = useState<{ name: string; type: string; status: string; is_main: boolean }[]>([]);
   const [salesBreakdown, setSalesBreakdown] = useState({ totalSales: 0, cashSales: 0, mpesaSales: 0, cardSales: 0, creditSales: 0, totalTransactions: 0 });
   const [todaySales, setTodaySales] = useState<DailySales>({ date: '', total: 0, cash: 0, mpesa: 0, card: 0, credit: 0, count: 0 });
-  const [productionStats, setProductionStats] = useState({ totalRuns: 0, completedRuns: 0, pendingRuns: 0 });
-  const [stockAlerts, setStockAlerts] = useState({ lowStock: 0, outOfStock: 0, totalValue: 0 });
+  const [stockAlerts, setStockAlerts] = useState({ lowStock: 0, outOfStock: 0, expiringItems: 0, totalValue: 0 });
   const [expenses, setExpenses] = useState({ today: 0, month: 0 });
   const [activeShifts, setActiveShifts] = useState(0);
   const [pendingDeliveries, setPendingDeliveries] = useState(0);
@@ -36,7 +35,6 @@ export default function Dashboard() {
 
     Promise.all([
       // Basic counts
-      supabase.from('recipes').select('id', { count: 'exact', head: true }),
       supabase.from('food_info').select('id', { count: 'exact', head: true }),
       supabase.from('employees').select('id', { count: 'exact', head: true }).eq('status', 'Active'),
       supabase.from('orders').select('id', { count: 'exact', head: true }),
@@ -49,15 +47,13 @@ export default function Dashboard() {
       supabase.from('pos_sales').select('*').eq('status', 'Completed').order('created_at', { ascending: false }).limit(8),
       // Outlets list
       supabase.from('outlets').select('name, outlet_type, status, is_main_branch').eq('status', 'Active').order('is_main_branch', { ascending: false }).then(r => r).catch(() => ({ data: null, error: null })),
-      // Production runs
-      supabase.from('production_runs').select('status').then(r => r).catch(() => ({ data: null, error: null })),
       // Today's expenses
       supabase.from('cost_entries').select('amount, date').then(r => r).catch(() => ({ data: null, error: null })),
       // Active shifts
       supabase.from('shifts').select('id', { count: 'exact', head: true }).eq('status', 'Active').then(r => r).catch(() => ({ count: 0, data: null, error: null })),
       // Pending deliveries
       supabase.from('deliveries').select('id', { count: 'exact', head: true }).in('status', ['Pending', 'Assigned', 'In Transit']).then(r => r).catch(() => ({ count: 0, data: null, error: null })),
-    ]).then(([recipes, products, employees, orders, inventory, outlets, requisitions, allSales, recentSalesData, outletsData, productionData, expensesData, shiftsData, deliveriesData]) => {
+    ]).then(([products, employees, orders, inventory, outlets, requisitions, allSales, recentSalesData, outletsData, expensesData, shiftsData, deliveriesData]) => {
       // Inventory stats
       const invItems = inventory.data || [];
       const totalInvValue = invItems.reduce((s: number, r: Record<string, unknown>) => s + ((r.quantity as number || 0) * (r.unit_cost as number || 0)), 0);
@@ -83,12 +79,6 @@ export default function Dashboard() {
       const todayCredit = todayData.filter((r: Record<string, unknown>) => r.payment_method === 'Credit').reduce((s: number, r: Record<string, unknown>) => s + ((r.total || 0) as number), 0);
       setTodaySales({ date: today, total: todayTotal, cash: todayCash, mpesa: todayMpesa, card: todayCard, credit: todayCredit, count: todayData.length });
 
-      // Production stats
-      const prodData = productionData.data || [];
-      const completedRuns = prodData.filter((r: Record<string, unknown>) => r.status === 'Completed').length;
-      const pendingRuns = prodData.filter((r: Record<string, unknown>) => r.status !== 'Completed' && r.status !== 'Cancelled').length;
-      setProductionStats({ totalRuns: prodData.length, completedRuns, pendingRuns });
-
       // Expenses
       const expData = expensesData.data || [];
       const todayExp = expData.filter((r: Record<string, unknown>) => (r.date as string || '') === today).reduce((s: number, r: Record<string, unknown>) => s + ((r.amount || 0) as number), 0);
@@ -99,7 +89,6 @@ export default function Dashboard() {
       setPendingDeliveries(deliveriesData.count || 0);
 
       setStats({
-        recipes: recipes.count || 0,
         products: products.count || 0,
         employees: employees.count || 0,
         revenue: totalRev,
@@ -216,22 +205,18 @@ export default function Dashboard() {
           </div>
 
           {/* ── Operations Overview ── */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3 mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3 mb-6">
             <div className="border border-border rounded-lg p-3 bg-card">
-              <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Product Lines</p>
-              <p className="text-sm md:text-lg font-bold">{stats.recipes}</p>
-            </div>
-            <div className="border border-border rounded-lg p-3 bg-card">
-              <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Products</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Total Products</p>
               <p className="text-sm md:text-lg font-bold">{stats.products}</p>
-            </div>
-            <div className="border border-border rounded-lg p-3 bg-card">
-              <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Procurement Batches</p>
-              <p className="text-sm md:text-lg font-bold">{productionStats.completedRuns}<span className="text-xs text-muted-foreground">/{productionStats.totalRuns}</span></p>
             </div>
             <div className={`border rounded-lg p-3 bg-card ${stockAlerts.lowStock > 0 ? 'border-amber-300' : 'border-border'}`}>
               <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Low Stock Alerts</p>
               <p className={`text-sm md:text-lg font-bold ${stockAlerts.lowStock > 0 ? 'text-amber-600' : ''}`}>{stockAlerts.lowStock}</p>
+            </div>
+            <div className={`border rounded-lg p-3 bg-card ${stockAlerts.outOfStock > 0 ? 'border-red-300' : 'border-border'}`}>
+              <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Out of Stock</p>
+              <p className={`text-sm md:text-lg font-bold ${stockAlerts.outOfStock > 0 ? 'text-red-600' : ''}`}>{stockAlerts.outOfStock}</p>
             </div>
             <div className={`border rounded-lg p-3 bg-card ${pendingDeliveries > 0 ? 'border-blue-300' : 'border-border'}`}>
               <p className="text-[10px] md:text-xs text-muted-foreground mb-0.5">Pending Deliveries</p>
@@ -332,11 +317,12 @@ export default function Dashboard() {
                   )}
                   <a href="/admin/pos" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors font-medium">Open POS</a>
                   <a href="/admin/reports" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors font-medium border border-green-200">View Reports</a>
+                  <a href="/admin/recipes" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Product Management</a>
+                  <a href="/admin/inventory" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Inventory</a>
                   <a href="/admin/shifts" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Shift Management</a>
                   <a href="/admin/stock-take" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Stock Take</a>
                   <a href="/admin/orders" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Create Order</a>
-                  <a href="/admin/production" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Procurement Batches</a>
-                  <a href="/admin/insurance" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Insurance</a>
+                  <a href="/admin/audit-logs" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Audit Logs</a>
                   <a href="/admin/outlets" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-orange-50 text-orange-700 rounded-lg hover:bg-orange-100 transition-colors font-medium border border-orange-200">Manage Branches</a>
                   <a href="/admin/settings" className="block px-3 md:px-4 py-2 md:py-2.5 text-xs md:text-sm bg-secondary rounded-lg hover:bg-muted transition-colors">Settings</a>
                 </div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { X, Cookie, Shield, BarChart3, Megaphone, Sparkles, Settings2 } from 'lucide-react';
+import { X, Shield, BarChart3, Megaphone, Sparkles, Settings2, ChevronRight, Lock, Eye } from 'lucide-react';
 
 interface CookiePreferences {
   necessary: boolean;
@@ -11,7 +11,15 @@ interface CookiePreferences {
   personalization: boolean;
 }
 
-const STORAGE_KEY = 'snackoh_cookie_consent';
+interface ConsentRecord {
+  preferences: CookiePreferences;
+  timestamp: string;
+  version: string;
+  method: 'accept_all' | 'reject_all' | 'custom';
+}
+
+const STORAGE_KEY = 'freshcart_cookie_consent';
+const CONSENT_VERSION = '1.0';
 
 const DEFAULT_PREFERENCES: CookiePreferences = {
   necessary: true,
@@ -20,12 +28,18 @@ const DEFAULT_PREFERENCES: CookiePreferences = {
   personalization: false,
 };
 
-function getStoredConsent(): CookiePreferences | null {
+function getStoredConsent(): ConsentRecord | null {
   if (typeof window === 'undefined') return null;
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
-      return JSON.parse(stored) as CookiePreferences;
+      const parsed = JSON.parse(stored) as ConsentRecord;
+      // Check if consent version matches
+      if (parsed.version === CONSENT_VERSION) {
+        return parsed;
+      }
+      // Version mismatch — re-consent needed
+      return null;
     }
   } catch {
     /* ignore parse errors */
@@ -33,12 +47,61 @@ function getStoredConsent(): CookiePreferences | null {
   return null;
 }
 
-function saveConsent(preferences: CookiePreferences) {
+function saveConsent(preferences: CookiePreferences, method: ConsentRecord['method']) {
+  const record: ConsentRecord = {
+    preferences,
+    timestamp: new Date().toISOString(),
+    version: CONSENT_VERSION,
+    method,
+  };
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(record));
+
+    // Dispatch event so other components can react to consent changes
+    window.dispatchEvent(new CustomEvent('cookie-consent-update', { detail: record }));
+
+    // Apply consent decisions
+    applyConsentDecisions(preferences);
   } catch {
     /* ignore storage errors */
   }
+}
+
+function applyConsentDecisions(preferences: CookiePreferences) {
+  // If analytics denied, disable tracking scripts
+  if (!preferences.analytics) {
+    // Disable GA / analytics cookies
+    if (typeof window !== 'undefined') {
+      (window as Record<string, unknown>)['ga-disable-GA_MEASUREMENT_ID'] = true;
+    }
+  }
+
+  // If marketing denied, clear marketing cookies
+  if (!preferences.marketing) {
+    clearCookiesByPattern(['_fbp', '_gcl', 'ads', 'marketing']);
+  }
+
+  // If personalization denied, clear personalization cookies
+  if (!preferences.personalization) {
+    clearCookiesByPattern(['pref', 'personalization', 'theme_override']);
+  }
+}
+
+function clearCookiesByPattern(patterns: string[]) {
+  if (typeof document === 'undefined') return;
+  const cookies = document.cookie.split(';');
+  for (const cookie of cookies) {
+    const name = cookie.split('=')[0].trim();
+    if (patterns.some(p => name.toLowerCase().includes(p))) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+    }
+  }
+}
+
+// Expose a helper to check consent from other components
+export function getCookieConsent(): CookiePreferences {
+  const stored = getStoredConsent();
+  return stored?.preferences || DEFAULT_PREFERENCES;
 }
 
 // ─── Toggle Switch ────────────────────────────────────────────────────────────
@@ -61,9 +124,9 @@ function ToggleSwitch({
       className={`
         relative inline-flex h-6 w-11 shrink-0 items-center rounded-full
         transition-colors duration-200 ease-in-out
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3b6b]/50 focus-visible:ring-offset-2
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:ring-offset-2
         ${disabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}
-        ${checked ? 'bg-[#4a3b6b]' : 'bg-gray-300'}
+        ${checked ? 'bg-emerald-500' : 'bg-gray-300 dark:bg-gray-600'}
       `}
     >
       <span
@@ -77,40 +140,55 @@ function ToggleSwitch({
   );
 }
 
-// ─── Preference Row ───────────────────────────────────────────────────────────
-function PreferenceRow({
+// ─── Cookie Category Card ────────────────────────────────────────────────────
+function CookieCategory({
   icon: Icon,
+  iconBg,
   iconColor,
   title,
   description,
+  cookieCount,
   checked,
   onChange,
   disabled = false,
 }: {
   icon: React.ComponentType<{ size?: number; className?: string }>;
+  iconBg: string;
   iconColor: string;
   title: string;
   description: string;
+  cookieCount: string;
   checked: boolean;
   onChange: (val: boolean) => void;
   disabled?: boolean;
 }) {
   return (
-    <div className="flex items-start gap-3 py-3.5">
-      <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${iconColor}`}>
-        <Icon size={16} />
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between gap-3">
-          <h4 className="text-sm font-semibold text-gray-900">{title}</h4>
-          <ToggleSwitch checked={checked} onChange={onChange} disabled={disabled} />
+    <div className={`group rounded-xl border p-4 transition-all duration-200 ${
+      checked
+        ? 'border-emerald-200 bg-emerald-50/50 dark:border-emerald-800 dark:bg-emerald-950/20'
+        : 'border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800/50'
+    } ${!disabled ? 'hover:shadow-sm' : ''}`}>
+      <div className="flex items-start gap-3">
+        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${iconBg}`}>
+          <Icon size={18} className={iconColor} />
         </div>
-        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{description}</p>
-        {disabled && (
-          <span className="inline-block text-[10px] text-[#4a3b6b] font-semibold bg-[#4a3b6b]/10 px-2 py-0.5 rounded-full mt-1.5">
-            Always active
-          </span>
-        )}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center justify-between gap-3 mb-1">
+            <div>
+              <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100">{title}</h4>
+              <span className="text-[10px] text-gray-400 font-medium">{cookieCount}</span>
+            </div>
+            {disabled ? (
+              <span className="inline-flex items-center gap-1 text-[10px] text-emerald-600 font-semibold bg-emerald-100 dark:bg-emerald-900/30 px-2 py-1 rounded-full">
+                <Lock size={9} />
+                Required
+              </span>
+            ) : (
+              <ToggleSwitch checked={checked} onChange={onChange} disabled={disabled} />
+            )}
+          </div>
+          <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{description}</p>
+        </div>
       </div>
     </div>
   );
@@ -127,11 +205,11 @@ export default function CookieConsent() {
   useEffect(() => {
     const stored = getStoredConsent();
     if (!stored) {
-      // Small delay so the banner slides in after page load
-      const timer = setTimeout(() => setVisible(true), 800);
+      const timer = setTimeout(() => setVisible(true), 1000);
       return () => clearTimeout(timer);
     }
-    // User already consented, do not show
+    // Apply stored consent decisions
+    applyConsentDecisions(stored.preferences);
   }, []);
 
   const handleClose = useCallback(() => {
@@ -139,7 +217,7 @@ export default function CookieConsent() {
     setTimeout(() => {
       setVisible(false);
       setAnimateOut(false);
-    }, 300);
+    }, 350);
   }, []);
 
   const handleAcceptAll = useCallback(() => {
@@ -149,14 +227,24 @@ export default function CookieConsent() {
       marketing: true,
       personalization: true,
     };
-    saveConsent(allAccepted);
+    saveConsent(allAccepted, 'accept_all');
+    handleClose();
+  }, [handleClose]);
+
+  const handleRejectAll = useCallback(() => {
+    const essentialOnly: CookiePreferences = {
+      necessary: true,
+      analytics: false,
+      marketing: false,
+      personalization: false,
+    };
+    saveConsent(essentialOnly, 'reject_all');
     handleClose();
   }, [handleClose]);
 
   const handleSavePreferences = useCallback(() => {
-    // Necessary cookies are always enabled
     const toSave: CookiePreferences = { ...preferences, necessary: true };
-    saveConsent(toSave);
+    saveConsent(toSave, 'custom');
     handleClose();
   }, [preferences, handleClose]);
 
@@ -169,77 +257,98 @@ export default function CookieConsent() {
   return (
     <div
       className={`
-        fixed bottom-0 left-0 right-0 z-[70] p-4 sm:p-6
-        flex justify-center
-        transition-all duration-300 ease-out
+        fixed bottom-0 left-0 right-0 z-[70] p-3 sm:p-5
+        flex justify-center pointer-events-none
+        transition-all duration-350 ease-out
         ${animateOut ? 'translate-y-full opacity-0' : 'translate-y-0 opacity-100'}
       `}
       style={{
-        animation: !animateOut ? 'slideUpCookie 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards' : undefined,
+        animation: !animateOut ? 'slideUpCookie 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards' : undefined,
       }}
     >
       <style jsx>{`
         @keyframes slideUpCookie {
-          from {
-            transform: translateY(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
+          from { transform: translateY(100%); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
         }
       `}</style>
 
-      <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl shadow-black/15 border border-gray-100 overflow-hidden">
+      <div className="w-full max-w-xl pointer-events-auto bg-white dark:bg-gray-900 rounded-2xl shadow-2xl shadow-black/20 border border-gray-200 dark:border-gray-700 overflow-hidden backdrop-blur-xl">
         {/* ── Banner View ── */}
         {!showPreferences && (
-          <div className="p-6">
+          <div className="p-5 sm:p-6">
             {/* Close button */}
             <button
-              onClick={handleClose}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors"
-              aria-label="Close cookie banner"
+              onClick={handleRejectAll}
+              className="absolute top-3.5 right-3.5 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              aria-label="Reject all and close"
             >
               <X size={16} strokeWidth={2.5} />
             </button>
 
-            {/* Icon & Title */}
-            <div className="flex items-center gap-2.5 mb-3 pr-8">
-              <div className="w-10 h-10 bg-[#4a3b6b]/10 rounded-xl flex items-center justify-center shrink-0">
-                <Cookie size={20} className="text-[#4a3b6b]" />
+            {/* Header */}
+            <div className="flex items-start gap-3 mb-4 pr-8">
+              <div className="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/20">
+                <Shield size={20} className="text-white" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900">Accept the use of cookies.</h3>
+              <div>
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white">Your Privacy Matters</h3>
+                <p className="text-xs text-gray-400 mt-0.5">Manage how we use cookies on this site</p>
+              </div>
             </div>
 
             {/* Description */}
-            <p className="text-sm text-gray-500 leading-relaxed mb-5">
-              We use cookies to enhance your browsing experience, serve personalised content, and
-              analyse our traffic. By clicking &quot;Accept all Cookies&quot;, you consent to our use of
-              cookies.{' '}
+            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-5">
+              We use cookies to improve your shopping experience, analyze site traffic, and personalize content. You can choose which cookies to allow.{' '}
               <Link
                 href="/cookie-policy"
-                className="text-[#4a3b6b] font-medium underline underline-offset-2 hover:text-[#3a2d57] transition-colors"
+                className="text-emerald-600 font-medium underline underline-offset-2 hover:text-emerald-700 transition-colors inline-flex items-center gap-0.5"
               >
-                Read our Cookie Policy
+                Cookie Policy <ChevronRight size={12} />
               </Link>
             </p>
 
+            {/* Quick summary chips */}
+            <div className="flex flex-wrap gap-2 mb-5">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-[11px] font-medium text-gray-600 dark:text-gray-300">
+                <Lock size={10} className="text-emerald-500" />
+                Essential (always on)
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-[11px] font-medium text-gray-600 dark:text-gray-300">
+                <BarChart3 size={10} className="text-blue-500" />
+                Analytics
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-[11px] font-medium text-gray-600 dark:text-gray-300">
+                <Megaphone size={10} className="text-orange-500" />
+                Marketing
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-[11px] font-medium text-gray-600 dark:text-gray-300">
+                <Eye size={10} className="text-purple-500" />
+                Personalization
+              </span>
+            </div>
+
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-2.5">
+            <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={handleAcceptAll}
-                className="flex-1 py-3 px-5 bg-[#4a3b6b] text-white text-sm font-semibold rounded-xl hover:bg-[#3a2d57] active:scale-[0.98] transition-all duration-150 shadow-sm"
+                className="flex-1 py-3 px-5 bg-emerald-600 text-white text-sm font-semibold rounded-xl hover:bg-emerald-700 active:scale-[0.98] transition-all duration-150 shadow-md shadow-emerald-600/20"
               >
-                Accept all Cookies
+                Accept All
+              </button>
+              <button
+                onClick={handleRejectAll}
+                className="flex-1 py-3 px-5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-sm font-semibold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 active:scale-[0.98] transition-all duration-150"
+              >
+                Essential Only
               </button>
               <button
                 onClick={() => setShowPreferences(true)}
-                className="flex-1 py-3 px-5 bg-white text-gray-700 text-sm font-semibold rounded-xl border-2 border-gray-200 hover:border-[#4a3b6b] hover:text-[#4a3b6b] active:scale-[0.98] transition-all duration-150"
+                className="flex-1 py-3 px-5 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 text-sm font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:border-emerald-400 hover:text-emerald-600 active:scale-[0.98] transition-all duration-150"
               >
                 <span className="inline-flex items-center gap-1.5 justify-center">
                   <Settings2 size={14} />
-                  Manage Preferences
+                  Customize
                 </span>
               </button>
             </div>
@@ -250,14 +359,20 @@ export default function CookieConsent() {
         {showPreferences && (
           <div className="max-h-[85vh] overflow-y-auto">
             {/* Header */}
-            <div className="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between z-10">
+            <div className="sticky top-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 px-5 py-4 flex items-center justify-between z-10">
               <div className="flex items-center gap-2.5">
-                <Shield size={18} className="text-[#4a3b6b]" />
-                <h3 className="text-base font-bold text-gray-900">Cookie Preferences</h3>
+                <button
+                  onClick={() => setShowPreferences(false)}
+                  className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 hover:text-gray-600 transition-colors"
+                  aria-label="Back to banner"
+                >
+                  <ChevronRight size={16} strokeWidth={2.5} className="rotate-180" />
+                </button>
+                <h3 className="text-base font-bold text-gray-900 dark:text-white">Cookie Preferences</h3>
               </div>
               <button
                 onClick={handleClose}
-                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 hover:text-gray-600 transition-colors"
                 aria-label="Close cookie preferences"
               >
                 <X size={16} strokeWidth={2.5} />
@@ -265,72 +380,78 @@ export default function CookieConsent() {
             </div>
 
             {/* Description */}
-            <div className="px-6 pt-4 pb-2">
-              <p className="text-xs text-gray-500 leading-relaxed">
-                Choose which cookies you allow. You can change these settings at any time.
-                Necessary cookies cannot be disabled as they are essential for the website to
-                function properly.
+            <div className="px-5 pt-4 pb-2">
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                Choose which cookies you allow. Necessary cookies cannot be disabled as they are required for the site to function. Your selection is saved and can be changed anytime via our Cookie Policy page.
               </p>
             </div>
 
             {/* Cookie categories */}
-            <div className="px-6 divide-y divide-gray-100">
-              <PreferenceRow
+            <div className="px-5 py-3 space-y-3">
+              <CookieCategory
                 icon={Shield}
-                iconColor="bg-green-50 text-green-600"
-                title="Necessary Cookies"
-                description="Essential for the website to function. These cookies ensure basic functionalities like page navigation, secure areas, and shopping cart."
+                iconBg="bg-emerald-100 dark:bg-emerald-900/30"
+                iconColor="text-emerald-600"
+                title="Essential Cookies"
+                description="Required for core site functionality — login sessions, shopping cart, secure checkout, and CSRF protection."
+                cookieCount="4 cookies"
                 checked={true}
                 onChange={() => {}}
                 disabled
               />
-              <PreferenceRow
+              <CookieCategory
                 icon={BarChart3}
-                iconColor="bg-blue-50 text-blue-600"
+                iconBg="bg-blue-100 dark:bg-blue-900/30"
+                iconColor="text-blue-600"
                 title="Analytics Cookies"
-                description="Help us understand how visitors interact with our website by collecting and reporting information anonymously."
+                description="Help us understand site usage — page views, traffic sources, and user journeys. Data is anonymized."
+                cookieCount="3 cookies"
                 checked={preferences.analytics}
                 onChange={(val) => updatePreference('analytics', val)}
               />
-              <PreferenceRow
+              <CookieCategory
                 icon={Megaphone}
-                iconColor="bg-orange-50 text-orange-600"
+                iconBg="bg-orange-100 dark:bg-orange-900/30"
+                iconColor="text-orange-600"
                 title="Marketing Cookies"
-                description="Used to track visitors across websites to display relevant advertisements and promotional content."
+                description="Used for targeted advertisements and promotional campaigns. Shared with advertising partners."
+                cookieCount="5 cookies"
                 checked={preferences.marketing}
                 onChange={(val) => updatePreference('marketing', val)}
               />
-              <PreferenceRow
+              <CookieCategory
                 icon={Sparkles}
-                iconColor="bg-purple-50 text-purple-600"
+                iconBg="bg-purple-100 dark:bg-purple-900/30"
+                iconColor="text-purple-600"
                 title="Personalization Cookies"
-                description="Allow the website to remember your preferences such as language, region, and display settings for a tailored experience."
+                description="Remember your preferences — language, region, display settings, and recently viewed products."
+                cookieCount="3 cookies"
                 checked={preferences.personalization}
                 onChange={(val) => updatePreference('personalization', val)}
               />
             </div>
 
             {/* Footer actions */}
-            <div className="sticky bottom-0 bg-white border-t border-gray-100 px-6 py-4 flex flex-col sm:flex-row gap-2.5">
+            <div className="sticky bottom-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-t border-gray-100 dark:border-gray-800 px-5 py-4 flex flex-col sm:flex-row gap-2">
               <button
                 onClick={handleSavePreferences}
-                className="flex-1 py-3 px-5 bg-[#4a3b6b] text-white text-sm font-semibold rounded-xl hover:bg-[#3a2d57] active:scale-[0.98] transition-all duration-150 shadow-sm"
+                className="flex-1 py-3 px-5 bg-emerald-600 text-white text-sm font-semibold rounded-xl hover:bg-emerald-700 active:scale-[0.98] transition-all duration-150 shadow-md shadow-emerald-600/20"
               >
-                Save Preferences
+                Save My Preferences
               </button>
               <button
                 onClick={handleAcceptAll}
-                className="flex-1 py-3 px-5 bg-white text-gray-700 text-sm font-semibold rounded-xl border-2 border-gray-200 hover:border-[#4a3b6b] hover:text-[#4a3b6b] active:scale-[0.98] transition-all duration-150"
+                className="flex-1 py-3 px-5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-sm font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:border-emerald-400 hover:text-emerald-600 active:scale-[0.98] transition-all duration-150"
               >
                 Accept All
               </button>
             </div>
 
             {/* Cookie policy link */}
-            <div className="px-6 pb-4 text-center">
+            <div className="px-5 pb-4 text-center">
               <Link
                 href="/cookie-policy"
-                className="text-xs text-[#4a3b6b] font-medium underline underline-offset-2 hover:text-[#3a2d57] transition-colors"
+                className="text-xs text-emerald-600 font-medium underline underline-offset-2 hover:text-emerald-700 transition-colors"
               >
                 Read our full Cookie Policy
               </Link>

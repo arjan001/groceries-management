@@ -494,17 +494,17 @@ function NewsletterModal() {
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50" onClick={handleClose}>
       <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full overflow-hidden flex flex-col sm:flex-row" onClick={e => e.stopPropagation()}>
         {/* Image side */}
-        <div className="sm:w-1/2 h-56 sm:h-auto relative hidden sm:block bg-gradient-to-br from-orange-400 via-orange-500 to-amber-600">
+        <div className="sm:w-1/2 h-56 sm:h-auto relative hidden sm:block bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600">
           {config.image && !imgError ? (
             <img src={config.image} alt="Newsletter" className="w-full h-full object-cover" onError={() => setImgError(true)} />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center text-white p-8">
-              <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-90 mb-4">
-                <rect width="20" height="16" x="2" y="4" rx="2"/>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              {/* Shopping basket icon */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-90 mb-3">
+                <path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"/><path d="m9 11 1 9"/><path d="M4.5 15.5h15"/><path d="m5 11 4-7"/>
               </svg>
-              <p className="text-xl font-black tracking-tight text-center">Stay In The Loop</p>
-              <p className="text-sm opacity-80 mt-1 text-center">Fresh deals & grocery savings</p>
+              <p className="text-xl font-black tracking-tight text-center">Fresh Deals Weekly</p>
+              <p className="text-sm opacity-80 mt-1 text-center">Save on groceries & seasonal produce</p>
             </div>
           )}
         </div>
@@ -520,8 +520,8 @@ function NewsletterModal() {
                 <Mail size={20} className="text-green-600" />
               </div>
               <h3 className="text-lg font-black text-gray-900 mb-2">Thank You!</h3>
-              <p className="text-sm text-gray-600 mb-3">You&apos;re now subscribed. Use code <strong className="text-orange-600">{config.discountCode}</strong> for your discount.</p>
-              <button onClick={handleClose} className="px-5 py-2 bg-orange-600 text-white font-bold text-sm rounded-full hover:bg-orange-700">
+              <p className="text-sm text-gray-600 mb-3">You&apos;re now subscribed. Use code <strong className="text-emerald-600">{config.discountCode}</strong> for your discount.</p>
+              <button onClick={handleClose} className="px-5 py-2 bg-emerald-600 text-white font-bold text-sm rounded-full hover:bg-emerald-700">
                 Start Shopping
               </button>
             </div>
@@ -539,13 +539,13 @@ function NewsletterModal() {
                     placeholder="Enter Your Email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-orange-400 outline-none"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-400 outline-none"
                   />
                 </div>
                 <button
                   onClick={handleSubscribe}
                   disabled={loading || !email}
-                  className="w-full py-2.5 bg-orange-600 text-white font-bold text-sm rounded-lg hover:bg-orange-700 disabled:opacity-50 transition-colors"
+                  className="w-full py-2.5 bg-emerald-600 text-white font-bold text-sm rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition-colors"
                 >
                   {loading ? 'Subscribing...' : 'Subscribe'}
                 </button>

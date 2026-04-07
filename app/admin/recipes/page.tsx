@@ -42,9 +42,9 @@ interface FilePreviewRow {
 
 // ── Constants ──
 
-const CATEGORIES = ['Beverages', 'Dairy', 'Snacks', 'Frozen', 'Canned Goods', 'Other'];
-const PRODUCT_TYPES = ['Milk', 'Juice', 'Cereal', 'Rice', 'Pasta', 'Cooking Oil', 'Flour', 'Sugar', 'Tea', 'Coffee', 'Snacks', 'Canned Food', 'Other'];
-const UNITS = ['g', 'kg', 'ml', 'L', 'tsp', 'tbsp', 'cups', 'pieces', 'dozen'];
+const CATEGORIES = ['Fruits & Vegetables', 'Dairy & Eggs', 'Meat & Seafood', 'Beverages', 'Pantry Staples', 'Snacks', 'Frozen Foods', 'Bakery', 'Household', 'Other'];
+const PRODUCT_TYPES = ['Fresh Produce', 'Dairy', 'Meat', 'Poultry', 'Seafood', 'Grains & Cereals', 'Cooking Oil', 'Canned Food', 'Beverages', 'Snacks', 'Cleaning', 'Personal Care', 'Other'];
+const UNITS = ['g', 'kg', 'ml', 'L', 'pieces', 'dozen', 'pack', 'bundle', 'crate', 'box'];
 const ROWS_PER_PAGE = 10;
 
 // ── Page Component ──
@@ -91,8 +91,8 @@ export default function RecipesPage() {
     id: '',
     name: '',
     code: '',
-    category: 'Beverages',
-    productType: 'Milk',
+    category: 'Fruits & Vegetables',
+    productType: 'Fresh Produce',
     batchSize: 1,
     expectedOutput: 0,
     outputUnit: 'pieces',
@@ -214,7 +214,7 @@ export default function RecipesPage() {
         }
         logAudit({
           action: 'UPDATE',
-          module: 'Recipes',
+          module: 'Products',
           record_id: editId,
           details: { name: formData.name, code: formData.code, category: formData.category, status: formData.status },
         });
@@ -235,7 +235,7 @@ export default function RecipesPage() {
         if (created) {
           logAudit({
             action: 'CREATE',
-            module: 'Recipes',
+            module: 'Products',
             record_id: created.id,
             details: { name: formData.name, code: formData.code, category: formData.category, status: formData.status },
           });
@@ -309,7 +309,7 @@ export default function RecipesPage() {
       if (created) {
         logAudit({
           action: 'CREATE',
-          module: 'Recipes',
+          module: 'Products',
           record_id: created.id,
           details: { name: recipe.name + ' (Copy)', code: recipe.code + '-COPY', duplicatedFrom: recipe.id },
         });
@@ -378,11 +378,11 @@ export default function RecipesPage() {
     // UI-only: simulate parsed data preview
     if (uploadedFile) {
       setFilePreview([
-        { name: 'Wheat Flour', quantity: '5000', unit: 'g', costPerUnit: '0.12' },
-        { name: 'Sugar', quantity: '500', unit: 'g', costPerUnit: '0.15' },
-        { name: 'Butter', quantity: '250', unit: 'g', costPerUnit: '0.80' },
-        { name: 'Eggs', quantity: '6', unit: 'pieces', costPerUnit: '15.00' },
-        { name: 'Yeast', quantity: '15', unit: 'g', costPerUnit: '2.50' },
+        { name: 'Fresh Bananas', quantity: '100', unit: 'kg', costPerUnit: '45.00' },
+        { name: 'Whole Milk', quantity: '200', unit: 'L', costPerUnit: '60.00' },
+        { name: 'White Rice', quantity: '500', unit: 'kg', costPerUnit: '120.00' },
+        { name: 'Cooking Oil', quantity: '100', unit: 'L', costPerUnit: '250.00' },
+        { name: 'Farm Eggs', quantity: '50', unit: 'dozen', costPerUnit: '180.00' },
       ]);
     }
   };
@@ -620,8 +620,8 @@ Make it printer-friendly.`;
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold mb-2">Product Catalog</h1>
-        <p className="text-muted-foreground">Define products with full ingredient tracking, costs, procurement flow, and expected output per batch</p>
+        <h1 className="text-2xl font-bold mb-2">Product Management</h1>
+        <p className="text-muted-foreground">Manage your grocery product catalog — add, edit, and track products with categories, pricing, and stock units</p>
       </div>
 
       {/* Stats Cards */}
@@ -736,7 +736,7 @@ Make it printer-friendly.`;
                   <td colSpan={10} className="px-4 py-12 text-center text-muted-foreground">
                     <div className="flex items-center justify-center gap-2">
                       <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" /></svg>
-                      Loading recipes...
+                      Loading products...
                     </div>
                   </td>
                 </tr>
@@ -914,7 +914,7 @@ Make it printer-friendly.`;
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full px-3 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none bg-white"
                   required
-                  placeholder="e.g. Classic White Loaf"
+                  placeholder="e.g. Fresh Bananas"
                 />
               </div>
               <div>
@@ -964,15 +964,15 @@ Make it printer-friendly.`;
             </div>
           </div>
 
-          {/* ── Section 2: Production Output (Green) ── */}
+          {/* ── Section 2: Stock & Packaging (Green) ── */}
           <div className="rounded-xl border-2 border-green-200 bg-green-50/50 p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">2</div>
-              <h3 className="font-bold text-green-900 text-lg">Production Output</h3>
+              <h3 className="font-bold text-green-900 text-lg">Stock & Packaging</h3>
             </div>
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1 text-green-800">Batch Multiplier</label>
+                <label className="block text-sm font-medium mb-1 text-green-800">Pack Size</label>
                 <input
                   type="number"
                   min="1"
@@ -982,7 +982,7 @@ Make it printer-friendly.`;
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1 text-green-800">Expected Output *</label>
+                <label className="block text-sm font-medium mb-1 text-green-800">Stock Quantity *</label>
                 <input
                   type="number"
                   min="1"
@@ -990,64 +990,62 @@ Make it printer-friendly.`;
                   onChange={(e) => setFormData({ ...formData, expectedOutput: parseInt(e.target.value) || 0 })}
                   className="w-full px-3 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-400 outline-none bg-white"
                   required
-                  placeholder="e.g. 10"
+                  placeholder="e.g. 100"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1 text-green-800">Output Unit</label>
-                <input
-                  type="text"
+                <label className="block text-sm font-medium mb-1 text-green-800">Unit</label>
+                <select
                   value={formData.outputUnit}
                   onChange={(e) => setFormData({ ...formData, outputUnit: e.target.value })}
                   className="w-full px-3 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-400 outline-none bg-white"
-                  placeholder="loaves, pieces, etc"
-                />
+                >
+                  {UNITS.map(u => <option key={u} value={u}>{u}</option>)}
+                </select>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-4 mt-4">
+            <div className="grid grid-cols-2 gap-4 mt-4">
               <div>
-                <label className="block text-sm font-medium mb-1 text-green-800">Prep Time (min)</label>
+                <label className="block text-sm font-medium mb-1 text-green-800">Shelf Life (days)</label>
                 <input
                   type="number"
                   min="0"
                   value={formData.prepTime}
                   onChange={(e) => setFormData({ ...formData, prepTime: parseInt(e.target.value) || 0 })}
                   className="w-full px-3 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-400 outline-none bg-white"
+                  placeholder="e.g. 7"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1 text-green-800">Processing Time (min)</label>
+                <label className="block text-sm font-medium mb-1 text-green-800">Storage Temp (&deg;C)</label>
                 <input
                   type="number"
-                  min="0"
-                  value={formData.bakeTime}
-                  onChange={(e) => setFormData({ ...formData, bakeTime: parseInt(e.target.value) || 0 })}
-                  className="w-full px-3 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-400 outline-none bg-white"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1 text-green-800">Storage Temp (degC)</label>
-                <input
-                  type="number"
-                  min="0"
                   value={formData.bakeTemp}
                   onChange={(e) => setFormData({ ...formData, bakeTemp: parseInt(e.target.value) || 0 })}
                   className="w-full px-3 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-400 outline-none bg-white"
+                  placeholder="e.g. 4 for refrigerated"
                 />
               </div>
             </div>
-            {/* Production Flow Summary */}
-            {formData.prepTime > 0 || formData.bakeTime > 0 ? (
+            {/* Stock Summary */}
+            {formData.expectedOutput > 0 ? (
               <div className="mt-4 p-3 bg-green-100 rounded-lg">
-                <p className="text-sm font-medium text-green-800">Production Flow Summary</p>
+                <p className="text-sm font-medium text-green-800">Stock Summary</p>
                 <div className="flex items-center gap-2 mt-2 text-xs text-green-700">
-                  <span className="px-2 py-1 bg-white rounded">Prep: {formData.prepTime} min</span>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-                  <span className="px-2 py-1 bg-white rounded">Process: {formData.bakeTime} min @ {formData.bakeTemp}C</span>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-                  <span className="px-2 py-1 bg-white rounded font-semibold">Output: {formData.expectedOutput} {formData.outputUnit}</span>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-                  <span className="px-2 py-1 bg-white rounded">Total: {formData.prepTime + formData.bakeTime} min</span>
+                  <span className="px-2 py-1 bg-white rounded">Qty: {formData.expectedOutput} {formData.outputUnit}</span>
+                  {formData.prepTime > 0 && (
+                    <>
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                      <span className="px-2 py-1 bg-white rounded">Shelf Life: {formData.prepTime} days</span>
+                    </>
+                  )}
+                  {formData.bakeTemp > 0 && (
+                    <>
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                      <span className="px-2 py-1 bg-white rounded">Store at {formData.bakeTemp}&deg;C</span>
+                    </>
+                  )}
+                  <span className="px-2 py-1 bg-white rounded font-semibold">Pack: {formData.batchSize}x</span>
                 </div>
               </div>
             ) : null}
@@ -1058,7 +1056,7 @@ Make it printer-friendly.`;
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm font-bold">3</div>
-                <h3 className="font-bold text-amber-900 text-lg">Ingredients & Costing</h3>
+                <h3 className="font-bold text-amber-900 text-lg">Supplier & Costing</h3>
               </div>
               <button
                 type="button"
@@ -1360,9 +1358,9 @@ Make it printer-friendly.`;
                 <p className="text-xl font-bold text-green-900">{selectedRecipe.expectedOutput} <span className="text-sm font-normal">{selectedRecipe.outputUnit}</span></p>
               </div>
               <div className="p-4 rounded-xl bg-blue-50 border border-blue-200">
-                <p className="text-xs text-blue-700 font-medium">Prep + Processing Time</p>
-                <p className="text-xl font-bold text-blue-900">{selectedRecipe.prepTime + selectedRecipe.bakeTime} <span className="text-sm font-normal">min</span></p>
-                <p className="text-xs text-blue-600 mt-0.5">{selectedRecipe.prepTime}m prep + {selectedRecipe.bakeTime}m processing</p>
+                <p className="text-xs text-blue-700 font-medium">Shelf Life</p>
+                <p className="text-xl font-bold text-blue-900">{selectedRecipe.prepTime} <span className="text-sm font-normal">days</span></p>
+                <p className="text-xs text-blue-600 mt-0.5">Store at {selectedRecipe.bakeTemp}&deg;C</p>
               </div>
               <div className="p-4 rounded-xl bg-amber-50 border border-amber-200">
                 <p className="text-xs text-amber-700 font-medium">Batch Cost</p>
@@ -1374,21 +1372,25 @@ Make it printer-friendly.`;
               </div>
             </div>
 
-            {/* Production Flow */}
+            {/* Product Details */}
             <div className="p-4 rounded-xl bg-secondary/50 border border-border">
-              <p className="text-sm font-semibold mb-3">Production Flow</p>
+              <p className="text-sm font-semibold mb-3">Product Details</p>
               <div className="flex items-center gap-2 flex-wrap text-sm">
                 <span className="px-3 py-1.5 bg-blue-100 text-blue-800 rounded-lg font-medium">
-                  Prep: {selectedRecipe.prepTime} min
-                </span>
-                <svg className="w-5 h-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-                <span className="px-3 py-1.5 bg-orange-100 text-orange-800 rounded-lg font-medium">
-                  Process: {selectedRecipe.bakeTime} min @ {selectedRecipe.bakeTemp}C
+                  Pack Size: {selectedRecipe.batchSize}
                 </span>
                 <svg className="w-5 h-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
                 <span className="px-3 py-1.5 bg-green-100 text-green-800 rounded-lg font-medium">
-                  Output: {selectedRecipe.expectedOutput} {selectedRecipe.outputUnit}
+                  Stock: {selectedRecipe.expectedOutput} {selectedRecipe.outputUnit}
                 </span>
+                {selectedRecipe.prepTime > 0 && (
+                  <>
+                    <svg className="w-5 h-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                    <span className="px-3 py-1.5 bg-orange-100 text-orange-800 rounded-lg font-medium">
+                      Shelf Life: {selectedRecipe.prepTime} days
+                    </span>
+                  </>
+                )}
               </div>
             </div>
 
@@ -1439,7 +1441,7 @@ Make it printer-friendly.`;
             {/* Instructions */}
             {selectedRecipe.instructions && (
               <div className="rounded-xl border border-teal-200 bg-teal-50/50 p-5">
-                <p className="font-semibold mb-2 text-teal-900">Preparation Instructions</p>
+                <p className="font-semibold mb-2 text-teal-900">Notes & Instructions</p>
                 <p className="text-sm text-teal-800 whitespace-pre-line leading-relaxed">{selectedRecipe.instructions}</p>
               </div>
             )}

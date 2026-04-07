@@ -89,12 +89,8 @@ const allNavGroups: NavGroup[] = [
     title: 'PRODUCTS & CATALOG',
     color: 'border-l-amber-500',
     items: [
-      { label: 'Product Catalog', href: '/admin/recipes', tip: 'Manage products with pricing, categories & details', icon: BookOpen },
-      { label: 'Food & Grocery Info', href: '/admin/food-info', tip: 'Allergens, nutrition info, expiry & certifications', icon: UtensilsCrossed },
+      { label: 'Product Management', href: '/admin/recipes', tip: 'Manage grocery products — pricing, categories & details', icon: BookOpen },
       { label: 'Catalog Upload', href: '/admin/catalog-upload', tip: 'Bulk-import products from CSV catalogue files', icon: FileUp },
-      { label: 'Procurement Batches', href: '/admin/production', tip: 'Schedule & track procurement and restocking batches', icon: Factory },
-      { label: 'Store Requisitions', href: '/admin/store-requisitions', tip: 'Request stock from warehouse with approval flow', icon: ClipboardCopy },
-      { label: 'Picking Lists', href: '/admin/picking-lists', tip: 'Order picking lists for fulfilment', icon: ClipboardList },
       { label: 'Lot & Expiry Tracking', href: '/admin/lot-tracking', tip: 'Track batches, expiry dates & traceability', icon: ScanLine },
       { label: 'Waste & Shrinkage', href: '/admin/waste-control', tip: 'Record & analyze expired, damaged & wasted stock', icon: Trash2 },
     ],
@@ -130,13 +126,9 @@ const allNavGroups: NavGroup[] = [
     items: [
       { label: 'Branch Management', href: '/admin/outlets', tip: 'Manage main store and branch outlets', icon: Store },
       { label: 'Branch Inventory', href: '/admin/outlet-inventory', tip: 'Manage inventory for individual branches', icon: PackageSearch },
-      { label: 'Branch Requisitions', href: '/admin/outlet-requisitions', tip: 'Stock requests from branches to main warehouse', icon: ClipboardCopy },
-      { label: 'Branch Returns', href: '/admin/outlet-returns', tip: 'Return expired/damaged items to main warehouse', icon: RotateCcw },
       { label: 'Branch Products', href: '/admin/outlet-products', tip: 'Branch-specific product catalog & pricing', icon: ShoppingBasket },
       { label: 'Branch Employees', href: '/admin/outlet-employees', tip: 'Manage staff assigned to each branch', icon: UserCog },
       { label: 'Branch Reports', href: '/admin/outlet-reports', tip: 'Sales, inventory & performance reports per branch', icon: PieChart },
-      { label: 'Branch Waste', href: '/admin/outlet-waste', tip: 'Record & track waste at each branch', icon: Recycle },
-      { label: 'Branch Settings', href: '/admin/outlet-settings', tip: 'Receipt, POS & display settings per branch', icon: SlidersHorizontal },
       { label: 'Menu Generator', href: '/admin/outlet-menu-generator', tip: 'Generate QR codes & PDF product lists for branches', icon: QrCode },
     ],
   },
@@ -575,7 +567,7 @@ export function Sidebar() {
         {canInstall && !isInstalled && (
           <button
             onClick={triggerInstall}
-            title="Install Snackoh App"
+            title="Install FreshCart App"
             className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors bg-orange-50 text-orange-700 hover:bg-orange-100 border border-orange-200 ${collapsed ? 'justify-center px-0' : ''}`}
           >
             <Download size={collapsed ? 20 : 16} strokeWidth={2.5} className="shrink-0" />
