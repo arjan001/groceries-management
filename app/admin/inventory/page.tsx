@@ -845,7 +845,7 @@ export default function InventoryPage() {
                   type="text"
                   value={stockRef}
                   onChange={(e) => setStockRef(e.target.value)}
-                  placeholder={showStockModal?.type === 'intake' ? 'e.g. Supplier delivery' : 'e.g. Morning production batch'}
+                  placeholder={showStockModal?.type === 'intake' ? 'e.g. Supplier delivery' : 'e.g. Morning procurement batch'}
                   className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/50 outline-none"
                 />
               </div>

@@ -1,6 +1,6 @@
-# Snackoh Bakers Management System
+# FreshCart Grocery Management System
 
-A comprehensive bakery ERP (Enterprise Resource Planning) and e-commerce platform built with Next.js. The system manages production, inventory, sales, deliveries, finance, and multi-branch operations for a bakery business.
+A comprehensive grocery ERP (Enterprise Resource Planning) and e-commerce platform built with Next.js. The system manages inventory, supply chain, sales, deliveries, finance, and multi-branch operations for a grocery business.
 
 ## Tech Stack
 

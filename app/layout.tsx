@@ -7,8 +7,8 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
-  title: 'Snackoh Bakers',
-  description: 'Fresh baked goods delivered to your door — Snackoh Bakers',
+  title: 'FreshCart Groceries',
+  description: 'Fresh groceries delivered to your door — FreshCart Groceries',
   icons: {
     icon: '/icon-192.png',
     apple: '/apple-icon.png',

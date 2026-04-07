@@ -140,7 +140,7 @@ export default function LoginPage() {
               </Link>
             </div>
           </div>
-          <p className="text-xs text-gray-400 mt-6">SNACKOH Bakers Management System</p>
+          <p className="text-xs text-gray-400 mt-6">FreshCart Groceries Management System</p>
         </div>
       </div>
     );
@@ -152,7 +152,7 @@ export default function LoginPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <Link href="/" className="text-3xl font-black text-gray-900 hover:text-orange-600 transition-colors">
-            SNACKOH
+            FreshCart
           </Link>
           <h1 className="text-xl font-bold text-gray-800 mt-4">Admin Login</h1>
           <p className="text-sm text-gray-500 mt-1">
@@ -175,7 +175,7 @@ export default function LoginPage() {
                 type="email"
                 value={form.email}
                 onChange={e => setForm({ ...form, email: e.target.value })}
-                placeholder="admin@snackoh.co.ke"
+                placeholder="admin@freshcart.co.ke"
                 required
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none"
               />

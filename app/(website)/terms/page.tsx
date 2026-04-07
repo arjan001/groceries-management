@@ -2,9 +2,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms and Conditions | Snackoh Bakers',
+  title: 'Terms and Conditions | FreshCart Groceries',
   description:
-    'Read the terms and conditions governing the use of Snackoh Bakers website, ordering, delivery, and related services in Nairobi, Kenya.',
+    'Read the terms and conditions governing the use of FreshCart Groceries website, ordering, delivery, and related services in Nairobi, Kenya.',
 };
 
 export default function TermsPage() {
@@ -38,7 +38,7 @@ export default function TermsPage() {
           {/* Introduction */}
           <section>
             <p className="text-gray-600 leading-relaxed text-sm">
-              Welcome to Snackoh Bakers. These Terms and Conditions
+              Welcome to FreshCart Groceries. These Terms and Conditions
               (&quot;Terms&quot;) govern your use of our website, products, and
               services. By accessing our website or placing an order, you agree
               to be bound by these Terms. Please read them carefully before using
@@ -74,9 +74,9 @@ export default function TermsPage() {
               2. Products and Services
             </h2>
             <p className="text-gray-600 leading-relaxed text-sm mb-3">
-              Snackoh Bakers offers a range of freshly baked goods including, but
-              not limited to, breads, cakes, pastries, cookies, doughnuts, and
-              custom-made baked products. We serve both retail and wholesale
+              FreshCart Groceries offers a range of fresh groceries including, but
+              not limited to, fruits, vegetables, dairy, beverages, household
+              essentials, and specialty products. We serve both retail and wholesale
               customers in Nairobi and surrounding areas.
             </p>
             <ul className="list-disc list-inside text-gray-600 text-sm space-y-1.5 ml-2">
@@ -90,8 +90,8 @@ export default function TermsPage() {
                 correct them.
               </li>
               <li>
-                Custom cake designs are subject to consultation and may differ
-                from reference images provided by the customer.
+                Product packaging and appearance may vary slightly from website
+                images.
               </li>
               <li>
                 Certain products may contain allergens (e.g., wheat, dairy, eggs,
@@ -205,12 +205,12 @@ export default function TermsPage() {
                 on the following business day.
               </li>
               <li>
-                Custom cakes and special orders require at least{' '}
+                Custom and special orders require at least{' '}
                 <strong>48 hours</strong> advance notice.
               </li>
               <li>
                 Delivery times are estimates and may be affected by traffic,
-                weather, or other unforeseen circumstances. Snackoh Bakers shall
+                weather, or other unforeseen circumstances. FreshCart Groceries shall
                 not be held liable for delays beyond our control.
               </li>
               <li>
@@ -230,12 +230,12 @@ export default function TermsPage() {
             <p className="text-gray-600 leading-relaxed text-sm">
               All content on this website, including but not limited to text,
               graphics, logos, images, product photographs, website design, and
-              software, is the property of Snackoh Bakers or its content
+              software, is the property of FreshCart Groceries or its content
               suppliers and is protected by applicable intellectual property
               laws. You may not reproduce, distribute, modify, display, or use
               any content from this website without our prior written consent.
-              The Snackoh Bakers name, logo, and branding are trademarks of
-              Snackoh Bakers and may not be used without express permission.
+              The FreshCart Groceries name, logo, and branding are trademarks of
+              FreshCart Groceries and may not be used without express permission.
             </p>
           </section>
 
@@ -279,7 +279,7 @@ export default function TermsPage() {
             </p>
             <ul className="list-disc list-inside text-gray-600 text-sm space-y-1.5 ml-2">
               <li>
-                Snackoh Bakers provides its website and services on an &quot;as
+                FreshCart Groceries provides its website and services on an &quot;as
                 is&quot; and &quot;as available&quot; basis without warranties of
                 any kind, either express or implied.
               </li>
@@ -344,7 +344,7 @@ export default function TermsPage() {
               Conditions, please contact us:
             </p>
             <div className="bg-gray-50 rounded-xl p-6 text-sm text-gray-700 space-y-1.5">
-              <p className="font-bold text-gray-900">Snackoh Bakers</p>
+              <p className="font-bold text-gray-900">FreshCart Groceries</p>
               <p>Nairobi, Kenya</p>
               <p>
                 For up-to-date contact details, please refer to the business

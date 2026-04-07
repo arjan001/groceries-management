@@ -157,8 +157,8 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           phone: mpesaPhone,
           amount: Math.ceil(orderTotal),
-          accountReference: `SNACKOH-${Date.now()}`,
-          description: `Snackoh Online Order - ${email || form.firstName}`,
+          accountReference: `FRESHCART-${Date.now()}`,
+          description: `FreshCart Online Order - ${email || form.firstName}`,
         }),
       });
       const data = await res.json();
@@ -231,7 +231,7 @@ export default function CheckoutPage() {
         fulfillment: fulfillment === 'ship' ? 'Delivery' : 'Pickup',
         delivery_notes: fulfillment === 'ship'
           ? `Ship to: ${form.address}${form.apartment ? ', ' + form.apartment : ''}, ${form.city}, ${form.county} ${form.postalCode}`
-          : 'Pickup from bakery',
+          : 'Pickup from store',
       });
       if (orderError) {
         console.error('Order save error:', orderError);
@@ -275,7 +275,7 @@ export default function CheckoutPage() {
         <div className="text-center max-w-md">
           <CheckCircle size={64} className="text-green-500 mx-auto mb-4" />
           <h1 className="text-3xl font-black text-gray-900 mb-2">Order Confirmed!</h1>
-          <p className="text-gray-600 mb-2">Thank you for your order. We&apos;ll bake it fresh and{fulfillment === 'ship' ? ' deliver it to you' : ' have it ready for pickup'}.</p>
+          <p className="text-gray-600 mb-2">Thank you for your order. We&apos;ll prepare it fresh and{fulfillment === 'ship' ? ' deliver it to you' : ' have it ready for pickup'}.</p>
           {completedOrderNumber && (
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4 mt-4">
               <p className="text-sm font-bold text-blue-800 mb-1">Your Order ID</p>
@@ -315,7 +315,7 @@ export default function CheckoutPage() {
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Logo + breadcrumb */}
         <div className="mb-8 text-center">
-          <Link href="/" className="text-2xl font-black text-gray-900">SNACKOH</Link>
+          <Link href="/" className="text-2xl font-black text-gray-900">FRESHCART</Link>
           <div className="flex items-center justify-center gap-2 mt-3 text-xs">
             {['Cart', 'Information', 'Shipping', 'Payment'].map((s, i) => (
               <span key={s} className="flex items-center gap-2">
@@ -358,7 +358,7 @@ export default function CheckoutPage() {
               <div className="border border-gray-200 rounded-xl overflow-hidden">
                 {[
                   { value: 'ship', label: 'Ship', sub: canDeliver ? 'Deliver to my address' : `Min. order KES ${deliverySettings.minimumOrderForDelivery.toLocaleString()} for delivery`, icon: Truck, disabled: !canDeliver },
-                  { value: 'pickup', label: 'Pick up', sub: 'Collect from our bakery', icon: Store, disabled: false },
+                  { value: 'pickup', label: 'Pick up', sub: 'Collect from our store', icon: Store, disabled: false },
                 ].map((opt, i) => (
                   <label key={opt.value}
                     className={`flex items-center gap-4 px-4 py-3.5 transition-colors ${opt.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${fulfillment === opt.value ? 'bg-orange-50' : 'bg-white hover:bg-gray-50'} ${i > 0 ? 'border-t border-gray-100' : ''}`}>
@@ -448,7 +448,7 @@ export default function CheckoutPage() {
             {fulfillment === 'pickup' && (
               <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 text-sm text-orange-800">
                 <p className="font-bold mb-1">Pickup Location</p>
-                <p>Snackoh Bites, Nairobi CBD</p>
+                <p>FreshCart Groceries, Nairobi CBD</p>
                 <p className="text-xs text-orange-600 mt-1">Mon-Sat: 6:00 AM - 8:00 PM | Sun: 7:00 AM - 6:00 PM</p>
               </div>
             )}
@@ -572,7 +572,7 @@ export default function CheckoutPage() {
                   <p className="text-xs text-gray-500">
                     {fulfillment === 'ship'
                       ? 'You can pay via M-Pesa or cash when your order is delivered.'
-                      : 'You can pay via M-Pesa or cash when you collect your order from our bakery.'}
+                      : 'You can pay via M-Pesa or cash when you collect your order from our store.'}
                   </p>
                 </div>
               )}

@@ -85,7 +85,7 @@ function MaintenanceScreen() {
             </span>
           </button>
         </div>
-        <p className="text-xs text-blue-300/40 mt-6">SNACKOH Bakers Management System</p>
+        <p className="text-xs text-blue-300/40 mt-6">FRESHCART Groceries Management System</p>
       </div>
     </div>
   );

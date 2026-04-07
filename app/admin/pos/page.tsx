@@ -115,16 +115,16 @@ export default function POSPage() {
 
   // ── Settings ──
   const [receiptSettings, setReceiptSettings] = useState<ReceiptSettings>({
-    headerText: 'SNACKOH BITES', subHeaderText: 'Quality Baked Goods', footerText: 'Thank you for choosing Snackoh!',
+    headerText: 'FRESHCART GROCERIES', subHeaderText: 'Quality Groceries', footerText: 'Thank you for choosing FreshCart!',
     disclaimer: 'Goods once sold are not returnable', showLogo: true, showTax: true, showCashier: true, showCustomer: true, showPaymentDetails: true,
     autoPrint: false, softwareProvidedBy: '', paperWidth: '80mm',
   });
   const [paymentDetailsSettings, setPaymentDetailsSettings] = useState<PaymentDetailsSettings>({
-    mpesaType: 'paybill', paybillNumber: '', accountNumber: '', tillNumber: '', mpesaName: 'SNACKOH BITES', showOnReceipt: true,
+    mpesaType: 'paybill', paybillNumber: '', accountNumber: '', tillNumber: '', mpesaName: 'FRESHCART GROCERIES', showOnReceipt: true,
     bankName: '', bankAccount: '', bankBranch: '',
   });
   const [generalSettings, setGeneralSettings] = useState<GeneralSettings>({
-    businessName: 'SNACKOH BITES', phone: '+254 700 000 000', email: 'info@snackoh.com', shopNumber: '', address: 'Nairobi, Kenya', currency: 'KES', taxRate: 16, logoUrl: '',
+    businessName: 'FRESHCART GROCERIES', phone: '+254 700 000 000', email: 'info@freshcart.com', shopNumber: '', address: 'Nairobi, Kenya', currency: 'KES', taxRate: 16, logoUrl: '',
   });
   const [posCardSettings, setPosCardSettings] = useState<PosCardSettings>({
     enabled: false, readerType: 'bluetooth', readerBrand: '', readerModel: '', connectionId: '', autoConnect: true,
@@ -440,8 +440,8 @@ export default function POSPage() {
         body: JSON.stringify({
           phone: mpesaPhone,
           amount: Math.ceil(total),
-          accountReference: `SNACKOH-${Date.now()}`,
-          description: `Snackoh POS - ${selectedCustomer.name}`,
+          accountReference: `FRESHCART-${Date.now()}`,
+          description: `FreshCart POS - ${selectedCustomer.name}`,
         }),
       });
       const data = await res.json();
@@ -684,7 +684,7 @@ export default function POSPage() {
       {/* Top Bar */}
       <div className="px-4 py-2 border-b border-border bg-card flex items-center justify-between gap-3 text-sm">
         <div className="flex items-center gap-3">
-          <span className="font-bold text-primary">SNACKOH POS</span>
+          <span className="font-bold text-primary">FRESHCART POS</span>
           <span className="text-xs text-muted-foreground">Cashier: <strong>{loggedCashier}</strong></span>
           <span className="text-xs text-muted-foreground">Opening: {cur} {openingBalance.toLocaleString()}</span>
           <span className="text-xs text-muted-foreground">Sales: {totalSalesCount} | {cur} {totalSalesAmount.toLocaleString()}</span>

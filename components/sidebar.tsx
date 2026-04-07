@@ -86,17 +86,13 @@ const allNavGroups: NavGroup[] = [
     ],
   },
   {
-    title: 'PRODUCTION',
+    title: 'PRODUCTS & CATALOG',
     color: 'border-l-amber-500',
     items: [
-      { label: 'Recipes & Products', href: '/admin/recipes', tip: 'Define recipes with ingredients, costs & output', icon: BookOpen },
-      { label: 'Product Catalogue', href: '/admin/food-info', tip: 'Allergens, nutrition info & certifications', icon: UtensilsCrossed },
+      { label: 'Product Management', href: '/admin/recipes', tip: 'Manage grocery products — pricing, categories & details', icon: BookOpen },
       { label: 'Catalog Upload', href: '/admin/catalog-upload', tip: 'Bulk-import products from CSV catalogue files', icon: FileUp },
-      { label: 'Production Runs', href: '/admin/production', tip: 'Schedule & track production batches', icon: Factory },
-      { label: 'Store Requisitions', href: '/admin/store-requisitions', tip: 'Request ingredients from store with approval flow', icon: ClipboardCopy },
-      { label: 'Picking Lists', href: '/admin/picking-lists', tip: 'Ingredient lists for production batches', icon: ClipboardList },
-      { label: 'Lot Tracking', href: '/admin/lot-tracking', tip: 'Track batches, expiry dates & traceability', icon: ScanLine },
-      { label: 'Waste Control', href: '/admin/waste-control', tip: 'Record & analyze production waste', icon: Trash2 },
+      { label: 'Lot & Expiry Tracking', href: '/admin/lot-tracking', tip: 'Track batches, expiry dates & traceability', icon: ScanLine },
+      { label: 'Waste & Shrinkage', href: '/admin/waste-control', tip: 'Record & analyze expired, damaged & wasted stock', icon: Trash2 },
     ],
   },
   {
@@ -107,37 +103,33 @@ const allNavGroups: NavGroup[] = [
       { label: 'Orders', href: '/admin/orders', tip: 'Create & manage customer orders with delivery', icon: FileText },
       { label: 'Order Tracking', href: '/admin/order-tracking', tip: 'Track order status & delivery progress', icon: MapPinned },
       { label: 'Delivery', href: '/admin/delivery', tip: 'Schedule deliveries & assign drivers', icon: Truck },
-      { label: 'Rider Reports', href: '/admin/rider-reports', tip: 'Waste & damage reports from riders/drivers', icon: AlertTriangle },
-      { label: 'Pricing', href: '/admin/pricing', tip: 'Set retail & wholesale pricing tiers', icon: Tag },
+      { label: 'Rider Reports', href: '/admin/rider-reports', tip: 'Waste & damage reports from delivery riders', icon: AlertTriangle },
+      { label: 'Pricing & Promotions', href: '/admin/pricing', tip: 'Set retail, wholesale & promotional pricing', icon: Tag },
     ],
   },
   {
-    title: 'INVENTORY',
+    title: 'INVENTORY & SUPPLY CHAIN',
     color: 'border-l-purple-500',
     items: [
-      { label: 'Inventory', href: '/admin/inventory', tip: 'Raw materials, packaging & stock levels', icon: Package },
-      { label: 'Stock Reorder', href: '/admin/stock-reorder', tip: 'Stock requisitions, reorder alerts & batch production triggers', icon: RefreshCw },
-      { label: 'Purchasing', href: '/admin/purchasing', tip: 'Purchase orders & supplier procurement', icon: ShoppingBag },
-      { label: 'Suppliers', href: '/admin/distributors', tip: 'Manage inventory suppliers & pricing', icon: Building2 },
-      { label: 'Distributors', href: '/admin/distribution', tip: 'Manage distribution agents & sales', icon: Handshake },
-      { label: 'Assets', href: '/admin/assets', tip: 'Equipment, vehicles & depreciation tracking', icon: Wrench },
+      { label: 'Inventory', href: '/admin/inventory', tip: 'Stock levels, categories & warehouse management', icon: Package },
+      { label: 'Stock Reorder', href: '/admin/stock-reorder', tip: 'Auto-reorder alerts, minimum levels & restock triggers', icon: RefreshCw },
+      { label: 'Purchase Orders', href: '/admin/purchasing', tip: 'Purchase orders & supplier procurement', icon: ShoppingBag },
+      { label: 'Suppliers', href: '/admin/distributors', tip: 'Manage suppliers, pricing & lead times', icon: Building2 },
+      { label: 'Distribution', href: '/admin/distribution', tip: 'Manage distribution channels & wholesale agents', icon: Handshake },
+      { label: 'Assets & Equipment', href: '/admin/assets', tip: 'Refrigerators, shelving, vehicles & depreciation', icon: Wrench },
       { label: 'Stock Take', href: '/admin/stock-take', tip: 'Physical stock counts, variance & reconciliation', icon: ClipboardCheck },
     ],
   },
   {
-    title: 'OUTLETS',
+    title: 'BRANCHES & OUTLETS',
     color: 'border-l-orange-500',
     items: [
-      { label: 'Branch Management', href: '/admin/outlets', tip: 'Manage main bakery and branch outlets', icon: Store },
-      { label: 'Outlet Inventory', href: '/admin/outlet-inventory', tip: 'Manage inventory for individual outlets', icon: PackageSearch },
-      { label: 'Outlet Requisitions', href: '/admin/outlet-requisitions', tip: 'Branch product requests from main bakery', icon: ClipboardCopy },
-      { label: 'Outlet Returns', href: '/admin/outlet-returns', tip: 'Return unsold items to main bakery for freshness', icon: RotateCcw },
-      { label: 'Outlet Products', href: '/admin/outlet-products', tip: 'Branch-specific product catalog & pricing', icon: ShoppingBasket },
+      { label: 'Branch Management', href: '/admin/outlets', tip: 'Manage main store and branch outlets', icon: Store },
+      { label: 'Branch Inventory', href: '/admin/outlet-inventory', tip: 'Manage inventory for individual branches', icon: PackageSearch },
+      { label: 'Branch Products', href: '/admin/outlet-products', tip: 'Branch-specific product catalog & pricing', icon: ShoppingBasket },
       { label: 'Branch Employees', href: '/admin/outlet-employees', tip: 'Manage staff assigned to each branch', icon: UserCog },
       { label: 'Branch Reports', href: '/admin/outlet-reports', tip: 'Sales, inventory & performance reports per branch', icon: PieChart },
-      { label: 'Branch Waste', href: '/admin/outlet-waste', tip: 'Record & track waste at each branch', icon: Recycle },
-      { label: 'Branch Settings', href: '/admin/outlet-settings', tip: 'Receipt, POS & display settings per branch', icon: SlidersHorizontal },
-      { label: 'Menu Generator', href: '/admin/outlet-menu-generator', tip: 'Generate QR codes & PDF menus for outlets', icon: QrCode },
+      { label: 'Menu Generator', href: '/admin/outlet-menu-generator', tip: 'Generate QR codes & PDF product lists for branches', icon: QrCode },
     ],
   },
   {
@@ -241,7 +233,7 @@ export function Sidebar() {
   const isMobile = useIsMobile();
   const [collapsed, setCollapsed] = useState(true);
   const [logoUrl, setLogoUrl] = useState('');
-  const [businessName, setBusinessName] = useState('SNACKOH');
+  const [businessName, setBusinessName] = useState('FRESHCART');
   const { isAdmin, permissions, role, loading: permsLoading, isOutletAdmin } = useUserPermissions();
   const { canInstall, isInstalled, triggerInstall } = usePwaInstall();
   const badges = useSidebarNotifications();
@@ -575,7 +567,7 @@ export function Sidebar() {
         {canInstall && !isInstalled && (
           <button
             onClick={triggerInstall}
-            title="Install Snackoh App"
+            title="Install FreshCart App"
             className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors bg-orange-50 text-orange-700 hover:bg-orange-100 border border-orange-200 ${collapsed ? 'justify-center px-0' : ''}`}
           >
             <Download size={collapsed ? 20 : 16} strokeWidth={2.5} className="shrink-0" />
@@ -583,7 +575,7 @@ export function Sidebar() {
           </button>
         )}
         {!collapsed && (
-          <p className="text-[10px] text-muted-foreground text-center">v2.0 | Snackoh Bakers</p>
+          <p className="text-[10px] text-muted-foreground text-center">v2.0 | FreshCart Groceries</p>
         )}
       </div>
     </aside>

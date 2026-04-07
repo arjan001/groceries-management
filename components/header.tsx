@@ -124,14 +124,14 @@ export function Header() {
 
   const [user, setUser] = useState({
     name: 'Admin User',
-    email: 'admin@bakery.com',
+    email: 'admin@freshcart.com',
     role: 'Administrator',
     initials: 'AU',
   });
 
   const [notifications, setNotifications] = useState<OnlineOrderNotif[]>([]);
   const [adminLogoUrl, setAdminLogoUrl] = useState('');
-  const [adminBusinessName, setAdminBusinessName] = useState('SNACKOH BAKERS');
+  const [adminBusinessName, setAdminBusinessName] = useState('FRESHCART GROCERIES');
 
   // Load branding for admin header
   useEffect(() => {

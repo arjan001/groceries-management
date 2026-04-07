@@ -1,7 +1,7 @@
 {
-  "name": "Snackoh Bakers Management System",
-  "short_name": "Snackoh",
-  "description": "Snackoh Bakers — Complete Bakery Management System with POS, Inventory, Delivery & HR",
+  "name": "FreshCart Groceries Management System",
+  "short_name": "FreshCart",
+  "description": "FreshCart Groceries — Complete Grocery Management System with POS, Inventory, Delivery & HR",
   "start_url": "/admin",
   "scope": "/",
   "id": "/admin",
