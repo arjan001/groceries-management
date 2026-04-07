@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Report — Snackoh Bakers</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #333; padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { color: #1a1a1a; margin-bottom: 8px; font-size: 28px; }
+    h2 { color: #333; margin: 24px 0 12px; font-size: 22px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
+    h3 { color: #555; margin: 16px 0 8px; font-size: 18px; }
+    .meta { color: #666; margin-bottom: 24px; font-size: 14px; }
+    .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 24px 0; }
+    .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); text-align: center; }
+    .card .value { font-size: 36px; font-weight: bold; }
+    .card .label { color: #666; font-size: 14px; margin-top: 4px; }
+    .pass { color: #16a34a; }
+    .fail { color: #dc2626; }
+    .skip { color: #ca8a04; }
+    .status-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+    .status-badge.pass { background: #dcfce7; color: #16a34a; }
+    .status-badge.fail { background: #fef2f2; color: #dc2626; }
+    .status-badge.skip { background: #fefce8; color: #ca8a04; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    th { background: #f8f9fa; text-align: left; padding: 10px 12px; font-size: 13px; color: #555; border-bottom: 2px solid #e0e0e0; }
+    td { padding: 8px 12px; font-size: 14px; border-bottom: 1px solid #f0f0f0; }
+    tr:hover { background: #f8f9fa; }
+    .suite-header { background: white; border-radius: 8px; padding: 16px; margin: 16px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .group-name { font-weight: 600; color: #444; margin: 12px 0 4px; font-size: 15px; }
+    .failure-msg { background: #fef2f2; border-left: 3px solid #dc2626; padding: 8px 12px; margin: 4px 0; font-family: monospace; font-size: 12px; overflow-x: auto; border-radius: 0 4px 4px 0; }
+    .overall { font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 8px; display: inline-block; margin: 16px 0; }
+    .overall.pass { background: #dcfce7; color: #16a34a; }
+    .overall.fail { background: #fef2f2; color: #dc2626; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Test Report</h1>
+    <p class="meta">Snackoh Bakers Management System &mdash; 2026-02-27 &mdash; Vitest 4.x &mdash; Node.js v22.22.0</p>
+
+    <div class="overall pass">
+      Overall: ALL TESTS PASSED
+    </div>
+
+    <div class="summary">
+      <div class="card"><div class="value">278</div><div class="label">Total Tests</div></div>
+      <div class="card"><div class="value pass">278</div><div class="label">Passed</div></div>
+      <div class="card"><div class="value fail">0</div><div class="label">Failed</div></div>
+      <div class="card"><div class="value skip">0</div><div class="label">Skipped</div></div>
+      <div class="card"><div class="value">100.0%</div><div class="label">Pass Rate</div></div>
+      <div class="card"><div class="value">81</div><div class="label">Test Suites</div></div>
+    </div>
+
+    <h2>Test Results by Suite</h2>
+    <div class="suite-header">
+      <h3><span class="status-badge pass">PASS</span> api-routes.test.ts (16/16)</h3>
+    </div><table><tr><th>Test</th><th>Group</th><th>Status</th><th>Duration</th></tr><tr>
+          <td>should return 400 when email is missing</td>
+          <td>API: /api/auth/create-user</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>24.89514500000007ms</td>
+        </tr><tr>
+          <td>should return 400 when password is missing</td>
+          <td>API: /api/auth/create-user</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.8103580000000647ms</td>
+        </tr><tr>
+          <td>should return 400 when password is too short</td>
+          <td>API: /api/auth/create-user</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.7056630000000723ms</td>
+        </tr><tr>
+          <td>should return 400 for invalid email format</td>
+          <td>API: /api/auth/create-user</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.5697890000000143ms</td>
+        </tr><tr>
+          <td>should successfully create a user with valid input</td>
+          <td>API: /api/auth/create-user</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>2.8290199999999004ms</td>
+        </tr><tr>
+          <td>should return 400 when phone is missing</td>
+          <td>API: /api/mpesa</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>23.639175000000023ms</td>
+        </tr><tr>
+          <td>should return 400 when amount is missing</td>
+          <td>API: /api/mpesa</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.6363119999999753ms</td>
+        </tr><tr>
+          <td>should return 400 when match action has no amount</td>
+          <td>API: /api/mpesa</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.6145750000000589ms</td>
+        </tr><tr>
+          <td>should return 400 when settings object is missing (POST)</td>
+          <td>API: /api/mpesa/settings</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>9.163635ms</td>
+        </tr><tr>
+          <td>should return success for GET request</td>
+          <td>API: /api/mpesa/settings</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.8867279999999482ms</td>
+        </tr><tr>
+          <td>should return 400 when origin is missing</td>
+          <td>API: /api/distance</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>6.3468540000000075ms</td>
+        </tr><tr>
+          <td>should return 400 when destination is missing</td>
+          <td>API: /api/distance</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.40085099999998874ms</td>
+        </tr><tr>
+          <td>should handle empty body gracefully</td>
+          <td>API: /api/mpesa/callback</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>8.173865999999975ms</td>
+        </tr><tr>
+          <td>should handle invalid JSON body gracefully</td>
+          <td>API: /api/mpesa/callback</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.7117470000000594ms</td>
+        </tr><tr>
+          <td>should handle successful payment callback</td>
+          <td>API: /api/mpesa/callback</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.2164050000000088ms</td>
+        </tr><tr>
+          <td>should handle failed payment callback</td>
+          <td>API: /api/mpesa/callback</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.7755050000000665ms</td>
+        </tr></table>
+    <div class="suite-header">
+      <h3><span class="status-badge pass">PASS</span> audit-logger.test.ts (6/6)</h3>
+    </div><table><tr><th>Test</th><th>Group</th><th>Status</th><th>Duration</th></tr><tr>
+          <td>should log an audit entry with user info</td>
+          <td>Audit Logger</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>30.698684999999955ms</td>
+        </tr><tr>
+          <td>should log with "System" when no user is authenticated</td>
+          <td>Audit Logger</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.4570840000000089ms</td>
+        </tr><tr>
+          <td>should handle insert errors gracefully (fire-and-forget)</td>
+          <td>Audit Logger</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.3982140000000527ms</td>
+        </tr><tr>
+          <td>should handle auth errors gracefully</td>
+          <td>Audit Logger</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.6745240000000194ms</td>
+        </tr><tr>
+          <td>should use email prefix as name when full_name is not set</td>
+          <td>Audit Logger</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.5082310000000234ms</td>
+        </tr><tr>
+          <td>should support all audit action types</td>
+          <td>Audit Logger</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.2874219999999923ms</td>
+        </tr></table>
+    <div class="suite-header">
+      <h3><span class="status-badge pass">PASS</span> cart-context.test.tsx (14/14)</h3>
+    </div><table><tr><th>Test</th><th>Group</th><th>Status</th><th>Duration</th></tr><tr>
+          <td>should start with empty cart</td>
+          <td>Cart Context</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>12.828466999999932ms</td>
+        </tr><tr>
+          <td>should add an item to the cart</td>
+          <td>Cart Context > addItem</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>3.881654000000026ms</td>
+        </tr><tr>
+          <td>should increment quantity when adding same item twice</td>
+          <td>Cart Context > addItem</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>3.2696600000000444ms</td>
+        </tr><tr>
+          <td>should add multiple different items</td>
+          <td>Cart Context > addItem</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>2.0994680000000017ms</td>
+        </tr><tr>
+          <td>should open cart when item is added</td>
+          <td>Cart Context > addItem</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.7853169999999636ms</td>
+        </tr><tr>
+          <td>should remove an item from the cart</td>
+          <td>Cart Context > removeItem</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.4649530000000368ms</td>
+        </tr><tr>
+          <td>should handle removing non-existent item gracefully</td>
+          <td>Cart Context > removeItem</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.42025000000001ms</td>
+        </tr><tr>
+          <td>should update item quantity</td>
+          <td>Cart Context > updateQty</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.3132970000000341ms</td>
+        </tr><tr>
+          <td>should remove item when quantity is set to 0</td>
+          <td>Cart Context > updateQty</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.8165920000000142ms</td>
+        </tr><tr>
+          <td>should remove item when quantity is negative</td>
+          <td>Cart Context > updateQty</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.4088420000000497ms</td>
+        </tr><tr>
+          <td>should remove all items from the cart</td>
+          <td>Cart Context > clearCart</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.2421749999999747ms</td>
+        </tr><tr>
+          <td>should calculate correct total with mixed quantities</td>
+          <td>Cart Context > Cart Calculations</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.0749369999999772ms</td>
+        </tr><tr>
+          <td>should open and close cart</td>
+          <td>Cart Context > Cart Visibility</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.9860509999999749ms</td>
+        </tr><tr>
+          <td>should throw when useCart is used outside CartProvider</td>
+          <td>Cart Context > Error Handling</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>4.294434000000024ms</td>
+        </tr></table>
+    <div class="suite-header">
+      <h3><span class="status-badge pass">PASS</span> db-utils.test.ts (21/21)</h3>
+    </div><table><tr><th>Test</th><th>Group</th><th>Status</th><th>Duration</th></tr><tr>
+          <td>should convert camelCase keys to snake_case</td>
+          <td>db-utils > toSnake</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.1681559999999536ms</td>
+        </tr><tr>
+          <td>should handle single-word keys (no conversion needed)</td>
+          <td>db-utils > toSnake</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.15761800000007042ms</td>
+        </tr><tr>
+          <td>should handle empty object</td>
+          <td>db-utils > toSnake</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0875260000000253ms</td>
+        </tr><tr>
+          <td>should handle keys with multiple uppercase letters</td>
+          <td>db-utils > toSnake</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.2606509999999389ms</td>
+        </tr><tr>
+          <td>should preserve values of different types</td>
+          <td>db-utils > toSnake</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.36873500000001513ms</td>
+        </tr><tr>
+          <td>should handle consecutive uppercase letters</td>
+          <td>db-utils > toSnake</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.19941400000004705ms</td>
+        </tr><tr>
+          <td>should convert snake_case keys to camelCase</td>
+          <td>db-utils > toCamel</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.2360599999999522ms</td>
+        </tr><tr>
+          <td>should handle single-word keys (no conversion needed)</td>
+          <td>db-utils > toCamel</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.09766000000001895ms</td>
+        </tr><tr>
+          <td>should handle empty object</td>
+          <td>db-utils > toCamel</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.22852199999999812ms</td>
+        </tr><tr>
+          <td>should handle database-style keys</td>
+          <td>db-utils > toCamel</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.16716500000006818ms</td>
+        </tr><tr>
+          <td>should preserve values of different types</td>
+          <td>db-utils > toCamel</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.12735300000008465ms</td>
+        </tr><tr>
+          <td>should roundtrip camelCase -> snake_case -> camelCase</td>
+          <td>db-utils > toSnake <-> toCamel roundtrip</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.07856300000003102ms</td>
+        </tr><tr>
+          <td>should roundtrip snake_case -> camelCase -> snake_case</td>
+          <td>db-utils > toSnake <-> toCamel roundtrip</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.06626800000003641ms</td>
+        </tr><tr>
+          <td>should convert array of snake_case rows to camelCase</td>
+          <td>db-utils > mapFromDb</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.11424799999997504ms</td>
+        </tr><tr>
+          <td>should handle empty array</td>
+          <td>db-utils > mapFromDb</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.050116000000002714ms</td>
+        </tr><tr>
+          <td>should handle single-item array</td>
+          <td>db-utils > mapFromDb</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0655420000000504ms</td>
+        </tr><tr>
+          <td>should convert camelCase to snake_case and exclude default keys</td>
+          <td>db-utils > mapToDb</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.4793490000000702ms</td>
+        </tr><tr>
+          <td>should exclude custom keys</td>
+          <td>db-utils > mapToDb</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.08825400000000627ms</td>
+        </tr><tr>
+          <td>should exclude undefined values</td>
+          <td>db-utils > mapToDb</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0903569999999263ms</td>
+        </tr><tr>
+          <td>should handle empty object</td>
+          <td>db-utils > mapToDb</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.05046700000002602ms</td>
+        </tr><tr>
+          <td>should keep null values (only exclude undefined)</td>
+          <td>db-utils > mapToDb</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.06289300000003095ms</td>
+        </tr></table>
+    <div class="suite-header">
+      <h3><span class="status-badge pass">PASS</span> module-crud-schemas.test.ts (154/154)</h3>
+    </div><table><tr><th>Test</th><th>Group</th><th>Status</th><th>Duration</th></tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: recipes (table: recipes)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.0133830000000899ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: recipes (table: recipes)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.1306049999999459ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: recipes (table: recipes)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.2817129999999679ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: recipes (table: recipes)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.3325370000000021ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: recipes (table: recipes)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.122820000000047ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: recipes (table: recipes)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.19472399999995105ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: recipes (table: recipes)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.11854200000004766ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: inventory (table: inventory_items)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.08646199999998316ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: inventory (table: inventory_items)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.16756999999995514ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: inventory (table: inventory_items)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.19344100000000708ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: inventory (table: inventory_items)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.09397500000000036ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: inventory (table: inventory_items)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.033049000000005435ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: inventory (table: inventory_items)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.08968899999990754ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: inventory (table: inventory_items)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.031245000000012624ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: orders (table: orders)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0484679999999571ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: orders (table: orders)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.029760000000010223ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: orders (table: orders)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.1845260000000053ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: orders (table: orders)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0651509999999007ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: orders (table: orders)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.02873299999998835ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: orders (table: orders)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.062190000000100554ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: orders (table: orders)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.030494999999973516ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: customers (table: customers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0439689999999473ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: customers (table: customers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.028155999999967207ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: customers (table: customers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.05880200000001423ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: customers (table: customers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.06261299999994208ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: customers (table: customers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.027760000000057516ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: customers (table: customers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.08202099999994061ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: customers (table: customers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.030397999999991043ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: employees (table: employees)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.042248000000085995ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: employees (table: employees)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.026920000000018263ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: employees (table: employees)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.1912049999999681ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: employees (table: employees)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.06436700000006113ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: employees (table: employees)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.030571000000009008ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: employees (table: employees)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.07006300000000465ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: employees (table: employees)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03265699999997196ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: production (table: production_runs)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04888000000005377ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: production (table: production_runs)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.027910000000019863ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: production (table: production_runs)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.13704900000004727ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: production (table: production_runs)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.08786200000008648ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: production (table: production_runs)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.030833000000029642ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: production (table: production_runs)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.8195759999999837ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: production (table: production_runs)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.10572700000000168ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: pricing (table: pricing_tiers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.06240500000001248ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: pricing (table: pricing_tiers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0402360000000499ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: pricing (table: pricing_tiers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.153020999999967ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: pricing (table: pricing_tiers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.045995000000061737ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: pricing (table: pricing_tiers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.02749000000005708ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: pricing (table: pricing_tiers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0428229999999985ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: pricing (table: pricing_tiers)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.029178000000001703ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: expenses (table: expenses)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03669600000000628ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: expenses (table: expenses)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.025840000000016516ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: expenses (table: expenses)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.13184100000000853ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: expenses (table: expenses)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.05020999999999276ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: expenses (table: expenses)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.02560300000004645ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: expenses (table: expenses)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04856599999993705ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: expenses (table: expenses)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03351899999995567ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: debtors (table: debtors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.037336999999979525ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: debtors (table: debtors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.025339999999914653ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: debtors (table: debtors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.07226199999990968ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: debtors (table: debtors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03384800000003452ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: debtors (table: debtors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0771869999999808ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: debtors (table: debtors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03687800000000152ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: debtors (table: debtors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.02736200000003919ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: creditors (table: creditors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04397700000004079ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: creditors (table: creditors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.02746300000001156ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: creditors (table: creditors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.07563700000002882ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: creditors (table: creditors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03259200000002238ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: creditors (table: creditors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.027779000000009546ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: creditors (table: creditors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03300000000001546ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: creditors (table: creditors)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03694900000004964ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: deliveries (table: deliveries)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.034639999999967586ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: deliveries (table: deliveries)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.025388999999904627ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: deliveries (table: deliveries)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.07333900000003268ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: deliveries (table: deliveries)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04099400000006881ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: deliveries (table: deliveries)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.02366499999993721ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: deliveries (table: deliveries)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0405750000001035ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: deliveries (table: deliveries)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.029990999999995438ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: pos_sales (table: pos_sales)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03379900000004454ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: pos_sales (table: pos_sales)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.023843000000056236ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: pos_sales (table: pos_sales)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.11816099999998642ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: pos_sales (table: pos_sales)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.043385000000057516ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: pos_sales (table: pos_sales)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.02459400000009282ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: pos_sales (table: pos_sales)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0422240000000329ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: pos_sales (table: pos_sales)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.026515000000017608ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: waste_records (table: waste_records)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.032409000000029664ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: waste_records (table: waste_records)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.024271999999996297ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: waste_records (table: waste_records)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.10182000000008884ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: waste_records (table: waste_records)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04157599999996364ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: waste_records (table: waste_records)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.024232999999981075ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: waste_records (table: waste_records)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04026699999997163ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: waste_records (table: waste_records)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.026275000000055115ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: assets (table: assets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03225800000006984ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: assets (table: assets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.023608999999964908ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: assets (table: assets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.1005729999999403ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: assets (table: assets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04112299999997049ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: assets (table: assets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0240120000000843ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: assets (table: assets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.039603000000056454ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: assets (table: assets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.02437099999997372ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: outlets (table: outlets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.033392999999932726ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: outlets (table: outlets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.024994999999989886ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: outlets (table: outlets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.07488799999998719ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: outlets (table: outlets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04137500000001637ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: outlets (table: outlets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.025187999999957356ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: outlets (table: outlets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.042397000000050866ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: outlets (table: outlets)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.02535800000009658ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: food_info (table: food_info)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03407500000002983ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: food_info (table: food_info)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.02469199999995908ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: food_info (table: food_info)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0465439999999262ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: food_info (table: food_info)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.043756000000030326ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: food_info (table: food_info)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.025328999999942425ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: food_info (table: food_info)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04197799999997187ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: food_info (table: food_info)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03750400000001264ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: lot_tracking (table: lot_tracking)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03539499999999407ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: lot_tracking (table: lot_tracking)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.025977000000011685ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: lot_tracking (table: lot_tracking)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.10737700000004224ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: lot_tracking (table: lot_tracking)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04296799999997347ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: lot_tracking (table: lot_tracking)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.024994999999989886ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: lot_tracking (table: lot_tracking)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04242199999998775ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: lot_tracking (table: lot_tracking)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.029178000000001703ms</td>
+        </tr><tr>
+          <td>should have a defined schema with fields</td>
+          <td>Module CRUD Schema Validation > Module: audit_log (table: audit_log)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03649499999994532ms</td>
+        </tr><tr>
+          <td>should have sample data available</td>
+          <td>Module CRUD Schema Validation > Module: audit_log (table: audit_log)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.025109999999926913ms</td>
+        </tr><tr>
+          <td>sample data should satisfy all required fields</td>
+          <td>Module CRUD Schema Validation > Module: audit_log (table: audit_log)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.10887700000000677ms</td>
+        </tr><tr>
+          <td>sample data fields should have correct types</td>
+          <td>Module CRUD Schema Validation > Module: audit_log (table: audit_log)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04400199999997767ms</td>
+        </tr><tr>
+          <td>CREATE: should fail validation when required fields are missing</td>
+          <td>Module CRUD Schema Validation > Module: audit_log (table: audit_log)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.025218999999992775ms</td>
+        </tr><tr>
+          <td>READ: schema fields should have consistent naming (snake_case)</td>
+          <td>Module CRUD Schema Validation > Module: audit_log (table: audit_log)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.043337999999948806ms</td>
+        </tr><tr>
+          <td>UPDATE: partial data should be valid (not all fields required)</td>
+          <td>Module CRUD Schema Validation > Module: audit_log (table: audit_log)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.029527000000030057ms</td>
+        </tr><tr>
+          <td>should have valid status in sample data</td>
+          <td>Business Rule Validation > orders — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.6157079999999269ms</td>
+        </tr><tr>
+          <td>should have multiple valid status transitions defined</td>
+          <td>Business Rule Validation > orders — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.07471800000007534ms</td>
+        </tr><tr>
+          <td>should have valid status in sample data</td>
+          <td>Business Rule Validation > production — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.08343200000001616ms</td>
+        </tr><tr>
+          <td>should have multiple valid status transitions defined</td>
+          <td>Business Rule Validation > production — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03329800000005889ms</td>
+        </tr><tr>
+          <td>should have valid status in sample data</td>
+          <td>Business Rule Validation > deliveries — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.05797000000006847ms</td>
+        </tr><tr>
+          <td>should have multiple valid status transitions defined</td>
+          <td>Business Rule Validation > deliveries — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.028593999999998232ms</td>
+        </tr><tr>
+          <td>should have valid status in sample data</td>
+          <td>Business Rule Validation > pos_sales — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.051341999999976906ms</td>
+        </tr><tr>
+          <td>should have multiple valid status transitions defined</td>
+          <td>Business Rule Validation > pos_sales — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.026791000000002896ms</td>
+        </tr><tr>
+          <td>should have valid status in sample data</td>
+          <td>Business Rule Validation > assets — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.06676699999991342ms</td>
+        </tr><tr>
+          <td>should have multiple valid status transitions defined</td>
+          <td>Business Rule Validation > assets — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.029605999999944288ms</td>
+        </tr><tr>
+          <td>should have valid status in sample data</td>
+          <td>Business Rule Validation > outlets — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.048377999999956955ms</td>
+        </tr><tr>
+          <td>should have multiple valid status transitions defined</td>
+          <td>Business Rule Validation > outlets — status values</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.026336000000014792ms</td>
+        </tr><tr>
+          <td>order payment_status should be valid</td>
+          <td>Business Rule Validation > Payment validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.05648400000006859ms</td>
+        </tr><tr>
+          <td>POS payment_method should be valid</td>
+          <td>Business Rule Validation > Payment validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.05046500000003107ms</td>
+        </tr><tr>
+          <td>order total should be positive</td>
+          <td>Business Rule Validation > Payment validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03752699999995457ms</td>
+        </tr><tr>
+          <td>POS sale total should be positive</td>
+          <td>Business Rule Validation > Payment validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03355799999997089ms</td>
+        </tr><tr>
+          <td>employee login_role should be a valid role</td>
+          <td>Business Rule Validation > Employee role validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.14346399999999448ms</td>
+        </tr><tr>
+          <td>should have comprehensive role list covering all access levels</td>
+          <td>Business Rule Validation > Employee role validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.07381600000007893ms</td>
+        </tr><tr>
+          <td>base_price should be >= cost_price</td>
+          <td>Business Rule Validation > Pricing validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04445500000008451ms</td>
+        </tr><tr>
+          <td>prices should be positive numbers</td>
+          <td>Business Rule Validation > Pricing validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.046469999999999345ms</td>
+        </tr><tr>
+          <td>quantity should be non-negative</td>
+          <td>Business Rule Validation > Inventory validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0352420000000393ms</td>
+        </tr><tr>
+          <td>reorder_level should be non-negative</td>
+          <td>Business Rule Validation > Inventory validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.03556000000003223ms</td>
+        </tr><tr>
+          <td>unit_cost should be positive</td>
+          <td>Business Rule Validation > Inventory validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.05810400000007121ms</td>
+        </tr><tr>
+          <td>action should be a valid audit action</td>
+          <td>Business Rule Validation > Audit log validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.08645400000000336ms</td>
+        </tr><tr>
+          <td>module should be a non-empty string</td>
+          <td>Business Rule Validation > Audit log validation</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.05647600000008879ms</td>
+        </tr><tr>
+          <td>should cover all 18 major modules</td>
+          <td>Module Coverage Summary</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.041835999999989326ms</td>
+        </tr><tr>
+          <td>all modules should have sample data for CREATE testing</td>
+          <td>Module Coverage Summary</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.25782700000002023ms</td>
+        </tr><tr>
+          <td>should have status validation for stateful modules</td>
+          <td>Module Coverage Summary</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.10258499999997639ms</td>
+        </tr></table>
+    <div class="suite-header">
+      <h3><span class="status-badge pass">PASS</span> products.test.ts (20/20)</h3>
+    </div><table><tr><th>Test</th><th>Group</th><th>Status</th><th>Duration</th></tr><tr>
+          <td>should have products loaded</td>
+          <td>Products Module > Product Data Integrity</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.0127780000000257ms</td>
+        </tr><tr>
+          <td>should have unique product IDs</td>
+          <td>Products Module > Product Data Integrity</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.2604350000000295ms</td>
+        </tr><tr>
+          <td>every product should have required fields</td>
+          <td>Products Module > Product Data Integrity</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>6.4073000000000775ms</td>
+        </tr><tr>
+          <td>every product should belong to a valid category</td>
+          <td>Products Module > Product Data Integrity</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.9445090000000391ms</td>
+        </tr><tr>
+          <td>should have products in each category</td>
+          <td>Products Module > Product Data Integrity</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.24164199999995617ms</td>
+        </tr><tr>
+          <td>all products should have stock > 0 and be in stock</td>
+          <td>Products Module > Product Data Integrity</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.9350410000000693ms</td>
+        </tr><tr>
+          <td>should find a product by ID</td>
+          <td>Products Module > getProduct</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.18203400000004422ms</td>
+        </tr><tr>
+          <td>should return undefined for non-existent product</td>
+          <td>Products Module > getProduct</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.09819500000003245ms</td>
+        </tr><tr>
+          <td>should find products for all known IDs</td>
+          <td>Products Module > getProduct</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.2528790000000072ms</td>
+        </tr><tr>
+          <td>should return only products marked as best sellers</td>
+          <td>Products Module > getBestSellers</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.18596200000001772ms</td>
+        </tr><tr>
+          <td>should return a subset of all products</td>
+          <td>Products Module > getBestSellers</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.08003100000007635ms</td>
+        </tr><tr>
+          <td>should return products that are on sale or have offers</td>
+          <td>Products Module > getOnOffer</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.14386000000001786ms</td>
+        </tr><tr>
+          <td>should include products with originalPrice</td>
+          <td>Products Module > getOnOffer</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.059290000000032705ms</td>
+        </tr><tr>
+          <td>should return products in the same category</td>
+          <td>Products Module > getRelated</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.12286799999992581ms</td>
+        </tr><tr>
+          <td>should not include the original product</td>
+          <td>Products Module > getRelated</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.06548500000008062ms</td>
+        </tr><tr>
+          <td>should return at most 4 products by default</td>
+          <td>Products Module > getRelated</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.06728099999997994ms</td>
+        </tr><tr>
+          <td>should respect custom count parameter</td>
+          <td>Products Module > getRelated</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.04293700000005174ms</td>
+        </tr><tr>
+          <td>should return empty array when no related products exist for a unique category</td>
+          <td>Products Module > getRelated</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.4138709999999719ms</td>
+        </tr><tr>
+          <td>CATEGORY_LIST should contain expected categories</td>
+          <td>Products Module > Category Constants</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.23883299999999963ms</td>
+        </tr><tr>
+          <td>CIRCLE_CATEGORIES should have entries with required fields</td>
+          <td>Products Module > Category Constants</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.25133500000004005ms</td>
+        </tr></table>
+    <div class="suite-header">
+      <h3><span class="status-badge pass">PASS</span> supabase-crud.test.ts (16/16)</h3>
+    </div><table><tr><th>Test</th><th>Group</th><th>Status</th><th>Duration</th></tr><tr>
+          <td>should fetch all rows from a table ordered by created_at descending</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbFetchAll</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>28.952613000000042ms</td>
+        </tr><tr>
+          <td>should return empty array on error</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbFetchAll</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.1800399999999627ms</td>
+        </tr><tr>
+          <td>should accept custom ordering</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbFetchAll</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.5232100000000628ms</td>
+        </tr><tr>
+          <td>should return empty array when data is null</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbFetchAll</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.589937999999961ms</td>
+        </tr><tr>
+          <td>should fetch rows with filters applied</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbFetchWithFilter</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.7520129999999199ms</td>
+        </tr><tr>
+          <td>should apply multiple filters</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbFetchWithFilter</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.3279300000000376ms</td>
+        </tr><tr>
+          <td>should return empty array on error</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbFetchWithFilter</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.40277499999990596ms</td>
+        </tr><tr>
+          <td>should insert a row and return the result</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbInsert</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.44601299999999355ms</td>
+        </tr><tr>
+          <td>should throw error on insert failure</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbInsert</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.5033379999999852ms</td>
+        </tr><tr>
+          <td>should update a row by id and return the result</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbUpdate</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.5316849999999249ms</td>
+        </tr><tr>
+          <td>should throw error on update failure</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbUpdate</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.45215600000005907ms</td>
+        </tr><tr>
+          <td>should delete a row by id and return true</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbDelete</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.5403240000000551ms</td>
+        </tr><tr>
+          <td>should throw error on delete failure</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbDelete</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.41291400000000067ms</td>
+        </tr><tr>
+          <td>should upsert a row and return the result</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbUpsert</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.43602899999996225ms</td>
+        </tr><tr>
+          <td>should throw error on upsert failure</td>
+          <td>CRUD Helpers (lib/supabase.ts) > dbUpsert</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.4502949999999828ms</td>
+        </tr><tr>
+          <td>should return true when environment variables are set</td>
+          <td>CRUD Helpers (lib/supabase.ts) > isSupabaseConfigured</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.20265100000005987ms</td>
+        </tr></table>
+    <div class="suite-header">
+      <h3><span class="status-badge pass">PASS</span> user-permissions.test.ts (23/23)</h3>
+    </div><table><tr><th>Test</th><th>Group</th><th>Status</th><th>Duration</th></tr><tr>
+          <td>should return empty array for admin users (meaning all routes allowed)</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>1.2292410000000018ms</td>
+        </tr><tr>
+          <td>should return empty array for Super Admin</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.14566600000000562ms</td>
+        </tr><tr>
+          <td>should return strictly limited routes for Rider role</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.9478940000000193ms</td>
+        </tr><tr>
+          <td>should return strictly limited routes for Driver role</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.40045600000007653ms</td>
+        </tr><tr>
+          <td>should return Baker default routes plus permission-based routes</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>5.531573999999978ms</td>
+        </tr><tr>
+          <td>should return Cashier default routes</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.22543999999993503ms</td>
+        </tr><tr>
+          <td>should return Sales default routes</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.15612099999998463ms</td>
+        </tr><tr>
+          <td>should return minimal routes for Viewer role</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.20595800000000963ms</td>
+        </tr><tr>
+          <td>should always include /admin/account and /admin/documentation</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>23.02243400000009ms</td>
+        </tr><tr>
+          <td>should add outlet routes for outlet admin</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.3707519999999249ms</td>
+        </tr><tr>
+          <td>should deduplicate routes</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.16609600000003866ms</td>
+        </tr><tr>
+          <td>should map permission "Manage Finance" to finance routes</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.14723500000002332ms</td>
+        </tr><tr>
+          <td>should map permission "System Settings" to settings routes</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.1078420000000051ms</td>
+        </tr><tr>
+          <td>should map permission "Manage Recipes" to production routes</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.1909449999999424ms</td>
+        </tr><tr>
+          <td>should map permission "Manage Employees" to HR routes</td>
+          <td>User Permissions > getAllowedRoutes</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.08270099999992908ms</td>
+        </tr><tr>
+          <td>should always return true for admin users</td>
+          <td>User Permissions > isRouteAllowed</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.11930799999993269ms</td>
+        </tr><tr>
+          <td>should return true for allowed routes</td>
+          <td>User Permissions > isRouteAllowed</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.07780300000001716ms</td>
+        </tr><tr>
+          <td>should return true for routes covered by /admin prefix in Cashier defaults</td>
+          <td>User Permissions > isRouteAllowed</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0640250000000151ms</td>
+        </tr><tr>
+          <td>should return true for account page for all roles</td>
+          <td>User Permissions > isRouteAllowed</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.1857799999999088ms</td>
+        </tr><tr>
+          <td>should handle sub-routes (prefix matching)</td>
+          <td>User Permissions > isRouteAllowed</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.06041799999991326ms</td>
+        </tr><tr>
+          <td>should allow Driver access to delivery and default routes</td>
+          <td>User Permissions > isRouteAllowed</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.08019899999999325ms</td>
+        </tr><tr>
+          <td>should allow outlet admin routes when user is outlet admin</td>
+          <td>User Permissions > isRouteAllowed</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.05558900000005451ms</td>
+        </tr><tr>
+          <td>should deny outlet routes when user is not outlet admin</td>
+          <td>User Permissions > isRouteAllowed</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.0364519999999402ms</td>
+        </tr></table>
+    <div class="suite-header">
+      <h3><span class="status-badge pass">PASS</span> utils.test.ts (8/8)</h3>
+    </div><table><tr><th>Test</th><th>Group</th><th>Status</th><th>Duration</th></tr><tr>
+          <td>should merge class names</td>
+          <td>Utils > cn (className merger)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>4.747736000000032ms</td>
+        </tr><tr>
+          <td>should handle conditional classes</td>
+          <td>Utils > cn (className merger)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.21765700000003108ms</td>
+        </tr><tr>
+          <td>should remove conflicting Tailwind classes (last wins)</td>
+          <td>Utils > cn (className merger)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.2596690000000308ms</td>
+        </tr><tr>
+          <td>should handle falsy values</td>
+          <td>Utils > cn (className merger)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.23785499999996773ms</td>
+        </tr><tr>
+          <td>should handle empty input</td>
+          <td>Utils > cn (className merger)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.11149699999998575ms</td>
+        </tr><tr>
+          <td>should handle arrays of class names</td>
+          <td>Utils > cn (className merger)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.20520199999998567ms</td>
+        </tr><tr>
+          <td>should merge padding classes correctly</td>
+          <td>Utils > cn (className merger)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.14107799999999315ms</td>
+        </tr><tr>
+          <td>should handle complex conditional patterns</td>
+          <td>Utils > cn (className merger)</td>
+          <td><span class="status-badge pass">PASSED</span></td>
+          <td>0.20176499999990938ms</td>
+        </tr></table>
+    <h2>Modules Covered</h2>
+    <table>
+      <tr><th>Module</th><th>Description</th></tr>
+      <tr><td>db-utils</td><td>camelCase/snake_case conversion utilities</td></tr>
+      <tr><td>supabase-crud</td><td>Generic CRUD helpers (fetch, insert, update, delete, upsert)</td></tr>
+      <tr><td>user-permissions</td><td>Role-based access control & route permissions</td></tr>
+      <tr><td>products</td><td>Product catalog, search, filtering</td></tr>
+      <tr><td>utils</td><td>CSS class name merger (cn)</td></tr>
+      <tr><td>audit-logger</td><td>Compliance audit trail logging</td></tr>
+      <tr><td>api-routes</td><td>API endpoint validation (auth, mpesa, distance)</td></tr>
+      <tr><td>module-crud-schemas</td><td>Schema validation for 18 database modules</td></tr>
+      <tr><td>cart-context</td><td>Shopping cart state management</td></tr>
+    </table>
+  </div>
+</body>
+</html>
