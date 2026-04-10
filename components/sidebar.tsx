@@ -24,6 +24,9 @@ import {
   Search,
   X,
   Command,
+  CreditCard,
+  Landmark,
+  UserMinus,
 } from 'lucide-react';
 import { usePwaInstall } from '@/components/pwa-install-prompt';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -73,6 +76,9 @@ const allNavGroups: NavGroup[] = [
     color: 'border-l-rose-500',
     items: [
       { label: 'Expenses', href: '/admin/expenses', tip: 'Track & manage business expenses', icon: Receipt },
+      { label: 'Credit Invoices', href: '/admin/credit-invoices', tip: 'Manage customer credit invoices & payment tracking', icon: CreditCard },
+      { label: 'Creditors', href: '/admin/creditors', tip: 'Track amounts owed to suppliers & creditors', icon: Landmark },
+      { label: 'Debtors', href: '/admin/debtors', tip: 'Track customer debts & outstanding balances', icon: UserMinus },
       { label: 'Reports', href: '/admin/reports', tip: 'Financial reports, P&L, sales & ledger', icon: BarChart3 },
     ],
   },
