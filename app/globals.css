@@ -10,33 +10,33 @@
   --card-foreground: #111827;
   --popover: #ffffff;
   --popover-foreground: #111827;
-  --primary: #3b82f6;
+  --primary: #16a34a;
   --primary-foreground: #ffffff;
-  --secondary: #f3f4f6;
+  --secondary: #f0fdf4;
   --secondary-foreground: #111827;
   --muted: #e5e7eb;
   --muted-foreground: #6b7280;
-  --accent: #2563eb;
+  --accent: #15803d;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e5e7eb;
+  --border: #d1d5db;
   --input: #ffffff;
-  --ring: #3b82f6;
-  --chart-1: #3b82f6;
-  --chart-2: #8b5cf6;
-  --chart-3: #ec4899;
+  --ring: #16a34a;
+  --chart-1: #16a34a;
+  --chart-2: #65a30d;
+  --chart-3: #0d9488;
   --chart-4: #f59e0b;
-  --chart-5: #10b981;
+  --chart-5: #059669;
   --radius: 8px;
-  --sidebar: #f8fafc;
+  --sidebar: #f0fdf4;
   --sidebar-foreground: #111827;
-  --sidebar-primary: #3b82f6;
+  --sidebar-primary: #16a34a;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e0e7ff;
-  --sidebar-accent-foreground: #1e40af;
-  --sidebar-border: #e2e8f0;
-  --sidebar-ring: #3b82f6;
+  --sidebar-accent: #dcfce7;
+  --sidebar-accent-foreground: #166534;
+  --sidebar-border: #bbf7d0;
+  --sidebar-ring: #16a34a;
 }
 
 @theme inline {
@@ -139,7 +139,7 @@
   }
 
   .badge-primary {
-    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-blue-100 text-blue-800;
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-green-100 text-green-800;
   }
 
   .badge-success {

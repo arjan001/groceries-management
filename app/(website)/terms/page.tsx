@@ -2,9 +2,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms and Conditions | FreshCart Groceries',
+  title: 'Terms and Conditions | Snackoh Groceries',
   description:
-    'Read the terms and conditions governing the use of FreshCart Groceries website, ordering, delivery, and related services in Nairobi, Kenya.',
+    'Read the terms and conditions governing the use of Snackoh Groceries website, ordering, delivery, and related services in Nairobi, Kenya.',
 };
 
 export default function TermsPage() {
@@ -38,7 +38,7 @@ export default function TermsPage() {
           {/* Introduction */}
           <section>
             <p className="text-gray-600 leading-relaxed text-sm">
-              Welcome to FreshCart Groceries. These Terms and Conditions
+              Welcome to Snackoh Groceries. These Terms and Conditions
               (&quot;Terms&quot;) govern your use of our website, products, and
               services. By accessing our website or placing an order, you agree
               to be bound by these Terms. Please read them carefully before using
@@ -74,7 +74,7 @@ export default function TermsPage() {
               2. Products and Services
             </h2>
             <p className="text-gray-600 leading-relaxed text-sm mb-3">
-              FreshCart Groceries offers a range of fresh groceries including, but
+              Snackoh Groceries offers a range of fresh groceries including, but
               not limited to, fruits, vegetables, dairy, beverages, household
               essentials, and specialty products. We serve both retail and wholesale
               customers in Nairobi and surrounding areas.
@@ -210,7 +210,7 @@ export default function TermsPage() {
               </li>
               <li>
                 Delivery times are estimates and may be affected by traffic,
-                weather, or other unforeseen circumstances. FreshCart Groceries shall
+                weather, or other unforeseen circumstances. Snackoh Groceries shall
                 not be held liable for delays beyond our control.
               </li>
               <li>
@@ -230,12 +230,12 @@ export default function TermsPage() {
             <p className="text-gray-600 leading-relaxed text-sm">
               All content on this website, including but not limited to text,
               graphics, logos, images, product photographs, website design, and
-              software, is the property of FreshCart Groceries or its content
+              software, is the property of Snackoh Groceries or its content
               suppliers and is protected by applicable intellectual property
               laws. You may not reproduce, distribute, modify, display, or use
               any content from this website without our prior written consent.
-              The FreshCart Groceries name, logo, and branding are trademarks of
-              FreshCart Groceries and may not be used without express permission.
+              The Snackoh Groceries name, logo, and branding are trademarks of
+              Snackoh Groceries and may not be used without express permission.
             </p>
           </section>
 
@@ -279,7 +279,7 @@ export default function TermsPage() {
             </p>
             <ul className="list-disc list-inside text-gray-600 text-sm space-y-1.5 ml-2">
               <li>
-                FreshCart Groceries provides its website and services on an &quot;as
+                Snackoh Groceries provides its website and services on an &quot;as
                 is&quot; and &quot;as available&quot; basis without warranties of
                 any kind, either express or implied.
               </li>
@@ -344,7 +344,7 @@ export default function TermsPage() {
               Conditions, please contact us:
             </p>
             <div className="bg-gray-50 rounded-xl p-6 text-sm text-gray-700 space-y-1.5">
-              <p className="font-bold text-gray-900">FreshCart Groceries</p>
+              <p className="font-bold text-gray-900">Snackoh Groceries</p>
               <p>Nairobi, Kenya</p>
               <p>
                 For up-to-date contact details, please refer to the business

@@ -54,7 +54,7 @@ function AnnouncementBar() {
   const marqueeText = marqueeItems.map(item => `  •  ${item}`).join('');
 
   return (
-    <div className="bg-orange-600 text-white text-xs py-2.5 font-medium tracking-wide overflow-hidden whitespace-nowrap">
+    <div className="bg-green-600 text-white text-xs py-2.5 font-medium tracking-wide overflow-hidden whitespace-nowrap">
       <div className="inline-flex animate-marquee">
         <span className="inline-block">{marqueeText}{marqueeText}</span>
       </div>
@@ -82,7 +82,7 @@ function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [logoUrl, setLogoUrl] = useState('');
-  const [businessName, setBusinessName] = useState('FRESHCART');
+  const [businessName, setBusinessName] = useState('SNACKOH');
   const [logoHeight, setLogoHeight] = useState(40);
   const [logoPosition, setLogoPosition] = useState<'left' | 'center'>('left');
   const router = useRouter();
@@ -142,7 +142,7 @@ function Navbar() {
       {logoUrl ? (
         <img src={logoUrl} alt={businessName} style={{ height: `${logoHeight}px`, maxHeight: '3.25rem' }} className="w-auto object-contain rounded-lg" />
       ) : (
-        <span className="text-2xl font-black tracking-tight text-gray-900 hover:text-orange-600 transition-colors">
+        <span className="text-2xl font-black tracking-tight text-gray-900 hover:text-green-600 transition-colors">
           {businessName}
         </span>
       )}
@@ -169,7 +169,7 @@ function Navbar() {
             <nav className="hidden md:flex items-center gap-6 flex-1 justify-end">
               {leftLinks.map(l => (
                 <Link key={l.href} href={l.href}
-                  className="text-xs font-bold tracking-widest text-gray-700 hover:text-orange-600 transition-colors">
+                  className="text-xs font-bold tracking-widest text-gray-700 hover:text-green-600 transition-colors">
                   {l.label}
                 </Link>
               ))}
@@ -184,7 +184,7 @@ function Navbar() {
             <nav className="hidden md:flex items-center gap-6 flex-1">
               {rightLinks.map(l => (
                 <Link key={l.href} href={l.href}
-                  className="text-xs font-bold tracking-widest text-gray-700 hover:text-orange-600 transition-colors">
+                  className="text-xs font-bold tracking-widest text-gray-700 hover:text-green-600 transition-colors">
                   {l.label}
                 </Link>
               ))}
@@ -209,7 +209,7 @@ function Navbar() {
                 className="relative w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700">
                 <ShoppingBag size={18} />
                 {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-orange-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                  <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-green-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                     {itemCount > 9 ? '9+' : itemCount}
                   </span>
                 )}
@@ -226,7 +226,7 @@ function Navbar() {
             <nav className="hidden md:flex items-center gap-8">
               {navLinks.map(l => (
                 <Link key={l.href} href={l.href}
-                  className="text-xs font-bold tracking-widest text-gray-700 hover:text-orange-600 transition-colors">
+                  className="text-xs font-bold tracking-widest text-gray-700 hover:text-green-600 transition-colors">
                   {l.label}
                 </Link>
               ))}
@@ -251,7 +251,7 @@ function Navbar() {
                 className="relative w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700">
                 <ShoppingBag size={18} />
                 {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-orange-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                  <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-green-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                     {itemCount > 9 ? '9+' : itemCount}
                   </span>
                 )}
@@ -271,7 +271,7 @@ function Navbar() {
               <input autoFocus type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                 placeholder="Search groceries, produce, dairy…"
                 className="flex-1 outline-none text-sm text-gray-800 placeholder-gray-400" />
-              <button type="submit" className="text-xs font-bold text-orange-600 hover:underline">Search</button>
+              <button type="submit" className="text-xs font-bold text-green-600 hover:underline">Search</button>
               <button type="button" onClick={() => setSearchOpen(false)}>
                 <X size={20} className="text-gray-500" />
               </button>
@@ -285,13 +285,13 @@ function Navbar() {
         <div className="fixed inset-0 z-50 bg-black/50" onClick={() => setMenuOpen(false)}>
           <div className="absolute left-0 top-0 h-full w-72 bg-white shadow-xl" onClick={e => e.stopPropagation()}>
             <div className="p-5 border-b flex justify-between items-center">
-              <span className="text-xl font-black">FRESHCART</span>
+              <span className="text-xl font-black">SNACKOH</span>
               <button onClick={() => setMenuOpen(false)}><X size={20} /></button>
             </div>
             <nav className="p-5 space-y-4">
               {navLinks.map(l => (
                 <Link key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-between text-sm font-bold tracking-wider text-gray-800 hover:text-orange-600 py-2 border-b border-gray-50">
+                  className="flex items-center justify-between text-sm font-bold tracking-wider text-gray-800 hover:text-green-600 py-2 border-b border-gray-50">
                   {l.label} <ChevronRight size={14} className="text-gray-400" />
                 </Link>
               ))}
@@ -336,7 +336,7 @@ function CartDrawer() {
             <p className="text-xs text-green-700 font-semibold mb-1.5">You qualify for FREE delivery!</p>
           )}
           <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-            <div className="h-full bg-orange-500 rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
+            <div className="h-full bg-green-500 rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
           </div>
         </div>
 
@@ -347,7 +347,7 @@ function CartDrawer() {
               <ShoppingBag size={40} className="text-gray-200 mb-3" />
               <p className="text-gray-500 font-medium">Your cart is empty</p>
               <button onClick={() => { closeCart(); router.push('/shop'); }}
-                className="mt-4 px-4 py-2 bg-orange-600 text-white text-sm font-semibold rounded-full hover:bg-orange-700">
+                className="mt-4 px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-full hover:bg-green-700">
                 Start Shopping
               </button>
             </div>
@@ -359,7 +359,7 @@ function CartDrawer() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-gray-800 truncate">{item.name}</p>
-                  <p className="text-xs text-orange-600 font-bold mt-0.5">KES {item.price.toLocaleString()}</p>
+                  <p className="text-xs text-green-600 font-bold mt-0.5">KES {item.price.toLocaleString()}</p>
                   <div className="flex items-center gap-2 mt-2">
                     <button onClick={() => updateQty(item.id, item.quantity - 1)}
                       className="w-6 h-6 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50">
@@ -589,29 +589,29 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <h3 className="text-white text-2xl font-black mb-4">FRESHCART</h3>
+            <h3 className="text-white text-2xl font-black mb-4">SNACKOH</h3>
             <p className="text-sm leading-relaxed text-gray-400 mb-4">
               Fresh groceries delivered to your doorstep. Quality produce, dairy, meats, and household essentials.
             </p>
             <p className="text-xs text-gray-500">Nairobi, Kenya</p>
             <p className="text-xs text-gray-500 mt-1">0733 67 52 67 (Orders)</p>
             <p className="text-xs text-gray-500 mt-1">0722 587 222 (Feedback)</p>
-            <p className="text-xs text-gray-500 mt-1">support@freshcart-groceries.com</p>
+            <p className="text-xs text-gray-500 mt-1">support@snackoh-groceries.com</p>
             <div className="flex gap-3 mt-4">
-              <a href="https://www.instagram.com/freshcartgroceries" target="_blank" rel="noopener noreferrer"
-                className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors" title="Instagram">
+              <a href="https://www.instagram.com/snackohgroceries" target="_blank" rel="noopener noreferrer"
+                className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors" title="Instagram">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
                 </svg>
               </a>
-              <a href="https://www.tiktok.com/@freshcartgroceries" target="_blank" rel="noopener noreferrer"
-                className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors" title="TikTok">
+              <a href="https://www.tiktok.com/@snackohgroceries" target="_blank" rel="noopener noreferrer"
+                className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors" title="TikTok">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-white">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.66a8.21 8.21 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.09z"/>
                 </svg>
               </a>
-              <a href="https://www.facebook.com/FreshCartGroceries" target="_blank" rel="noopener noreferrer"
-                className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors" title="Facebook">
+              <a href="https://www.facebook.com/SnackohGroceries" target="_blank" rel="noopener noreferrer"
+                className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors" title="Facebook">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-white">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                 </svg>
@@ -631,7 +631,7 @@ function Footer() {
                 { label: 'Contact Us', href: '/contact' },
                 { label: 'Careers', href: '#' },
               ].map(l => (
-                <li key={l.label}><Link href={l.href} className="hover:text-orange-400 transition-colors">{l.label}</Link></li>
+                <li key={l.label}><Link href={l.href} className="hover:text-green-400 transition-colors">{l.label}</Link></li>
               ))}
             </ul>
           </div>
@@ -641,7 +641,7 @@ function Footer() {
             <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">Categories</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
               {['Fruits & Vegetables', 'Dairy & Eggs', 'Meat & Seafood', 'Beverages', 'Pantry Staples', 'Household'].map(l => (
-                <li key={l}><Link href="/shop" className="hover:text-orange-400 transition-colors">{l}</Link></li>
+                <li key={l}><Link href="/shop" className="hover:text-green-400 transition-colors">{l}</Link></li>
               ))}
             </ul>
           </div>
@@ -657,7 +657,7 @@ function Footer() {
                 { label: 'Refund Policy', href: '/refund-policy' },
                 { label: 'Bulk Orders', href: '/contact' },
               ].map(l => (
-                <li key={l.label}><Link href={l.href} className="hover:text-orange-400 transition-colors">{l.label}</Link></li>
+                <li key={l.label}><Link href={l.href} className="hover:text-green-400 transition-colors">{l.label}</Link></li>
               ))}
             </ul>
           </div>
@@ -668,7 +668,7 @@ function Footer() {
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="bg-orange-600 text-white px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap">
+            <div className="bg-green-600 text-white px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap">
               Get 10% Off
             </div>
             <span className="text-xs text-gray-500">Subscribe to our newsletter for the latest updates and offers</span>
@@ -676,15 +676,15 @@ function Footer() {
           <div className="flex gap-2">
             <input type="email" placeholder="Your email address" value={footerEmail}
               onChange={e => setFooterEmail(e.target.value)}
-              className="px-4 py-2 bg-gray-800 text-white text-xs rounded-lg outline-none placeholder-gray-500 w-52 focus:ring-2 focus:ring-orange-500" />
+              className="px-4 py-2 bg-gray-800 text-white text-xs rounded-lg outline-none placeholder-gray-500 w-52 focus:ring-2 focus:ring-green-500" />
             <button onClick={handleFooterSubscribe}
-              className="px-4 py-2 bg-orange-600 text-white text-xs font-bold rounded-lg hover:bg-orange-700">
+              className="px-4 py-2 bg-green-600 text-white text-xs font-bold rounded-lg hover:bg-green-700">
               {footerSubscribed ? 'SUBSCRIBED!' : 'SUBSCRIBE'}
             </button>
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 pb-5 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-gray-600">&copy; {new Date().getFullYear()} FreshCart Groceries &middot; All rights reserved</p>
+          <p className="text-xs text-gray-600">&copy; {new Date().getFullYear()} Snackoh Grocery System &middot; All rights reserved</p>
           <div className="flex items-center gap-3">
             <span className="text-xs text-gray-600">We accept:</span>
             <img src="/visa-cards.png" alt="Visa & Mastercard" className="h-10 object-contain" />
@@ -700,7 +700,7 @@ function Footer() {
         <div className="max-w-7xl mx-auto px-6 pb-5 flex items-center justify-center">
           <p className="text-xs text-gray-600">
             Developed by{' '}
-            <a href="http://oneplusafrica.com/" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300 font-semibold transition-colors">
+            <a href="http://oneplusafrica.com/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 font-semibold transition-colors">
               OnePlusAfrica Tech Solutions
             </a>
           </p>

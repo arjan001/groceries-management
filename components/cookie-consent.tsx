@@ -18,7 +18,7 @@ interface ConsentRecord {
   method: 'accept_all' | 'reject_all' | 'custom';
 }
 
-const STORAGE_KEY = 'freshcart_cookie_consent';
+const STORAGE_KEY = 'snackoh_cookie_consent';
 const CONSENT_VERSION = '1.0';
 
 const DEFAULT_PREFERENCES: CookiePreferences = {

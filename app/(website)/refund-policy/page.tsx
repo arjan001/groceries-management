@@ -2,9 +2,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Refund Policy | FreshCart Groceries',
+  title: 'Refund Policy | Snackoh Groceries',
   description:
-    'Understand the refund, return, exchange, and cancellation policies for orders placed with FreshCart Groceries in Nairobi, Kenya.',
+    'Understand the refund, return, exchange, and cancellation policies for orders placed with Snackoh Groceries in Nairobi, Kenya.',
 };
 
 export default function RefundPolicyPage() {
@@ -39,12 +39,12 @@ export default function RefundPolicyPage() {
               1. Overview
             </h2>
             <p className="text-gray-600 leading-relaxed text-sm">
-              At FreshCart Groceries, we take great pride in the quality of our
+              At Snackoh Groceries, we take great pride in the quality of our
               groceries and strive to ensure every customer is satisfied with their
               order. We understand, however, that issues may arise from time to
               time. This Refund Policy outlines the circumstances under which
               refunds, exchanges, or replacements may be issued for products
-              purchased from FreshCart Groceries. By placing an order with us, you
+              purchased from Snackoh Groceries. By placing an order with us, you
               agree to the terms of this policy.
             </p>
           </section>
@@ -301,7 +301,7 @@ export default function RefundPolicyPage() {
               policy, please do not hesitate to reach out to us:
             </p>
             <div className="bg-gray-50 rounded-xl p-6 text-sm text-gray-700 space-y-1.5">
-              <p className="font-bold text-gray-900">FreshCart Groceries</p>
+              <p className="font-bold text-gray-900">Snackoh Groceries</p>
               <p>Nairobi, Kenya</p>
               <p>
                 For up-to-date contact details, please refer to the business

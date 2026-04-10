@@ -6,11 +6,11 @@ import remarkGfm from 'remark-gfm';
 import { BookOpenText, ExternalLink, ArrowUp, Download } from 'lucide-react';
 
 
-const markdownContent = `# FreshCart Groceries - Employee Training Manual
+const markdownContent = `# Snackoh Groceries - Employee Training Manual
 
 ## System Overview
 
-The FreshCart Groceries Management System is a comprehensive grocery store ERP (Enterprise Resource Planning) and e-commerce platform purpose-built for grocery store operations of all sizes. It integrates every aspect of the business into a single, unified system -- from recipe development and production scheduling to point-of-sale transactions, delivery logistics, multi-branch management, and financial accounting.
+The Snackoh Groceries Management System is a comprehensive grocery store ERP (Enterprise Resource Planning) and e-commerce platform purpose-built for grocery store operations of all sizes. It integrates every aspect of the business into a single, unified system -- from recipe development and production scheduling to point-of-sale transactions, delivery logistics, multi-branch management, and financial accounting.
 
 The platform is designed around role-based access control, ensuring each employee sees only the tools and data relevant to their job. Whether you are a baker managing production runs, a cashier processing in-store sales, a delivery rider tracking assignments, or an administrator overseeing the entire operation, the system adapts to your needs.
 
@@ -50,11 +50,11 @@ The platform is designed around role-based access control, ensuring each employe
 
 ## 1. Getting Started
 
-This section walks you through the essential first steps to begin using the FreshCart Groceries Management System, from logging in for the first time to navigating the interface and installing the system as a standalone application on your device.
+This section walks you through the essential first steps to begin using the Snackoh Groceries Management System, from logging in for the first time to navigating the interface and installing the system as a standalone application on your device.
 
 ### Logging In
 
-1. Open your web browser and navigate to the FreshCart Groceries system URL.
+1. Open your web browser and navigate to the Snackoh Groceries system URL.
 2. Click the **Staff Admin** icon (person icon) in the top-right of the website, or go directly to \`/auth/login\`.
 3. Enter your **email address** and **password** provided by your administrator.
 4. Click **Sign In**.
@@ -93,7 +93,7 @@ The system can be installed as an app on your phone or computer:
 
 ## 2. System Setup Guide (First-Time Setup)
 
-This section is the step-by-step process guide for setting up the FreshCart Groceries system from scratch. Follow these phases in order. Each phase builds on the previous one, so do not skip ahead. By the end, your products will appear on the public-facing website and the grocery store will be ready for daily operations.
+This section is the step-by-step process guide for setting up the Snackoh Groceries system from scratch. Follow these phases in order. Each phase builds on the previous one, so do not skip ahead. By the end, your products will appear on the public-facing website and the grocery store will be ready for daily operations.
 
 > **Important:** You do not need to wait for production batches to display products on the website. As long as a product is registered in the Product Catalogue (Food Info), it will appear on the shop -- even with zero stock. Products with zero inventory show as "Sold Out" and customers can still view them, they just cannot add them to the cart until stock is available.
 
@@ -358,7 +358,7 @@ This section is the step-by-step process guide for setting up the FreshCart Groc
 
 ## 3. Employee Roles
 
-The FreshCart Groceries Management System uses a role-based access control (RBAC) model to ensure that every employee sees only the modules and data relevant to their responsibilities. Each employee is assigned a single login role that determines their default module access, and administrators can further fine-tune access using granular permissions. This approach maximizes security while keeping the interface clean and focused for each user.
+The Snackoh Groceries Management System uses a role-based access control (RBAC) model to ensure that every employee sees only the modules and data relevant to their responsibilities. Each employee is assigned a single login role that determines their default module access, and administrators can further fine-tune access using granular permissions. This approach maximizes security while keeping the interface clean and focused for each user.
 
 Each employee is assigned a role that determines what they can see and do in the system. Here are the standard roles:
 
@@ -1082,7 +1082,7 @@ The Settings module is the system-wide configuration center where administrators
 
 ## 13. E-Commerce Website
 
-The public-facing e-commerce website is an integral part of the FreshCart Groceries platform, allowing customers to browse the full product catalog, place orders online, and pay seamlessly via M-Pesa -- all without needing to visit a physical grocery store location. The website is fully responsive (works on mobile, tablet, and desktop) and can be installed as a Progressive Web App (PWA) for a native app-like experience.
+The public-facing e-commerce website is an integral part of the Snackoh Groceries platform, allowing customers to browse the full product catalog, place orders online, and pay seamlessly via M-Pesa -- all without needing to visit a physical grocery store location. The website is fully responsive (works on mobile, tablet, and desktop) and can be installed as a Progressive Web App (PWA) for a native app-like experience.
 
 ### Pages:
 - **Home:** A visually rich landing page featuring best-selling products, seasonal promotions, customer testimonials, and quick navigation to the shop. Includes the announcement bar for special offers.
@@ -1194,7 +1194,7 @@ Custom Roles
 
 ## 15. Security Best Practices
 
-The FreshCart Groceries Management System handles sensitive business data, financial information, and customer personal details. Following these security practices is essential for protecting the business, its customers, and your own account. Every employee shares responsibility for maintaining system security.
+The Snackoh Groceries Management System handles sensitive business data, financial information, and customer personal details. Following these security practices is essential for protecting the business, its customers, and your own account. Every employee shares responsibility for maintaining system security.
 
 ### Password Safety
 - Use a strong password with at least 8 characters, including uppercase, lowercase, numbers, and a symbol.
@@ -1373,9 +1373,9 @@ If you notice any of the following, report it to your administrator right away:
 
 ## Contact & Support
 
-- **Online Orders:** 0733 67 52 67 | sales@freshcart-groceries.com
-- **Complaints & Compliments:** 0722 587 222 | 0799 55 94 34 | feedback@freshcart-groceries.com
-- **Leadership:** ceo@freshcart-groceries.com
+- **Online Orders:** 0733 67 52 67 | sales@snackoh-groceries.com
+- **Complaints & Compliments:** 0722 587 222 | 0799 55 94 34 | feedback@snackoh-groceries.com
+- **Leadership:** ceo@snackoh-groceries.com
 
 **Operating Hours:**
 - Monday - Saturday: 6:00 AM - 8:00 PM
@@ -1383,7 +1383,7 @@ If you notice any of the following, report it to your administrator right away:
 
 ---
 
-*FreshCart Groceries Management System v2.0*
+*Snackoh Groceries Management System v2.0*
 *Last Updated: February 2026*
 `;
 
@@ -1409,7 +1409,7 @@ export default function DocumentationPage() {
       const html2pdf = (await import('html2pdf.js')).default;
       const options = {
         margin: [10, 10, 10, 10],
-        filename: 'FreshCart-Groceries-Documentation.pdf',
+        filename: 'Snackoh-Groceries-Documentation.pdf',
         image: { type: 'jpeg', quality: 0.95 },
         html2canvas: { scale: 2, useCORS: true, logging: false },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
@@ -1600,7 +1600,7 @@ export default function DocumentationPage() {
 
         {/* Footer */}
         <div className="mt-12 pt-6 border-t border-border text-center text-sm text-muted-foreground">
-          <p>FreshCart Groceries Management System v2.0 &mdash; Employee Training Manual</p>
+          <p>Snackoh Groceries Management System v2.0 &mdash; Employee Training Manual</p>
         </div>
       </div>
 

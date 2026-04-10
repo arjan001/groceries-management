@@ -103,8 +103,8 @@ export default function CreditInvoicesPage() {
   const [filterStatus, setFilterStatus] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [businessSettings, setBusinessSettings] = useState<BusinessSettings>({
-    businessName: 'FRESHCART GROCERIES', tagline: 'Quality Groceries', phone: '+254 700 000 000',
-    email: 'info@freshcart.com', address: 'Nairobi, Kenya', logoUrl: '', currency: 'KES', taxRate: 16,
+    businessName: 'SNACKOH GROCERY SYSTEM', tagline: 'Quality Groceries', phone: '+254 700 000 000',
+    email: 'info@snackoh.com', address: 'Nairobi, Kenya', logoUrl: '', currency: 'KES', taxRate: 16,
     invoiceLogoHeight: 50, reportWatermarkEnabled: false, reportWatermarkOpacity: 8,
   });
   const perPage = 10;

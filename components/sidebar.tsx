@@ -79,7 +79,7 @@ interface NavGroup {
 const allNavGroups: NavGroup[] = [
   {
     title: 'CORE',
-    color: 'border-l-blue-500',
+    color: 'border-l-green-600',
     items: [
       { label: 'Dashboard', href: '/admin', tip: 'Overview of key metrics, recent activity & quick actions', icon: LayoutDashboard },
       { label: 'POS System', href: '/admin/pos', tip: 'Point of Sale — process sales, payments & receipts', icon: ShoppingCart },
@@ -233,7 +233,7 @@ export function Sidebar() {
   const isMobile = useIsMobile();
   const [collapsed, setCollapsed] = useState(true);
   const [logoUrl, setLogoUrl] = useState('');
-  const [businessName, setBusinessName] = useState('FRESHCART');
+  const [businessName, setBusinessName] = useState('SNACKOH');
   const { isAdmin, permissions, role, loading: permsLoading, isOutletAdmin } = useUserPermissions();
   const { canInstall, isInstalled, triggerInstall } = usePwaInstall();
   const badges = useSidebarNotifications();
@@ -567,15 +567,15 @@ export function Sidebar() {
         {canInstall && !isInstalled && (
           <button
             onClick={triggerInstall}
-            title="Install FreshCart App"
-            className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors bg-orange-50 text-orange-700 hover:bg-orange-100 border border-orange-200 ${collapsed ? 'justify-center px-0' : ''}`}
+            title="Install Snackoh App"
+            className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors bg-green-50 text-green-700 hover:bg-green-100 border border-green-200 ${collapsed ? 'justify-center px-0' : ''}`}
           >
             <Download size={collapsed ? 20 : 16} strokeWidth={2.5} className="shrink-0" />
             {!collapsed && <span>Install App</span>}
           </button>
         )}
         {!collapsed && (
-          <p className="text-[10px] text-muted-foreground text-center">v2.0 | FreshCart Groceries</p>
+          <p className="text-[10px] text-muted-foreground text-center">v2.0 | Snackoh Grocery System</p>
         )}
       </div>
     </aside>

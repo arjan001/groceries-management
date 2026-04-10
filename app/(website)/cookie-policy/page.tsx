@@ -12,7 +12,7 @@ export default function CookiePolicyPage() {
           </p>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">Cookie Policy</h1>
           <p className="text-white/70 text-base max-w-lg mx-auto">
-            Learn about how FreshCart Groceries uses cookies and similar technologies on our website.
+            Learn about how Snackoh Groceries uses cookies and similar technologies on our website.
           </p>
         </div>
       </section>
@@ -45,7 +45,7 @@ export default function CookiePolicyPage() {
                 make your next visit easier and the site more useful to you.
               </p>
               <p>
-                At FreshCart Groceries, we use cookies to enhance your browsing experience, understand
+                At Snackoh Groceries, we use cookies to enhance your browsing experience, understand
                 how our website is used, and deliver content and advertisements that are relevant to
                 you.
               </p>
@@ -315,7 +315,7 @@ export default function CookiePolicyPage() {
             </h2>
             <div className="space-y-3 text-sm text-gray-600 leading-relaxed">
               <p>
-                FreshCart Groceries is committed to complying with the Kenya Data Protection Act, 2019,
+                Snackoh Groceries is committed to complying with the Kenya Data Protection Act, 2019,
                 and the regulations issued by the Office of the Data Protection Commissioner (ODPC).
                 Under this Act, we are required to:
               </p>
@@ -335,7 +335,7 @@ export default function CookiePolicyPage() {
               <div className="bg-orange-50 border border-orange-100 rounded-xl p-5 mt-4">
                 <p className="font-semibold text-gray-800 mb-1 text-sm">ODPC Registration</p>
                 <p className="text-sm text-gray-600">
-                  FreshCart Groceries is registered with the Office of the Data Protection Commissioner
+                  Snackoh Groceries is registered with the Office of the Data Protection Commissioner
                   (ODPC) in compliance with Kenya&apos;s Data Protection Act, 2019. For more
                   information about data protection in Kenya, visit the{' '}
                   <a
@@ -381,16 +381,16 @@ export default function CookiePolicyPage() {
               </p>
               <div className="bg-gray-50 rounded-xl p-5 space-y-2">
                 <p>
-                  <strong className="text-gray-700">FreshCart Groceries</strong>
+                  <strong className="text-gray-700">Snackoh Groceries</strong>
                 </p>
                 <p>Nairobi, Kenya</p>
                 <p>
                   Email:{' '}
                   <a
-                    href="mailto:sales@freshcart-groceries.com"
+                    href="mailto:sales@snackoh-groceries.com"
                     className="text-orange-600 hover:underline"
                   >
-                    sales@freshcart-groceries.com
+                    sales@snackoh-groceries.com
                   </a>
                 </p>
                 <p>

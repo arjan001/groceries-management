@@ -128,7 +128,7 @@ export default function LoginPage() {
             <div className="flex gap-3 justify-center">
               <button
                 onClick={() => { setAccountDeactivated(false); setForm({ email: '', password: '' }); }}
-                className="px-6 py-2.5 bg-orange-600 text-white font-semibold text-sm rounded-xl hover:bg-orange-700 transition-colors"
+                className="px-6 py-2.5 bg-green-600 text-white font-semibold text-sm rounded-xl hover:bg-green-700 transition-colors"
               >
                 Try Again
               </button>
@@ -140,7 +140,7 @@ export default function LoginPage() {
               </Link>
             </div>
           </div>
-          <p className="text-xs text-gray-400 mt-6">FreshCart Groceries Management System</p>
+          <p className="text-xs text-gray-400 mt-6">Snackoh Grocery System</p>
         </div>
       </div>
     );
@@ -151,8 +151,8 @@ export default function LoginPage() {
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-8">
-          <Link href="/" className="text-3xl font-black text-gray-900 hover:text-orange-600 transition-colors">
-            FreshCart
+          <Link href="/" className="text-3xl font-black text-gray-900 hover:text-green-600 transition-colors">
+            Snackoh
           </Link>
           <h1 className="text-xl font-bold text-gray-800 mt-4">Admin Login</h1>
           <p className="text-sm text-gray-500 mt-1">
@@ -175,9 +175,9 @@ export default function LoginPage() {
                 type="email"
                 value={form.email}
                 onChange={e => setForm({ ...form, email: e.target.value })}
-                placeholder="admin@freshcart.co.ke"
+                placeholder="admin@snackoh.co.ke"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none"
               />
             </div>
 
@@ -190,7 +190,7 @@ export default function LoginPage() {
                   onChange={e => setForm({ ...form, password: e.target.value })}
                   placeholder="Enter your password"
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none pr-10"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none pr-10"
                 />
                 <button type="button" onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
@@ -202,7 +202,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3.5 bg-orange-600 text-white font-bold text-sm rounded-xl hover:bg-orange-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-green-600 text-white font-bold text-sm rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {submitting ? (
                 <>
@@ -218,7 +218,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center text-xs text-gray-400 mt-6">
-          <Link href="/" className="text-orange-600 hover:underline font-medium">Back to Store</Link>
+          <Link href="/" className="text-green-600 hover:underline font-medium">Back to Store</Link>
         </p>
       </div>
     </div>

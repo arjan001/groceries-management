@@ -77,10 +77,10 @@ export default function SettingsPage() {
 
   // ── General Settings ──
   const [general, setGeneral] = useState({
-    businessName: 'FRESHCART GROCERIES',
+    businessName: 'SNACKOH GROCERY SYSTEM',
     tagline: 'Quality Groceries',
     phone: '+254 700 000 000',
-    email: 'info@freshcart.com',
+    email: 'info@snackoh.com',
     shopNumber: '',
     address: 'Nairobi, Kenya',
     currency: 'KES',
@@ -110,9 +110,9 @@ export default function SettingsPage() {
   // ── Receipt Settings ──
   const [receipt, setReceipt] = useState({
     showLogo: true,
-    headerText: 'FRESHCART GROCERIES',
+    headerText: 'SNACKOH GROCERY SYSTEM',
     subHeaderText: 'Quality Groceries',
-    footerText: 'Thank you for choosing FreshCart!',
+    footerText: 'Thank you for choosing Snackoh!',
     showTax: true,
     showCashier: true,
     showCustomer: true,
@@ -129,7 +129,7 @@ export default function SettingsPage() {
     paybillNumber: '',
     accountNumber: '',
     tillNumber: '',
-    mpesaName: 'FRESHCART GROCERIES',
+    mpesaName: 'SNACKOH GROCERY SYSTEM',
     bankName: '',
     bankAccount: '',
     bankBranch: '',
@@ -306,12 +306,12 @@ export default function SettingsPage() {
 
   // ── Social Media Settings ──
   const [socialMedia, setSocialMedia] = useState({
-    instagram: '@freshcartgroceries',
-    instagramUrl: 'https://www.instagram.com/freshcartgroceries',
-    tiktok: '@freshcartgroceries',
-    tiktokUrl: 'https://www.tiktok.com/@freshcartgroceries',
-    facebook: 'FreshCart Groceries',
-    facebookUrl: 'https://www.facebook.com/FreshCartGroceries',
+    instagram: '@snackohgroceries',
+    instagramUrl: 'https://www.instagram.com/snackohgroceries',
+    tiktok: '@snackohgroceries',
+    tiktokUrl: 'https://www.tiktok.com/@snackohgroceries',
+    facebook: 'Snackoh Grocery System',
+    facebookUrl: 'https://www.facebook.com/SnackohGroceries',
     twitter: '',
     twitterUrl: '',
     youtube: '',
@@ -1772,11 +1772,11 @@ export default function SettingsPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className={labelCls}>Handle</label>
-                    <input className={inputCls} value={socialMedia.instagram} onChange={e => setSocialMedia({ ...socialMedia, instagram: e.target.value })} placeholder="@freshcartgroceries" />
+                    <input className={inputCls} value={socialMedia.instagram} onChange={e => setSocialMedia({ ...socialMedia, instagram: e.target.value })} placeholder="@snackohgroceries" />
                   </div>
                   <div>
                     <label className={labelCls}>URL</label>
-                    <input className={inputCls} value={socialMedia.instagramUrl} onChange={e => setSocialMedia({ ...socialMedia, instagramUrl: e.target.value })} placeholder="https://www.instagram.com/freshcartgroceries" />
+                    <input className={inputCls} value={socialMedia.instagramUrl} onChange={e => setSocialMedia({ ...socialMedia, instagramUrl: e.target.value })} placeholder="https://www.instagram.com/snackohgroceries" />
                   </div>
                 </div>
               </div>
@@ -1789,11 +1789,11 @@ export default function SettingsPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className={labelCls}>Handle</label>
-                    <input className={inputCls} value={socialMedia.tiktok} onChange={e => setSocialMedia({ ...socialMedia, tiktok: e.target.value })} placeholder="@freshcartgroceries" />
+                    <input className={inputCls} value={socialMedia.tiktok} onChange={e => setSocialMedia({ ...socialMedia, tiktok: e.target.value })} placeholder="@snackohgroceries" />
                   </div>
                   <div>
                     <label className={labelCls}>URL</label>
-                    <input className={inputCls} value={socialMedia.tiktokUrl} onChange={e => setSocialMedia({ ...socialMedia, tiktokUrl: e.target.value })} placeholder="https://www.tiktok.com/@freshcartgroceries" />
+                    <input className={inputCls} value={socialMedia.tiktokUrl} onChange={e => setSocialMedia({ ...socialMedia, tiktokUrl: e.target.value })} placeholder="https://www.tiktok.com/@snackohgroceries" />
                   </div>
                 </div>
               </div>
@@ -1806,11 +1806,11 @@ export default function SettingsPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className={labelCls}>Page Name</label>
-                    <input className={inputCls} value={socialMedia.facebook} onChange={e => setSocialMedia({ ...socialMedia, facebook: e.target.value })} placeholder="FreshCart Groceries" />
+                    <input className={inputCls} value={socialMedia.facebook} onChange={e => setSocialMedia({ ...socialMedia, facebook: e.target.value })} placeholder="Snackoh Grocery System" />
                   </div>
                   <div>
                     <label className={labelCls}>URL</label>
-                    <input className={inputCls} value={socialMedia.facebookUrl} onChange={e => setSocialMedia({ ...socialMedia, facebookUrl: e.target.value })} placeholder="https://www.facebook.com/FreshCartGroceries" />
+                    <input className={inputCls} value={socialMedia.facebookUrl} onChange={e => setSocialMedia({ ...socialMedia, facebookUrl: e.target.value })} placeholder="https://www.facebook.com/SnackohGroceries" />
                   </div>
                 </div>
               </div>
@@ -1823,11 +1823,11 @@ export default function SettingsPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className={labelCls}>Handle</label>
-                    <input className={inputCls} value={socialMedia.twitter} onChange={e => setSocialMedia({ ...socialMedia, twitter: e.target.value })} placeholder="@freshcartgroceries" />
+                    <input className={inputCls} value={socialMedia.twitter} onChange={e => setSocialMedia({ ...socialMedia, twitter: e.target.value })} placeholder="@snackohgroceries" />
                   </div>
                   <div>
                     <label className={labelCls}>URL</label>
-                    <input className={inputCls} value={socialMedia.twitterUrl} onChange={e => setSocialMedia({ ...socialMedia, twitterUrl: e.target.value })} placeholder="https://x.com/freshcartgroceries" />
+                    <input className={inputCls} value={socialMedia.twitterUrl} onChange={e => setSocialMedia({ ...socialMedia, twitterUrl: e.target.value })} placeholder="https://x.com/snackohgroceries" />
                   </div>
                 </div>
               </div>
@@ -1840,11 +1840,11 @@ export default function SettingsPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className={labelCls}>Channel Name</label>
-                    <input className={inputCls} value={socialMedia.youtube} onChange={e => setSocialMedia({ ...socialMedia, youtube: e.target.value })} placeholder="FreshCart Groceries" />
+                    <input className={inputCls} value={socialMedia.youtube} onChange={e => setSocialMedia({ ...socialMedia, youtube: e.target.value })} placeholder="Snackoh Grocery System" />
                   </div>
                   <div>
                     <label className={labelCls}>URL</label>
-                    <input className={inputCls} value={socialMedia.youtubeUrl} onChange={e => setSocialMedia({ ...socialMedia, youtubeUrl: e.target.value })} placeholder="https://www.youtube.com/@freshcartgroceries" />
+                    <input className={inputCls} value={socialMedia.youtubeUrl} onChange={e => setSocialMedia({ ...socialMedia, youtubeUrl: e.target.value })} placeholder="https://www.youtube.com/@snackohgroceries" />
                   </div>
                 </div>
               </div>
@@ -2020,7 +2020,7 @@ export default function SettingsPage() {
 
               <div>
                 <label className={labelCls}>M-Pesa Registered Name</label>
-                <input type="text" placeholder="e.g. FRESHCART GROCERIES" value={paymentDetails.mpesaName} onChange={e => setPaymentDetails({ ...paymentDetails, mpesaName: e.target.value })} className={inputCls} />
+                <input type="text" placeholder="e.g. SNACKOH GROCERY SYSTEM" value={paymentDetails.mpesaName} onChange={e => setPaymentDetails({ ...paymentDetails, mpesaName: e.target.value })} className={inputCls} />
               </div>
 
               <label className="flex items-center justify-between cursor-pointer">
@@ -3797,7 +3797,7 @@ export default function SettingsPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className={labelCls}>Sender Name</label>
-                      <input type="text" value={emailSettings.fromName} onChange={(e) => setEmailSettings({ ...emailSettings, fromName: e.target.value })} className={inputCls} placeholder="e.g. FreshCart Groceries" />
+                      <input type="text" value={emailSettings.fromName} onChange={(e) => setEmailSettings({ ...emailSettings, fromName: e.target.value })} className={inputCls} placeholder="e.g. Snackoh Grocery System" />
                       <p className="text-xs text-muted-foreground mt-1">Display name shown in the &quot;From&quot; field of emails</p>
                     </div>
                     <div>

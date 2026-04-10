@@ -1,13 +1,13 @@
 {
-  "name": "FreshCart Groceries Management System",
-  "short_name": "FreshCart",
-  "description": "FreshCart Groceries — Complete Grocery Management System with POS, Inventory, Delivery & HR",
+  "name": "Snackoh Grocery System",
+  "short_name": "Snackoh",
+  "description": "Snackoh Grocery System — Complete Grocery Management for Mama Mboga & Grocery Vendors with POS, Inventory, Delivery & HR",
   "start_url": "/admin",
   "scope": "/",
   "id": "/admin",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#ea580c",
+  "theme_color": "#16a34a",
   "orientation": "any",
   "categories": ["business", "productivity"],
   "icons": [

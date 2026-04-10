@@ -119,7 +119,7 @@ interface ReportBusinessInfo {
 function exportPDF(title: string, headers: string[], rows: string[][], businessInfo?: ReportBusinessInfo) {
   const win = window.open('', '_blank');
   if (!win) return;
-  const b = businessInfo || { businessName: 'FRESHCART GROCERIES', tagline: 'Quality Groceries', phone: '', email: '', address: 'Nairobi, Kenya', logoUrl: '', reportLogoHeight: 45, reportWatermarkEnabled: false, reportWatermarkOpacity: 8 };
+  const b = businessInfo || { businessName: 'SNACKOH GROCERY SYSTEM', tagline: 'Quality Groceries', phone: '', email: '', address: 'Nairobi, Kenya', logoUrl: '', reportLogoHeight: 45, reportWatermarkEnabled: false, reportWatermarkOpacity: 8 };
   const logoH = b.reportLogoHeight || 45;
   const wmEnabled = b.reportWatermarkEnabled && b.logoUrl;
   const wmOpacity = (b.reportWatermarkOpacity || 8) / 100;
@@ -247,7 +247,7 @@ export default function ReportsPage() {
 
   // Business settings for report header
   const [reportBizInfo, setReportBizInfo] = useState<ReportBusinessInfo>({
-    businessName: 'FRESHCART GROCERIES', tagline: 'Quality Groceries', phone: '', email: '', address: 'Nairobi, Kenya', logoUrl: '',
+    businessName: 'SNACKOH GROCERY SYSTEM', tagline: 'Quality Groceries', phone: '', email: '', address: 'Nairobi, Kenya', logoUrl: '',
     reportLogoHeight: 45, reportWatermarkEnabled: false, reportWatermarkOpacity: 8,
   });
 
@@ -1314,7 +1314,7 @@ export default function ReportsPage() {
     <div className="p-4 md:p-8 max-w-[1600px] mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Reports & Analytics</h1>
-        <p className="text-muted-foreground">Financial reports, sales analytics, and general ledger for FRESHCART GROCERIES</p>
+        <p className="text-muted-foreground">Financial reports, sales analytics, and general ledger for SNACKOH GROCERY SYSTEM</p>
       </div>
 
       {/* Date Range Filter */}

@@ -1,8 +1,8 @@
-# FreshCart Groceries - Employee Training Manual
+# Snackoh Groceries - Employee Training Manual
 
 ## System Overview
 
-The FreshCart Grocery Management System is a comprehensive grocery ERP (Enterprise Resource Planning) and e-commerce platform purpose-built for grocery operations of all sizes. It integrates every aspect of the business into a single, unified system -- from product catalog management and procurement scheduling to point-of-sale transactions, delivery logistics, multi-branch management, and financial accounting.
+The Snackoh Grocery Management System is a comprehensive grocery ERP (Enterprise Resource Planning) and e-commerce platform purpose-built for grocery operations of all sizes. It integrates every aspect of the business into a single, unified system -- from product catalog management and procurement scheduling to point-of-sale transactions, delivery logistics, multi-branch management, and financial accounting.
 
 The platform is designed around role-based access control, ensuring each employee sees only the tools and data relevant to their job. Whether you are a stock manager handling procurement runs, a cashier processing in-store sales, a delivery rider tracking assignments, or an administrator overseeing the entire operation, the system adapts to your needs.
 
