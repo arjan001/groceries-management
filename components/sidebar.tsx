@@ -27,6 +27,11 @@ import {
   CreditCard,
   Landmark,
   UserMinus,
+  RefreshCw,
+  ClipboardList,
+  Truck,
+  Wrench,
+  ClipboardCheck,
 } from 'lucide-react';
 import { usePwaInstall } from '@/components/pwa-install-prompt';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -55,12 +60,23 @@ const allNavGroups: NavGroup[] = [
     ],
   },
   {
-    title: 'PRODUCTS & INVENTORY',
+    title: 'PRODUCTS',
     color: 'border-l-amber-500',
     items: [
       { label: 'Products', href: '/admin/recipes', tip: 'Manage grocery products — pricing, categories & details', icon: BookOpen },
+    ],
+  },
+  {
+    title: 'INVENTORY & SUPPLY CHAIN',
+    color: 'border-l-orange-500',
+    items: [
       { label: 'Inventory', href: '/admin/inventory', tip: 'Stock levels, categories & warehouse management', icon: Package },
+      { label: 'Stock Reorder', href: '/admin/stock-reorder', tip: 'Automatic & manual stock reordering & reorder points', icon: RefreshCw },
+      { label: 'Purchase Orders', href: '/admin/purchasing', tip: 'Create & manage purchase orders to suppliers', icon: ClipboardList },
       { label: 'Suppliers', href: '/admin/distributors', tip: 'Manage suppliers, pricing & lead times', icon: Building2 },
+      { label: 'Distribution', href: '/admin/distribution', tip: 'Track distribution agents, routes & commissions', icon: Truck },
+      { label: 'Assets & Equipment', href: '/admin/assets', tip: 'Track fixed assets, maintenance & depreciation', icon: Wrench },
+      { label: 'Stock Take', href: '/admin/stock-take', tip: 'Physical stock counts, audits & discrepancy tracking', icon: ClipboardCheck },
     ],
   },
   {
