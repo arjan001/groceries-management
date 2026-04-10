@@ -221,9 +221,9 @@ function exportPDF(title: string, headers: string[], rows: string[][]) {
     @media print{body{padding:15px}.no-print{display:none}}
   </style></head><body>
     <h1>${title}</h1>
-    <p class="subtitle">Generated on ${new Date().toLocaleString()} | FRESHCART GROCERIES - Employee Productivity Report</p>
+    <p class="subtitle">Generated on ${new Date().toLocaleString()} | SNACKOH GROCERY SYSTEM - Employee Productivity Report</p>
     <table><thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${tableRows}</tbody></table>
-    <p class="footer">FRESHCART GROCERIES - Employee Productivity Report</p>
+    <p class="footer">SNACKOH GROCERY SYSTEM - Employee Productivity Report</p>
     <script>window.onload=function(){window.print()}</script>
   </body></html>`;
   win.document.write(html);

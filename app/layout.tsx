@@ -7,8 +7,8 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
-  title: 'FreshCart Groceries',
-  description: 'Fresh groceries delivered to your door — FreshCart Groceries',
+  title: 'Snackoh Grocery System',
+  description: 'Complete grocery management system for mama mboga and grocery vendors — Snackoh Grocery System',
   icons: {
     icon: '/icon-192.png',
     apple: '/apple-icon.png',
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
       <head>
-        <meta name="theme-color" content="#ea580c" />
+        <meta name="theme-color" content="#16a34a" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
       </head>
       <body className="font-sans antialiased">

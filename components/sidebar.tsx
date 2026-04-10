@@ -10,54 +10,28 @@ import {
   LayoutDashboard,
   ShoppingCart,
   BookOpen,
-  UtensilsCrossed,
-  Factory,
-  ClipboardList,
-  ScanLine,
-  Trash2,
   Users,
   FileText,
-  MapPinned,
-  Truck,
-  Tag,
   Package,
-  ShoppingBag,
   Building2,
-  Handshake,
-  Wrench,
-  TrendingDown,
-  CreditCard,
   UserCheck,
-  Shield,
   BarChart3,
   Settings,
   User,
-  ScrollText,
   Receipt,
-  Activity,
-  RefreshCw,
   Download,
   LucideIcon,
-  Store,
-  PackageSearch,
-  ClipboardCopy,
-  AlertTriangle,
-  RotateCcw,
-  ShoppingBasket,
-  UserCog,
-  PieChart,
-  Recycle,
-  SlidersHorizontal,
   Search,
   X,
   Command,
-  BookOpenText,
+  CreditCard,
+  Landmark,
+  UserMinus,
+  RefreshCw,
+  ClipboardList,
+  Truck,
+  Wrench,
   ClipboardCheck,
-  Clock,
-  ShieldCheck,
-  FileUp,
-  History,
-  QrCode,
 } from 'lucide-react';
 import { usePwaInstall } from '@/components/pwa-install-prompt';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -79,57 +53,38 @@ interface NavGroup {
 const allNavGroups: NavGroup[] = [
   {
     title: 'CORE',
-    color: 'border-l-blue-500',
+    color: 'border-l-green-600',
     items: [
       { label: 'Dashboard', href: '/admin', tip: 'Overview of key metrics, recent activity & quick actions', icon: LayoutDashboard },
       { label: 'POS System', href: '/admin/pos', tip: 'Point of Sale — process sales, payments & receipts', icon: ShoppingCart },
     ],
   },
   {
-    title: 'PRODUCTS & CATALOG',
+    title: 'PRODUCTS',
     color: 'border-l-amber-500',
     items: [
-      { label: 'Product Management', href: '/admin/recipes', tip: 'Manage grocery products — pricing, categories & details', icon: BookOpen },
-      { label: 'Catalog Upload', href: '/admin/catalog-upload', tip: 'Bulk-import products from CSV catalogue files', icon: FileUp },
-      { label: 'Lot & Expiry Tracking', href: '/admin/lot-tracking', tip: 'Track batches, expiry dates & traceability', icon: ScanLine },
-      { label: 'Waste & Shrinkage', href: '/admin/waste-control', tip: 'Record & analyze expired, damaged & wasted stock', icon: Trash2 },
+      { label: 'Products', href: '/admin/recipes', tip: 'Manage grocery products — pricing, categories & details', icon: BookOpen },
+    ],
+  },
+  {
+    title: 'INVENTORY & SUPPLY CHAIN',
+    color: 'border-l-orange-500',
+    items: [
+      { label: 'Inventory', href: '/admin/inventory', tip: 'Stock levels, categories & warehouse management', icon: Package },
+      { label: 'Stock Reorder', href: '/admin/stock-reorder', tip: 'Automatic & manual stock reordering & reorder points', icon: RefreshCw },
+      { label: 'Purchase Orders', href: '/admin/purchasing', tip: 'Create & manage purchase orders to suppliers', icon: ClipboardList },
+      { label: 'Suppliers', href: '/admin/distributors', tip: 'Manage suppliers, pricing & lead times', icon: Building2 },
+      { label: 'Distribution', href: '/admin/distribution', tip: 'Track distribution agents, routes & commissions', icon: Truck },
+      { label: 'Assets & Equipment', href: '/admin/assets', tip: 'Track fixed assets, maintenance & depreciation', icon: Wrench },
+      { label: 'Stock Take', href: '/admin/stock-take', tip: 'Physical stock counts, audits & discrepancy tracking', icon: ClipboardCheck },
     ],
   },
   {
     title: 'SALES & ORDERS',
     color: 'border-l-green-500',
     items: [
-      { label: 'Customers', href: '/admin/customers', tip: 'Customer profiles, geo-location & segmentation', icon: Users },
-      { label: 'Orders', href: '/admin/orders', tip: 'Create & manage customer orders with delivery', icon: FileText },
-      { label: 'Order Tracking', href: '/admin/order-tracking', tip: 'Track order status & delivery progress', icon: MapPinned },
-      { label: 'Delivery', href: '/admin/delivery', tip: 'Schedule deliveries & assign drivers', icon: Truck },
-      { label: 'Rider Reports', href: '/admin/rider-reports', tip: 'Waste & damage reports from delivery riders', icon: AlertTriangle },
-      { label: 'Pricing & Promotions', href: '/admin/pricing', tip: 'Set retail, wholesale & promotional pricing', icon: Tag },
-    ],
-  },
-  {
-    title: 'INVENTORY & SUPPLY CHAIN',
-    color: 'border-l-purple-500',
-    items: [
-      { label: 'Inventory', href: '/admin/inventory', tip: 'Stock levels, categories & warehouse management', icon: Package },
-      { label: 'Stock Reorder', href: '/admin/stock-reorder', tip: 'Auto-reorder alerts, minimum levels & restock triggers', icon: RefreshCw },
-      { label: 'Purchase Orders', href: '/admin/purchasing', tip: 'Purchase orders & supplier procurement', icon: ShoppingBag },
-      { label: 'Suppliers', href: '/admin/distributors', tip: 'Manage suppliers, pricing & lead times', icon: Building2 },
-      { label: 'Distribution', href: '/admin/distribution', tip: 'Manage distribution channels & wholesale agents', icon: Handshake },
-      { label: 'Assets & Equipment', href: '/admin/assets', tip: 'Refrigerators, shelving, vehicles & depreciation', icon: Wrench },
-      { label: 'Stock Take', href: '/admin/stock-take', tip: 'Physical stock counts, variance & reconciliation', icon: ClipboardCheck },
-    ],
-  },
-  {
-    title: 'BRANCHES & OUTLETS',
-    color: 'border-l-orange-500',
-    items: [
-      { label: 'Branch Management', href: '/admin/outlets', tip: 'Manage main store and branch outlets', icon: Store },
-      { label: 'Branch Inventory', href: '/admin/outlet-inventory', tip: 'Manage inventory for individual branches', icon: PackageSearch },
-      { label: 'Branch Products', href: '/admin/outlet-products', tip: 'Branch-specific product catalog & pricing', icon: ShoppingBasket },
-      { label: 'Branch Employees', href: '/admin/outlet-employees', tip: 'Manage staff assigned to each branch', icon: UserCog },
-      { label: 'Branch Reports', href: '/admin/outlet-reports', tip: 'Sales, inventory & performance reports per branch', icon: PieChart },
-      { label: 'Menu Generator', href: '/admin/outlet-menu-generator', tip: 'Generate QR codes & PDF product lists for branches', icon: QrCode },
+      { label: 'Customers', href: '/admin/customers', tip: 'Customer profiles & segmentation', icon: Users },
+      { label: 'Orders', href: '/admin/orders', tip: 'Create & manage customer orders', icon: FileText },
     ],
   },
   {
@@ -137,10 +92,10 @@ const allNavGroups: NavGroup[] = [
     color: 'border-l-rose-500',
     items: [
       { label: 'Expenses', href: '/admin/expenses', tip: 'Track & manage business expenses', icon: Receipt },
-      { label: 'Credit Invoices', href: '/admin/credit-invoices', tip: 'Invoicing for credit sales with payment tracking', icon: FileText },
-      { label: 'Debtors', href: '/admin/debtors', tip: 'Track credit sales & customer debts', icon: TrendingDown },
-      { label: 'Creditors', href: '/admin/creditors', tip: 'Supplier credit & payment schedules', icon: CreditCard },
-      { label: 'Insurance', href: '/admin/insurance', tip: 'Vehicle, asset, employee & business insurance policies', icon: ShieldCheck },
+      { label: 'Credit Invoices', href: '/admin/credit-invoices', tip: 'Manage customer credit invoices & payment tracking', icon: CreditCard },
+      { label: 'Creditors', href: '/admin/creditors', tip: 'Track amounts owed to suppliers & creditors', icon: Landmark },
+      { label: 'Debtors', href: '/admin/debtors', tip: 'Track customer debts & outstanding balances', icon: UserMinus },
+      { label: 'Reports', href: '/admin/reports', tip: 'Financial reports, P&L, sales & ledger', icon: BarChart3 },
     ],
   },
   {
@@ -148,27 +103,14 @@ const allNavGroups: NavGroup[] = [
     color: 'border-l-teal-500',
     items: [
       { label: 'Employees', href: '/admin/employees', tip: 'Staff profiles, certificates & payroll info', icon: UserCheck },
-      { label: 'User Creation', href: '/admin/roles-permissions', tip: 'Create users and assign system access permissions', icon: Shield },
-      { label: 'Shift Management', href: '/admin/shifts', tip: 'Employee shifts, schedules & shift reports', icon: Clock },
-      { label: 'Productivity Report', href: '/admin/employee-productivity', tip: 'Employee KPI tracking, performance & productivity metrics', icon: Activity },
     ],
   },
   {
     title: 'SYSTEM',
     color: 'border-l-gray-400',
     items: [
-      { label: 'Reports & Ledger', href: '/admin/reports', tip: 'Financial reports, P&L, sales, debtors, creditors & ledger', icon: BarChart3 },
-      { label: 'Audit Logs', href: '/admin/audit-logs', tip: 'Track system activity, user actions & access logs', icon: ScrollText },
       { label: 'Settings', href: '/admin/settings', tip: 'System config, receipt, theme & security', icon: Settings },
-      { label: 'Changelog Report', href: '/admin/changelog', tip: 'System changelog, implementation report & PDF download', icon: History },
-    ],
-  },
-  {
-    title: 'MY ACCOUNT',
-    color: 'border-l-indigo-500',
-    items: [
-      { label: 'Account Settings', href: '/admin/account', tip: 'Your profile, password & certificates', icon: User },
-      { label: 'Documentation', href: '/admin/documentation', tip: 'Employee training manual & system guide', icon: BookOpenText },
+      { label: 'Account', href: '/admin/account', tip: 'Your profile, password & certificates', icon: User },
     ],
   },
 ];
@@ -233,7 +175,7 @@ export function Sidebar() {
   const isMobile = useIsMobile();
   const [collapsed, setCollapsed] = useState(true);
   const [logoUrl, setLogoUrl] = useState('');
-  const [businessName, setBusinessName] = useState('FRESHCART');
+  const [businessName, setBusinessName] = useState('SNACKOH');
   const { isAdmin, permissions, role, loading: permsLoading, isOutletAdmin } = useUserPermissions();
   const { canInstall, isInstalled, triggerInstall } = usePwaInstall();
   const badges = useSidebarNotifications();
@@ -567,15 +509,15 @@ export function Sidebar() {
         {canInstall && !isInstalled && (
           <button
             onClick={triggerInstall}
-            title="Install FreshCart App"
-            className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors bg-orange-50 text-orange-700 hover:bg-orange-100 border border-orange-200 ${collapsed ? 'justify-center px-0' : ''}`}
+            title="Install Snackoh App"
+            className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors bg-green-50 text-green-700 hover:bg-green-100 border border-green-200 ${collapsed ? 'justify-center px-0' : ''}`}
           >
             <Download size={collapsed ? 20 : 16} strokeWidth={2.5} className="shrink-0" />
             {!collapsed && <span>Install App</span>}
           </button>
         )}
         {!collapsed && (
-          <p className="text-[10px] text-muted-foreground text-center">v2.0 | FreshCart Groceries</p>
+          <p className="text-[10px] text-muted-foreground text-center">v2.0 | Snackoh Grocery System</p>
         )}
       </div>
     </aside>

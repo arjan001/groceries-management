@@ -128,8 +128,8 @@ export default function Dashboard() {
   return (
     <div className="p-4 md:p-6 lg:p-8">
       <div className="mb-4 md:mb-6">
-        <h1 className="text-lg md:text-xl font-bold mb-1">FreshCart Groceries Dashboard</h1>
-        <p className="text-xs md:text-sm text-muted-foreground">Welcome to FreshCart Grocery Management System</p>
+        <h1 className="text-lg md:text-xl font-bold mb-1">Snackoh Grocery Dashboard</h1>
+        <p className="text-xs md:text-sm text-muted-foreground">Welcome to Snackoh Grocery System</p>
       </div>
 
       {loading && (

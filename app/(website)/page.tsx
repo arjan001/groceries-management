@@ -28,7 +28,7 @@ function HomeProductCard({ product }: { product: Product }) {
           </div>
         )}
         {product.isNew && (
-          <span className="absolute top-3 left-3 bg-orange-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>
+          <span className="absolute top-3 left-3 bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>
         )}
         {!product.inStock && (
           <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
@@ -38,7 +38,7 @@ function HomeProductCard({ product }: { product: Product }) {
         {product.inStock && (
           <button
             onClick={e => { e.stopPropagation(); addItem({ id: product.id, name: product.name, price: product.price, image: product.image, category: product.category }); }}
-            className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-orange-600 flex items-center gap-1.5"
+            className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-green-600 flex items-center gap-1.5"
           >
             <ShoppingBag size={12} /> Add to Cart
           </button>
@@ -46,7 +46,7 @@ function HomeProductCard({ product }: { product: Product }) {
       </div>
       <p className="text-sm font-semibold text-gray-800 truncate">{product.name}</p>
       <div className="flex items-center gap-2 mt-0.5">
-        <span className="text-sm font-black text-orange-600">KES {product.price.toLocaleString()}</span>
+        <span className="text-sm font-black text-green-600">KES {product.price.toLocaleString()}</span>
         {product.originalPrice && (
           <span className="text-xs text-gray-400 line-through">KES {product.originalPrice.toLocaleString()}</span>
         )}
@@ -138,10 +138,10 @@ function AdsCarousel() {
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
                 <div className="relative z-10 p-6 h-full flex flex-col justify-center">
-                  <p className="text-orange-300 text-[10px] font-bold tracking-widest uppercase mb-1">{offer.badge}</p>
+                  <p className="text-green-300 text-[10px] font-bold tracking-widest uppercase mb-1">{offer.badge}</p>
                   <h3 className="text-white text-xl md:text-2xl font-black leading-tight mb-1.5">{offer.title}</h3>
                   <p className="text-white/70 text-xs max-w-xs mb-3">{offer.description}</p>
-                  <span className="inline-flex items-center gap-1.5 text-white text-xs font-bold group-hover:text-orange-300 transition-colors">
+                  <span className="inline-flex items-center gap-1.5 text-white text-xs font-bold group-hover:text-green-300 transition-colors">
                     {offer.discount ? `${offer.discount} — Shop Now` : 'Explore New In'} <ArrowRight size={12} />
                   </span>
                 </div>
@@ -165,14 +165,14 @@ function AdsCarousel() {
                   <img src={offer.image_url} alt={offer.title}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-600 to-amber-800" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-amber-800" />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
                 <div className="relative z-10 p-6 h-full flex flex-col justify-center">
-                  <p className="text-orange-300 text-[10px] font-bold tracking-widest uppercase mb-1">{offer.badge_text}</p>
+                  <p className="text-green-300 text-[10px] font-bold tracking-widest uppercase mb-1">{offer.badge_text}</p>
                   <h3 className="text-white text-xl md:text-2xl font-black leading-tight mb-1.5">{offer.title}</h3>
                   <p className="text-white/70 text-xs max-w-xs mb-3">{offer.description}</p>
-                  <span className="inline-flex items-center gap-1.5 text-white text-xs font-bold group-hover:text-orange-300 transition-colors">
+                  <span className="inline-flex items-center gap-1.5 text-white text-xs font-bold group-hover:text-green-300 transition-colors">
                     {offer.discount_text ? `${offer.discount_text} — Shop Now` : 'Shop The Sale'} <ArrowRight size={12} />
                   </span>
                 </div>
@@ -192,14 +192,14 @@ function AdsCarousel() {
                       <img src={offer.image_url} alt={offer.title}
                         className="absolute inset-0 w-full h-full object-cover" />
                     ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-orange-600 to-amber-800" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-amber-800" />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
                     <div className="relative z-10 p-8 h-full flex flex-col justify-center">
-                      <p className="text-orange-300 text-[10px] font-bold tracking-widest uppercase mb-1">{offer.badge_text}</p>
+                      <p className="text-green-300 text-[10px] font-bold tracking-widest uppercase mb-1">{offer.badge_text}</p>
                       <h3 className="text-white text-2xl md:text-3xl font-black leading-tight mb-2">{offer.title}</h3>
                       <p className="text-white/70 text-sm max-w-md mb-3">{offer.description}</p>
-                      <span className="inline-flex items-center gap-1.5 text-white text-sm font-bold group-hover:text-orange-300 transition-colors">
+                      <span className="inline-flex items-center gap-1.5 text-white text-sm font-bold group-hover:text-green-300 transition-colors">
                         {offer.discount_text ? `${offer.discount_text} — Shop Now` : 'Shop Now'} <ArrowRight size={14} />
                       </span>
                     </div>
@@ -236,26 +236,26 @@ function AdsCarousel() {
 // ─── Offers & Wholesale Section ──────────────────────────────────────────────
 function OffersSection() {
   return (
-    <section className="py-10 bg-orange-50">
+    <section className="py-10 bg-green-50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-8">
-          <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Special Deals</p>
+          <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-1">Special Deals</p>
           <h2 className="text-3xl font-black text-gray-900">Offers & Promotions</h2>
           <p className="text-gray-500 mt-2 text-sm max-w-lg mx-auto">Check out our current deals, wholesale offers, and upcoming promotions. Save big on your weekly groceries!</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {/* Current Offers */}
-          <div className="bg-white rounded-2xl p-6 border border-orange-100 shadow-sm hover:shadow-md transition-shadow">
-            <div className="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
-              <Tag size={20} className="text-orange-600" />
+          <div className="bg-white rounded-2xl p-6 border border-green-100 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+              <Tag size={20} className="text-green-600" />
             </div>
             <h3 className="font-black text-gray-900 text-lg mb-2">Current Offers</h3>
             <ul className="space-y-2 text-sm text-gray-600 mb-4">
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-orange-400 rounded-full shrink-0" /> 20% off all fresh produce this weekend</li>
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-orange-400 rounded-full shrink-0" /> Buy 2 dairy items, get 1 free</li>
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-orange-400 rounded-full shrink-0" /> Free delivery over KES 2,000</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-green-400 rounded-full shrink-0" /> 20% off all fresh produce this weekend</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-green-400 rounded-full shrink-0" /> Buy 2 dairy items, get 1 free</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-green-400 rounded-full shrink-0" /> Free delivery over KES 2,000</li>
             </ul>
-            <Link href="/shop" className="text-xs font-bold text-orange-600 hover:underline flex items-center gap-1">
+            <Link href="/shop" className="text-xs font-bold text-green-600 hover:underline flex items-center gap-1">
               Shop Now <ArrowRight size={12} />
             </Link>
           </div>
@@ -330,12 +330,12 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
           {/* Text */}
           <div>
-            <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-3">
+            <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-3">
               FREE DELIVERY ON ORDERS OVER KES 2,000
             </p>
             <h1 className="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-5">
               Farm-Fresh<br />
-              <span className="text-orange-600">Groceries</span><br />
+              <span className="text-green-600">Groceries</span><br />
               Delivered Daily
             </h1>
             <p className="text-gray-500 text-base leading-relaxed mb-4 max-w-md">
@@ -344,7 +344,7 @@ export default function HomePage() {
               sourced locally and delivered fresh to your door.
             </p>
             <div className="flex items-center gap-4 mb-8">
-              <div className="flex items-center gap-2 text-xs bg-orange-50 text-orange-700 font-semibold px-3 py-1.5 rounded-full border border-orange-200">
+              <div className="flex items-center gap-2 text-xs bg-green-50 text-green-700 font-semibold px-3 py-1.5 rounded-full border border-green-200">
                 <Store size={14} /> Retail Orders
               </div>
               <div className="flex items-center gap-2 text-xs bg-amber-50 text-amber-700 font-semibold px-3 py-1.5 rounded-full border border-amber-200">
@@ -353,11 +353,11 @@ export default function HomePage() {
             </div>
             <div className="flex flex-wrap gap-3">
               <Link href="/shop"
-                className="px-8 py-3.5 bg-gray-900 text-white font-bold text-sm rounded-full hover:bg-orange-600 transition-colors inline-flex items-center gap-2">
+                className="px-8 py-3.5 bg-gray-900 text-white font-bold text-sm rounded-full hover:bg-green-600 transition-colors inline-flex items-center gap-2">
                 SHOP NOW <ChevronRight size={15} />
               </Link>
               <Link href="/shop?category=Cake"
-                className="px-8 py-3.5 border-2 border-gray-200 text-gray-800 font-bold text-sm rounded-full hover:border-orange-400 transition-colors">
+                className="px-8 py-3.5 border-2 border-gray-200 text-gray-800 font-bold text-sm rounded-full hover:border-green-400 transition-colors">
                 Fresh Produce
               </Link>
             </div>
@@ -369,7 +369,7 @@ export default function HomePage() {
                 { icon: Shield, label: 'Quality Guaranteed' },
               ].map(b => (
                 <div key={b.label} className="flex items-center gap-2 text-xs text-gray-500 font-medium">
-                  <b.icon size={14} className="text-orange-500" /> {b.label}
+                  <b.icon size={14} className="text-green-500" /> {b.label}
                 </div>
               ))}
             </div>
@@ -411,10 +411,10 @@ export default function HomePage() {
             {CIRCLE_CATEGORIES.map(cat => (
               <Link key={cat.label} href={cat.href}
                 className="flex flex-col items-center gap-2.5 group shrink-0">
-                <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-transparent group-hover:border-orange-400 transition-all ring-2 ring-gray-100 group-hover:ring-orange-200">
+                <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-transparent group-hover:border-green-400 transition-all ring-2 ring-gray-100 group-hover:ring-green-200">
                   <img src={cat.image} alt={cat.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <span className="text-xs font-bold text-gray-700 group-hover:text-orange-600 transition-colors tracking-wide">{cat.label}</span>
+                <span className="text-xs font-bold text-gray-700 group-hover:text-green-600 transition-colors tracking-wide">{cat.label}</span>
               </Link>
             ))}
           </div>
@@ -425,7 +425,7 @@ export default function HomePage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
-            <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Retail &amp; Wholesale</p>
+            <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-1">Retail &amp; Wholesale</p>
             <h2 className="text-3xl font-black text-gray-900">What We Offer</h2>
             <p className="text-gray-500 mt-2 text-sm max-w-lg mx-auto">
               Whether you&apos;re buying for your home or stocking your shop, we&apos;ve got you covered with fresh groceries every day.
@@ -454,7 +454,7 @@ export default function HomePage() {
               Looking for <strong className="text-gray-700">wholesale pricing</strong>? We offer bulk orders for shops, restaurants, events, and corporate clients.
             </p>
             <Link href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 text-white font-bold text-sm rounded-full hover:bg-orange-700 transition-colors">
+              className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-bold text-sm rounded-full hover:bg-green-700 transition-colors">
               Contact Us for Wholesale <ChevronRight size={14} />
             </Link>
           </div>
@@ -466,10 +466,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Our Favourites</p>
+              <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-1">Our Favourites</p>
               <h2 className="text-3xl font-black text-gray-900">Best Sellers</h2>
             </div>
-            <Link href="/shop" className="text-sm font-bold text-gray-600 hover:text-orange-600 flex items-center gap-1">
+            <Link href="/shop" className="text-sm font-bold text-gray-600 hover:text-green-600 flex items-center gap-1">
               View all <ChevronRight size={14} />
             </Link>
           </div>
@@ -489,7 +489,7 @@ export default function HomePage() {
             src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=1200&q=80&fit=crop"
             alt="Fresh Groceries" className="absolute inset-0 w-full h-full object-cover opacity-40" />
           <div className="relative z-10 px-10 md:px-16 max-w-xl">
-            <p className="text-orange-300 text-xs font-bold tracking-widest uppercase mb-2">Limited Time</p>
+            <p className="text-green-300 text-xs font-bold tracking-widest uppercase mb-2">Limited Time</p>
             <h2 className="text-3xl md:text-4xl font-black text-white leading-tight mb-4">
               The Freshest Picks<br />For Your Kitchen
             </h2>
@@ -497,7 +497,7 @@ export default function HomePage() {
               From weeknight dinners to weekend feasts — our seasonal specials are here for a limited time only.
             </p>
             <Link href="/shop"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-bold text-sm rounded-full hover:bg-orange-600 hover:text-white transition-colors">
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-bold text-sm rounded-full hover:bg-green-600 hover:text-white transition-colors">
               SHOP NOW <ChevronRight size={14} />
             </Link>
           </div>
@@ -508,7 +508,7 @@ export default function HomePage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
-            <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Shop by Need</p>
+            <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-1">Shop by Need</p>
             <h2 className="text-3xl font-black text-gray-900">For Every Occasion!</h2>
             <p className="text-gray-500 mt-2 text-sm max-w-md mx-auto">
               Whether it&apos;s a family dinner, party prep, or weekly restock — we&apos;ve got everything you need.
@@ -526,7 +526,7 @@ export default function HomePage() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
                 <div className="absolute bottom-5 inset-x-0 flex justify-center">
-                  <span className="bg-white text-gray-900 font-black text-xs tracking-[0.2em] px-6 py-2.5 rounded-full group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                  <span className="bg-white text-gray-900 font-black text-xs tracking-[0.2em] px-6 py-2.5 rounded-full group-hover:bg-green-600 group-hover:text-white transition-colors">
                     {item.label}
                   </span>
                 </div>
@@ -541,10 +541,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-1">Stocked Today</p>
+              <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-1">Stocked Today</p>
               <h2 className="text-3xl font-black text-gray-900">Fresh Arrivals</h2>
             </div>
-            <Link href="/shop" className="text-sm font-bold text-gray-600 hover:text-orange-600 flex items-center gap-1">
+            <Link href="/shop" className="text-sm font-bold text-gray-600 hover:text-green-600 flex items-center gap-1">
               View all <ChevronRight size={14} />
             </Link>
           </div>
@@ -553,7 +553,7 @@ export default function HomePage() {
           </div>
           <div className="mt-10 text-center">
             <Link href="/shop"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-orange-600 text-white font-bold text-sm rounded-full hover:bg-orange-700 transition-colors">
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-green-600 text-white font-bold text-sm rounded-full hover:bg-green-700 transition-colors">
               Shop More <ChevronRight size={15} />
             </Link>
           </div>
@@ -561,14 +561,14 @@ export default function HomePage() {
       </section>
 
       {/* ─── DISCOUNT STRIP ───────────────────────────────────────────────── */}
-      <section className="py-5 bg-orange-600">
+      <section className="py-5 bg-green-600">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
             <p className="text-2xl font-black text-white">25% OFF FRESH PRODUCE ORDERS</p>
-            <p className="text-orange-100 text-sm">Stock up on fruits and vegetables, get 25% off. This week only.</p>
+            <p className="text-green-100 text-sm">Stock up on fruits and vegetables, get 25% off. This week only.</p>
           </div>
           <Link href="/shop?category=Cake"
-            className="shrink-0 px-6 py-3 bg-white text-orange-600 font-black text-sm rounded-full hover:bg-gray-100 transition-colors">
+            className="shrink-0 px-6 py-3 bg-white text-green-600 font-black text-sm rounded-full hover:bg-gray-100 transition-colors">
             SHOP PRODUCE
           </Link>
         </div>
@@ -579,11 +579,11 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-xs text-orange-600 font-bold tracking-widest uppercase mb-2">About FreshCart Groceries</p>
+              <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-2">About Snackoh Groceries</p>
               <h2 className="text-3xl font-black text-gray-900 mb-6">Committed to Freshness, Quality &amp; Value</h2>
               <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
                 <p>
-                  At FreshCart Groceries, we believe that every meal starts with quality ingredients. Our store is built on a foundation of sourcing the freshest produce, dairy, meats, and pantry essentials from trusted local farms and suppliers.
+                  At Snackoh Groceries, we believe that every meal starts with quality ingredients. Our store is built on a foundation of sourcing the freshest produce, dairy, meats, and pantry essentials from trusted local farms and suppliers.
                 </p>
                 <p>
                   We are committed to maintaining strict quality control at every step — from selecting farm-fresh produce and verified suppliers to our carefully managed cold-chain logistics. Freshness is not just a promise; it&apos;s our daily practice. Every item is sourced and delivered fresh.
@@ -592,11 +592,11 @@ export default function HomePage() {
                   Whether you&apos;re a <strong className="text-gray-800">retail customer</strong> doing your weekly grocery run or a <strong className="text-gray-800">wholesale partner</strong> stocking your restaurant or shop, we serve both with the same dedication to quality. We supply homes, restaurants, hotels, and corporate kitchens across Nairobi.
                 </p>
               </div>
-              <div className="mt-6 p-4 bg-orange-50 border border-orange-100 rounded-xl">
+              <div className="mt-6 p-4 bg-green-50 border border-green-100 rounded-xl">
                 <p className="text-sm font-bold text-gray-800 mb-1">Interested in wholesale orders?</p>
                 <p className="text-xs text-gray-600 mb-3">We offer competitive bulk pricing for businesses. Get in touch with our sales team for a custom quote.</p>
                 <Link href="/contact"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-600 text-white font-bold text-xs rounded-full hover:bg-orange-700 transition-colors">
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-600 text-white font-bold text-xs rounded-full hover:bg-green-700 transition-colors">
                   Contact Us <ChevronRight size={12} />
                 </Link>
               </div>
@@ -623,7 +623,7 @@ export default function HomePage() {
             {[
               { name: 'Grace M.', review: 'The freshest vegetables I\'ve found anywhere! The avocados are always perfectly ripe and the delivery is so fast.', rating: 5 },
               { name: 'James K.', review: 'Best grocery delivery in Nairobi! Everything arrives fresh and well-packed. I order every week without fail.', rating: 5 },
-              { name: 'Amina W.', review: 'Stocked my entire restaurant kitchen through FreshCart. Quality produce, competitive wholesale prices, and reliable delivery!', rating: 5 },
+              { name: 'Amina W.', review: 'Stocked my entire restaurant kitchen through Snackoh. Quality produce, competitive wholesale prices, and reliable delivery!', rating: 5 },
             ].map(r => (
               <div key={r.name} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex mb-3">

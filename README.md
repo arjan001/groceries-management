@@ -1,4 +1,4 @@
-# FreshCart Grocery Management System
+# Snackoh Grocery Management System
 
 A comprehensive grocery ERP (Enterprise Resource Planning) and e-commerce platform built with Next.js. The system manages inventory, supply chain, sales, deliveries, finance, and multi-branch operations for a grocery business.
 

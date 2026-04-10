@@ -157,8 +157,8 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           phone: mpesaPhone,
           amount: Math.ceil(orderTotal),
-          accountReference: `FRESHCART-${Date.now()}`,
-          description: `FreshCart Online Order - ${email || form.firstName}`,
+          accountReference: `SNACKOH-${Date.now()}`,
+          description: `Snackoh Online Order - ${email || form.firstName}`,
         }),
       });
       const data = await res.json();
@@ -285,7 +285,7 @@ export default function CheckoutPage() {
           )}
           <p className="text-sm text-gray-400 mb-6">A confirmation will be sent to <strong>{email}</strong></p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/shop" className="px-6 py-3 bg-orange-600 text-white font-bold rounded-full hover:bg-orange-700 text-sm">
+            <Link href="/shop" className="px-6 py-3 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 text-sm">
               Continue Shopping
             </Link>
             {completedOrderNumber && (
@@ -304,7 +304,7 @@ export default function CheckoutPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <p className="text-gray-500 mb-4">Your cart is empty.</p>
-          <Link href="/shop" className="px-6 py-3 bg-orange-600 text-white font-bold rounded-full">Shop Now</Link>
+          <Link href="/shop" className="px-6 py-3 bg-green-600 text-white font-bold rounded-full">Shop Now</Link>
         </div>
       </div>
     );
@@ -315,12 +315,12 @@ export default function CheckoutPage() {
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Logo + breadcrumb */}
         <div className="mb-8 text-center">
-          <Link href="/" className="text-2xl font-black text-gray-900">FRESHCART</Link>
+          <Link href="/" className="text-2xl font-black text-gray-900">SNACKOH</Link>
           <div className="flex items-center justify-center gap-2 mt-3 text-xs">
             {['Cart', 'Information', 'Shipping', 'Payment'].map((s, i) => (
               <span key={s} className="flex items-center gap-2">
                 {i > 0 && <ChevronRight size={10} className="text-gray-300" />}
-                <span className={i === 1 ? 'text-orange-600 font-bold' : 'text-gray-400'}>{s}</span>
+                <span className={i === 1 ? 'text-green-600 font-bold' : 'text-gray-400'}>{s}</span>
               </span>
             ))}
           </div>
@@ -335,11 +335,11 @@ export default function CheckoutPage() {
             <div>
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-base font-black text-gray-900">Contact</h2>
-                <Link href="#" className="text-xs text-orange-600 hover:underline">Sign in</Link>
+                <Link href="#" className="text-xs text-green-600 hover:underline">Sign in</Link>
               </div>
               <input type="email" placeholder="Email or mobile phone number" value={email}
                 onChange={e => setEmail(e.target.value)} required
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none" />
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none" />
             </div>
 
             {/* Delivery method */}
@@ -361,11 +361,11 @@ export default function CheckoutPage() {
                   { value: 'pickup', label: 'Pick up', sub: 'Collect from our store', icon: Store, disabled: false },
                 ].map((opt, i) => (
                   <label key={opt.value}
-                    className={`flex items-center gap-4 px-4 py-3.5 transition-colors ${opt.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${fulfillment === opt.value ? 'bg-orange-50' : 'bg-white hover:bg-gray-50'} ${i > 0 ? 'border-t border-gray-100' : ''}`}>
+                    className={`flex items-center gap-4 px-4 py-3.5 transition-colors ${opt.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${fulfillment === opt.value ? 'bg-green-50' : 'bg-white hover:bg-gray-50'} ${i > 0 ? 'border-t border-gray-100' : ''}`}>
                     <input type="radio" name="fulfillment" value={opt.value}
                       checked={fulfillment === opt.value} onChange={() => !opt.disabled && setFulfillment(opt.value as FulfillmentType)}
                       disabled={opt.disabled}
-                      className="accent-orange-600" />
+                      className="accent-green-600" />
                     <div className="flex-1">
                       <p className="text-sm font-semibold text-gray-800">{opt.label}</p>
                       <p className="text-xs text-gray-500">{opt.sub}</p>
@@ -381,7 +381,7 @@ export default function CheckoutPage() {
               <div className="space-y-3">
                 <div>
                   <label className="block text-xs font-semibold text-gray-600 mb-1">Country / Region</label>
-                  <select className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none">
+                  <select className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none">
                     <option>Kenya</option>
                     <option>Uganda</option>
                     <option>Tanzania</option>
@@ -390,38 +390,38 @@ export default function CheckoutPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <input placeholder="First name (optional)" value={form.firstName}
                     onChange={e => setForm({ ...form, firstName: e.target.value })}
-                    className="px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none" />
+                    className="px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none" />
                   <input placeholder="Last name" value={form.lastName}
                     onChange={e => setForm({ ...form, lastName: e.target.value })} required
-                    className="px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none" />
+                    className="px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none" />
                 </div>
                 <div className="relative">
                   <input placeholder="Address" value={form.address}
                     onChange={e => setForm({ ...form, address: e.target.value })} required
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none pr-10" />
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none pr-10" />
                 </div>
                 <input placeholder="Apartment, suite, etc. (optional)" value={form.apartment}
                   onChange={e => setForm({ ...form, apartment: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none" />
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none" />
                 <div className="grid grid-cols-3 gap-3">
                   <input placeholder="City" value={form.city}
                     onChange={e => setForm({ ...form, city: e.target.value })} required
-                    className="px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none" />
+                    className="px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none" />
                   <select value={form.county} onChange={e => setForm({ ...form, county: e.target.value })}
-                    className="px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none">
+                    className="px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none">
                     <option value="">County</option>
                     {['Nairobi','Mombasa','Kisumu','Nakuru','Eldoret','Thika'].map(c => <option key={c}>{c}</option>)}
                   </select>
                   <input placeholder="Postal code" value={form.postalCode}
                     onChange={e => setForm({ ...form, postalCode: e.target.value })}
-                    className="px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none" />
+                    className="px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none" />
                 </div>
                 <input placeholder="Phone number" type="tel" value={form.phone}
                   onChange={e => setForm({ ...form, phone: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none" />
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none" />
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" checked={form.saveInfo} onChange={e => setForm({ ...form, saveInfo: e.target.checked })}
-                    className="accent-orange-600 w-4 h-4" />
+                    className="accent-green-600 w-4 h-4" />
                   <span className="text-sm text-gray-600">Save this information for next time</span>
                 </label>
 
@@ -446,10 +446,10 @@ export default function CheckoutPage() {
             )}
 
             {fulfillment === 'pickup' && (
-              <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 text-sm text-orange-800">
+              <div className="bg-green-50 border border-green-100 rounded-xl p-4 text-sm text-green-800">
                 <p className="font-bold mb-1">Pickup Location</p>
-                <p>FreshCart Groceries, Nairobi CBD</p>
-                <p className="text-xs text-orange-600 mt-1">Mon-Sat: 6:00 AM - 8:00 PM | Sun: 7:00 AM - 6:00 PM</p>
+                <p>Snackoh Groceries, Nairobi CBD</p>
+                <p className="text-xs text-green-600 mt-1">Mon-Sat: 6:00 AM - 8:00 PM | Sun: 7:00 AM - 6:00 PM</p>
               </div>
             )}
 
@@ -468,10 +468,10 @@ export default function CheckoutPage() {
                   { value: 'pay_on_delivery' as PaymentMethod, label: fulfillment === 'ship' ? 'Pay on Delivery' : 'Pay at Pickup', sub: fulfillment === 'ship' ? 'Pay when your order arrives' : 'Pay when you collect your order', icon: ShieldCheck },
                 ].map((opt, i) => (
                   <label key={opt.value}
-                    className={`flex items-center gap-4 px-4 py-3.5 cursor-pointer transition-colors ${paymentMethod === opt.value ? 'bg-orange-50' : 'bg-white hover:bg-gray-50'} ${i > 0 ? 'border-t border-gray-100' : ''}`}>
+                    className={`flex items-center gap-4 px-4 py-3.5 cursor-pointer transition-colors ${paymentMethod === opt.value ? 'bg-green-50' : 'bg-white hover:bg-gray-50'} ${i > 0 ? 'border-t border-gray-100' : ''}`}>
                     <input type="radio" name="paymentMethod" value={opt.value}
                       checked={paymentMethod === opt.value} onChange={() => setPaymentMethod(opt.value)}
-                      className="accent-orange-600" />
+                      className="accent-green-600" />
                     <div className="flex-1">
                       <p className="text-sm font-semibold text-gray-800">{opt.label}</p>
                       <p className="text-xs text-gray-500">{opt.sub}</p>
@@ -587,14 +587,14 @@ export default function CheckoutPage() {
 
             {/* Place order button */}
             <button type="submit"
-              className="w-full py-4 font-black text-base rounded-xl transition-colors flex items-center justify-center gap-2 bg-orange-600 text-white hover:bg-orange-700">
+              className="w-full py-4 font-black text-base rounded-xl transition-colors flex items-center justify-center gap-2 bg-green-600 text-white hover:bg-green-700">
               <Lock size={16} /> Place Order — KES {orderTotal.toLocaleString()}
             </button>
 
             {/* Footer links */}
             <div className="flex flex-wrap justify-center gap-4 text-xs text-gray-400 border-t border-gray-100 pt-5">
               {['Refund policy', 'Shipping', 'Privacy policy', 'Terms of service', 'Cancellations'].map(l => (
-                <Link key={l} href="#" className="hover:text-orange-600 hover:underline">{l}</Link>
+                <Link key={l} href="#" className="hover:text-green-600 hover:underline">{l}</Link>
               ))}
             </div>
           </form>

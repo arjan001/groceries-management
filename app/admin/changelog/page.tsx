@@ -246,7 +246,7 @@ export default function ChangelogPage() {
       <!DOCTYPE html>
       <html>
       <head>
-        <title>FreshCart Groceries — System Changelog Report</title>
+        <title>Snackoh Grocery System — System Changelog Report</title>
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a1a; padding: 40px; line-height: 1.6; }
@@ -297,7 +297,7 @@ export default function ChangelogPage() {
       </head>
       <body>
         <div class="report-header">
-          <h1>FRESHCART GROCERIES</h1>
+          <h1>SNACKOH GROCERY SYSTEM</h1>
           <div class="subtitle">System Changelog & Implementation Report</div>
           <div class="meta">Generated on ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} | Confidential — Internal Use Only</div>
         </div>
@@ -353,9 +353,9 @@ export default function ChangelogPage() {
         `).join('')}
 
         <div class="footer">
-          <p><strong>FreshCart Groceries Management System</strong> — Confidential Implementation Report</p>
+          <p><strong>Snackoh Grocery System</strong> — Confidential Implementation Report</p>
           <p>This report was auto-generated from the system changelog. For questions, contact your system administrator.</p>
-          <p>&copy; ${new Date().getFullYear()} FreshCart Groceries. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Snackoh Grocery System. All rights reserved.</p>
         </div>
       </body>
       </html>
@@ -691,7 +691,7 @@ export default function ChangelogPage() {
 
       {/* Footer */}
       <div className="mt-10 text-center text-xs text-muted-foreground/60 space-y-1">
-        <p>FreshCart Groceries Management System — Changelog & Implementation Report</p>
+        <p>Snackoh Grocery System — Changelog & Implementation Report</p>
         <p>Auto-updated from database. Last synced: {lastRefresh.toLocaleTimeString()} | Refreshes automatically every 30 seconds.</p>
       </div>
     </div>

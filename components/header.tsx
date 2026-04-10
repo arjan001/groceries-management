@@ -124,14 +124,14 @@ export function Header() {
 
   const [user, setUser] = useState({
     name: 'Admin User',
-    email: 'admin@freshcart.com',
+    email: 'admin@snackoh.com',
     role: 'Administrator',
     initials: 'AU',
   });
 
   const [notifications, setNotifications] = useState<OnlineOrderNotif[]>([]);
   const [adminLogoUrl, setAdminLogoUrl] = useState('');
-  const [adminBusinessName, setAdminBusinessName] = useState('FRESHCART GROCERIES');
+  const [adminBusinessName, setAdminBusinessName] = useState('SNACKOH GROCERY SYSTEM');
 
   // Load branding for admin header
   useEffect(() => {
@@ -390,7 +390,7 @@ export function Header() {
         {canInstall && !isInstalled && (
           <button
             onClick={triggerInstall}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-orange-50 text-orange-700 border border-orange-200 rounded-lg hover:bg-orange-100 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-green-50 text-green-700 border border-green-200 rounded-lg hover:bg-green-100 transition-colors"
             title="Install Snackoh App"
           >
             <Download size={14} strokeWidth={2.5} />

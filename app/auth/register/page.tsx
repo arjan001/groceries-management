@@ -119,7 +119,7 @@ export default function RegisterPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <Loader2 size={32} className="animate-spin text-orange-600" />
+        <Loader2 size={32} className="animate-spin text-green-600" />
       </div>
     );
   }
@@ -128,14 +128,14 @@ export default function RegisterPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
-          <Shield size={48} className="text-orange-600 mx-auto mb-4" />
+          <Shield size={48} className="text-green-600 mx-auto mb-4" />
           <h1 className="text-2xl font-black text-gray-900 mb-2">Registration Closed</h1>
           <p className="text-gray-500 text-sm mb-6">
             A super admin account has already been created. Registration is no longer available.
             Please log in with your existing credentials.
           </p>
           <Link href="/auth/login"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 text-white font-bold text-sm rounded-full hover:bg-orange-700 transition-colors">
+            className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-bold text-sm rounded-full hover:bg-green-700 transition-colors">
             Go to Login
           </Link>
         </div>
@@ -154,7 +154,7 @@ export default function RegisterPage() {
           <p className="text-gray-500 text-sm mb-4">
             Your account has been created with full permissions. Redirecting to login...
           </p>
-          <Loader2 size={20} className="animate-spin text-orange-600 mx-auto" />
+          <Loader2 size={20} className="animate-spin text-green-600 mx-auto" />
         </div>
       </div>
     );
@@ -165,8 +165,8 @@ export default function RegisterPage() {
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-8">
-          <Link href="/" className="text-3xl font-black text-gray-900 hover:text-orange-600 transition-colors">
-            FreshCart
+          <Link href="/" className="text-3xl font-black text-gray-900 hover:text-green-600 transition-colors">
+            Snackoh
           </Link>
           <h1 className="text-xl font-bold text-gray-800 mt-4">Create Super Admin Account</h1>
           <p className="text-sm text-gray-500 mt-1">
@@ -198,7 +198,7 @@ export default function RegisterPage() {
                 onChange={e => setForm({ ...form, fullName: e.target.value })}
                 placeholder="Enter your full name"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none"
               />
             </div>
 
@@ -208,9 +208,9 @@ export default function RegisterPage() {
                 type="email"
                 value={form.email}
                 onChange={e => setForm({ ...form, email: e.target.value })}
-                placeholder="admin@freshcart.co.ke"
+                placeholder="admin@snackoh.co.ke"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none"
               />
             </div>
 
@@ -224,7 +224,7 @@ export default function RegisterPage() {
                   placeholder="Minimum 6 characters"
                   required
                   minLength={6}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none pr-10"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none pr-10"
                 />
                 <button type="button" onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
@@ -242,14 +242,14 @@ export default function RegisterPage() {
                 placeholder="Re-enter your password"
                 required
                 minLength={6}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-400 outline-none"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-green-400 outline-none"
               />
             </div>
 
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3.5 bg-orange-600 text-white font-bold text-sm rounded-xl hover:bg-orange-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-green-600 text-white font-bold text-sm rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {submitting ? (
                 <>
@@ -266,7 +266,7 @@ export default function RegisterPage() {
 
         <p className="text-center text-xs text-gray-400 mt-6">
           Already have an account?{' '}
-          <Link href="/auth/login" className="text-orange-600 hover:underline font-medium">Log in</Link>
+          <Link href="/auth/login" className="text-green-600 hover:underline font-medium">Log in</Link>
         </p>
       </div>
     </div>

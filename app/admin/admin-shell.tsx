@@ -26,46 +26,46 @@ function MaintenanceScreen() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-950 to-slate-900 flex items-center justify-center px-4 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-indigo-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-20 left-20 w-72 h-72 bg-green-500 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-emerald-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-teal-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="max-w-xl w-full text-center relative z-10">
         <div className="bg-white/5 backdrop-blur-xl rounded-3xl shadow-2xl p-10 border border-white/10">
           {/* Animated icon */}
           <div className="relative w-24 h-24 mx-auto mb-8">
-            <div className="absolute inset-0 bg-blue-500/20 rounded-full animate-ping" />
-            <div className="relative w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/30">
+            <div className="absolute inset-0 bg-green-500/20 rounded-full animate-ping" />
+            <div className="relative w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30">
               <Wrench size={40} className="text-white animate-spin" style={{ animationDuration: '4s' }} />
             </div>
           </div>
 
           <h1 className="text-3xl font-bold text-white mb-3">System Maintenance</h1>
-          <p className="text-blue-200 text-lg mb-8">Automatic maintenance & backup in progress{dots}</p>
+          <p className="text-green-200 text-lg mb-8">Automatic maintenance & backup in progress{dots}</p>
 
           {/* Progress indicators */}
           <div className="space-y-4 mb-8">
             <div className="flex items-center gap-3 text-left bg-white/5 rounded-xl p-4 border border-white/10">
-              <Database size={20} className="text-blue-400 flex-shrink-0" />
+              <Database size={20} className="text-green-400 flex-shrink-0" />
               <div className="flex-1">
                 <p className="text-white text-sm font-medium">Database Optimization</p>
-                <p className="text-blue-300/70 text-xs">Running scheduled maintenance routines</p>
+                <p className="text-green-300/70 text-xs">Running scheduled maintenance routines</p>
               </div>
-              <RefreshCw size={16} className="text-blue-400 animate-spin" />
+              <RefreshCw size={16} className="text-green-400 animate-spin" />
             </div>
             <div className="flex items-center gap-3 text-left bg-white/5 rounded-xl p-4 border border-white/10">
-              <svg className="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
               </svg>
               <div className="flex-1">
                 <p className="text-white text-sm font-medium">Data Backup</p>
-                <p className="text-blue-300/70 text-xs">Securing all records and system data</p>
+                <p className="text-green-300/70 text-xs">Securing all records and system data</p>
               </div>
-              <RefreshCw size={16} className="text-indigo-400 animate-spin" style={{ animationDuration: '2s' }} />
+              <RefreshCw size={16} className="text-emerald-400 animate-spin" style={{ animationDuration: '2s' }} />
             </div>
           </div>
 
@@ -85,7 +85,7 @@ function MaintenanceScreen() {
             </span>
           </button>
         </div>
-        <p className="text-xs text-blue-300/40 mt-6">FRESHCART Groceries Management System</p>
+        <p className="text-xs text-green-300/40 mt-6">SNACKOH Grocery System</p>
       </div>
     </div>
   );
@@ -293,7 +293,7 @@ export default function AdminShell({
     return (
       <div className="flex h-screen items-center justify-center bg-background">
         <div className="text-center">
-          <Loader2 size={32} className="animate-spin text-orange-600 mx-auto mb-3" />
+          <Loader2 size={32} className="animate-spin text-green-600 mx-auto mb-3" />
           <p className="text-sm text-muted-foreground">Checking authentication...</p>
         </div>
       </div>
