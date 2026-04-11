@@ -290,45 +290,61 @@ export default function HomePage() {
                 </div>
               </div>
               {/* Dashboard content mockup */}
-              <div className="p-6 md:p-8">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="p-4 sm:p-6 md:p-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
                   {[
-                    { label: 'Total Revenue', value: 'KES 2.4M', change: '+12.5%', icon: TrendingUp },
-                    { label: 'Active Products', value: '1,847', change: '+23', icon: Package },
-                    { label: 'Total Orders', value: '12,456', change: '+8.3%', icon: Receipt },
-                    { label: 'Active Outlets', value: '5', change: '+1', icon: Store },
+                    { label: 'Total Sales', value: 'KES 2.4M', change: '+12.5%', icon: TrendingUp, changeColor: 'text-green-400' },
+                    { label: 'Net Profit', value: 'KES 840K', change: '+8.1%', icon: PieChart, changeColor: 'text-green-400' },
+                    { label: 'Total Loss/Waste', value: 'KES 45K', change: '-3.2%', icon: Package, changeColor: 'text-red-400' },
+                    { label: 'Active Products', value: '1,847', change: '+23', icon: Store, changeColor: 'text-green-400' },
                   ].map((stat) => (
-                    <div key={stat.label} className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-4">
+                    <div key={stat.label} className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-3 md:p-4">
                       <div className="flex items-center justify-between mb-2">
                         <stat.icon size={16} className="text-gray-500" />
-                        <span className="text-green-400 text-xs font-semibold">{stat.change}</span>
+                        <span className={`${stat.changeColor} text-xs font-semibold`}>{stat.change}</span>
                       </div>
-                      <p className="text-white font-black text-lg md:text-xl">{stat.value}</p>
+                      <p className="text-white font-black text-base md:text-xl">{stat.value}</p>
                       <p className="text-gray-500 text-xs mt-0.5">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+                {/* Secondary stats row */}
+                <div className="grid grid-cols-3 gap-3 md:gap-4 mb-6">
+                  {[
+                    { label: 'Today\'s Revenue', value: 'KES 127K', icon: Receipt },
+                    { label: 'Pending Orders', value: '24', icon: ShoppingCart },
+                    { label: 'Active Outlets', value: '5', icon: Store },
+                  ].map((stat) => (
+                    <div key={stat.label} className="bg-gray-800/30 border border-gray-700/30 rounded-lg p-3">
+                      <div className="flex items-center gap-2 mb-1">
+                        <stat.icon size={12} className="text-green-400" />
+                        <p className="text-gray-500 text-xs">{stat.label}</p>
+                      </div>
+                      <p className="text-white font-bold text-sm md:text-base">{stat.value}</p>
                     </div>
                   ))}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-4">
                     <div className="flex items-center justify-between mb-4">
-                      <h4 className="text-white font-bold text-sm">Recent Sales</h4>
+                      <h4 className="text-white font-bold text-sm">Recent Grocery Sales</h4>
                       <span className="text-green-400 text-xs font-medium flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> Live
                       </span>
                     </div>
                     <div className="space-y-3">
                       {[
-                        { name: 'Customer #1847', amount: 'KES 5,200', time: '2m ago', method: 'M-Pesa' },
-                        { name: 'Customer #1846', amount: 'KES 1,350', time: '8m ago', method: 'Cash' },
-                        { name: 'Customer #1845', amount: 'KES 12,800', time: '15m ago', method: 'Card' },
+                        { name: 'Fresh Vegetables Bundle', amount: 'KES 3,200', time: '2m ago', method: 'M-Pesa' },
+                        { name: 'Rice 10kg + Cooking Oil', amount: 'KES 4,350', time: '8m ago', method: 'Cash' },
+                        { name: 'Dairy & Bread Order', amount: 'KES 1,890', time: '15m ago', method: 'Card' },
                       ].map((sale, idx) => (
                         <div key={idx} className="flex items-center justify-between py-2 border-b border-gray-700/30 last:border-0">
                           <div>
-                            <p className="text-gray-300 text-sm font-medium">{sale.name}</p>
+                            <p className="text-gray-300 text-xs sm:text-sm font-medium">{sale.name}</p>
                             <p className="text-gray-500 text-xs">{sale.method}</p>
                           </div>
                           <div className="text-right">
-                            <p className="text-green-400 font-bold text-sm">{sale.amount}</p>
+                            <p className="text-green-400 font-bold text-xs sm:text-sm">{sale.amount}</p>
                             <p className="text-gray-500 text-xs">{sale.time}</p>
                           </div>
                         </div>
@@ -338,17 +354,17 @@ export default function HomePage() {
                   <div className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-4">
                     <div className="flex items-center justify-between mb-4">
                       <h4 className="text-white font-bold text-sm">Stock Alerts</h4>
-                      <span className="text-gray-400 text-xs">5 items low</span>
+                      <span className="text-amber-400 text-xs font-semibold">5 items low</span>
                     </div>
                     <div className="space-y-3">
                       {[
                         { item: 'Fresh Milk (500ml)', stock: 12, threshold: 20 },
-                        { item: 'White Bread', stock: 5, threshold: 15 },
+                        { item: 'Maize Flour 2kg', stock: 5, threshold: 15 },
                         { item: 'Sugar (1kg)', stock: 8, threshold: 25 },
                       ].map((item, idx) => (
                         <div key={idx} className="py-2 border-b border-gray-700/30 last:border-0">
                           <div className="flex items-center justify-between mb-1">
-                            <p className="text-gray-300 text-sm font-medium">{item.item}</p>
+                            <p className="text-gray-300 text-xs sm:text-sm font-medium">{item.item}</p>
                             <p className="text-amber-400 text-xs font-semibold">{item.stock} left</p>
                           </div>
                           <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
@@ -696,7 +712,7 @@ export default function HomePage() {
               className="px-10 py-4 bg-white text-green-700 font-bold text-base rounded-full hover:bg-gray-100 transition-all inline-flex items-center gap-2 shadow-lg">
               Start Free Trial <ArrowRight size={18} />
             </Link>
-            <Link href="/contact"
+            <Link href="/book-demo"
               className="px-10 py-4 bg-green-700/50 text-white font-bold text-base rounded-full hover:bg-green-700 transition-all inline-flex items-center gap-2 border border-green-400/30">
               Book a Demo <Zap size={18} />
             </Link>
