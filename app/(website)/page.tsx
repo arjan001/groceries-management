@@ -1,641 +1,709 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState, useEffect, useCallback } from 'react';
-import { useCart } from '@/lib/cart-context';
-import { CIRCLE_CATEGORIES, fetchMainBakeryProducts } from '@/lib/products';
-import type { Product, Offer } from '@/lib/products';
-import { ShoppingBag, Star, ChevronRight, ChevronLeft, Truck, Clock, Shield, Users, Store, Megaphone, Tag, ArrowRight } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { useState, useEffect } from 'react';
+import {
+  BarChart3, ShoppingCart, Users, Package, TrendingUp, Shield,
+  ChevronRight, ArrowRight, Check, Star, Play, Zap, Clock,
+  Store, Truck, Receipt, PieChart, Bell, Smartphone,
+  ChevronDown, Layers, Settings, CreditCard, Box,
+  MonitorSmartphone, HeadphonesIcon, Globe,
+} from 'lucide-react';
 
-// ─── Product Card (mini, for home page) ───────────────────────────────────
-function HomeProductCard({ product }: { product: Product }) {
-  const { addItem } = useCart();
-  const router = useRouter();
-
+// ─── Animated Counter ────────────────────────────────────────────────────────
+function AnimatedStat({ value, suffix = '', prefix = '' }: { value: string; suffix?: string; prefix?: string }) {
   return (
-    <div className="group cursor-pointer" onClick={() => router.push(`/shop/${product.id}`)}>
-      <div className="relative overflow-hidden rounded-2xl bg-gray-50 aspect-square mb-3">
-        <img src={product.image} alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        {product.isSale && product.originalPrice && (
-          <div className="absolute top-3 right-0">
-            <div className="bg-red-500 text-white text-[10px] font-black px-3 py-1 uppercase tracking-wider"
-              style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 8% 100%)' }}>
-              SALE
-            </div>
-          </div>
-        )}
-        {product.isNew && (
-          <span className="absolute top-3 left-3 bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>
-        )}
-        {!product.inStock && (
-          <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
-            <span className="bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full">SOLD OUT</span>
-          </div>
-        )}
-        {product.inStock && (
-          <button
-            onClick={e => { e.stopPropagation(); addItem({ id: product.id, name: product.name, price: product.price, image: product.image, category: product.category }); }}
-            className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-green-600 flex items-center gap-1.5"
-          >
-            <ShoppingBag size={12} /> Add to Cart
-          </button>
-        )}
-      </div>
-      <p className="text-sm font-semibold text-gray-800 truncate">{product.name}</p>
-      <div className="flex items-center gap-2 mt-0.5">
-        <span className="text-sm font-black text-green-600">KES {product.price.toLocaleString()}</span>
-        {product.originalPrice && (
-          <span className="text-xs text-gray-400 line-through">KES {product.originalPrice.toLocaleString()}</span>
-        )}
-      </div>
-      {/* Stock indicator */}
-      <div className="mt-1">
-        {product.inStock ? (
-          product.stock <= 5 ? (
-            <span className="text-[10px] text-amber-600 font-semibold">Only {product.stock} left!</span>
-          ) : (
-            <span className="text-[10px] text-green-600 font-semibold">In stock</span>
-          )
-        ) : (
-          <span className="text-[10px] text-red-500 font-semibold">Out of stock</span>
-        )}
-      </div>
-    </div>
+    <span className="tabular-nums">{prefix}{value}{suffix}</span>
   );
 }
 
-// ─── Promotional Ads Carousel ─────────────────────────────────────────────
-function AdsCarousel() {
-  const [offers, setOffers] = useState<Offer[]>([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
+export default function HomePage() {
+  const [activePricing, setActivePricing] = useState<'monthly' | 'annual'>('monthly');
+  const [activeFeature, setActiveFeature] = useState(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  useEffect(() => {
-    async function loadOffers() {
-      try {
-        const { data, error } = await supabase
-          .from('offers')
-          .select('*')
-          .eq('is_active', true)
-          .order('sort_order', { ascending: true });
-        if (!error && data && data.length > 0) {
-          setOffers(data as Offer[]);
-          return;
-        }
-      } catch { /* table may not exist */ }
-      // Fallback to localStorage
-      try {
-        const local = localStorage.getItem('snackoh_offers');
-        if (local) {
-          const parsed = JSON.parse(local) as Offer[];
-          setOffers(parsed.filter(o => o.is_active));
-        }
-      } catch { /* ignore */ }
-    }
-    loadOffers();
-  }, []);
-
-  // Auto-slide every 5 seconds
-  useEffect(() => {
-    if (offers.length <= 1) return;
-    const timer = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % offers.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [offers.length]);
-
-  // Default offers if none configured
-  const defaultOffers: { title: string; description: string; badge: string; link: string; image: string; discount: string }[] = [
+  const features = [
     {
-      title: 'Weekend Fresh Deals',
-      description: 'Up to 30% off on fresh produce, dairy, and pantry essentials. Farm-fresh quality guaranteed.',
-      badge: 'LIMITED OFFER',
-      link: '/shop',
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80&fit=crop',
-      discount: '30% OFF',
+      icon: BarChart3,
+      title: 'Real-Time Dashboard',
+      description: 'Monitor sales, inventory, and expenses in real-time. Get instant insights into your grocery business performance with live analytics.',
     },
     {
-      title: 'New Arrivals This Week',
-      description: 'Fresh seasonal produce and imported specialties. Discover the latest additions to our store.',
-      badge: 'JUST DROPPED',
-      link: '/shop',
-      image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=800&q=80&fit=crop',
-      discount: '',
+      icon: ShoppingCart,
+      title: 'POS System',
+      description: 'Fast, reliable point-of-sale with M-Pesa, cash, and card payments. Process transactions seamlessly across all your outlets.',
+    },
+    {
+      icon: Package,
+      title: 'Inventory Management',
+      description: 'Track stock levels, set reorder alerts, manage suppliers, and automate purchase orders. Never run out of best-selling items.',
+    },
+    {
+      icon: Users,
+      title: 'Employee Management',
+      description: 'Manage staff shifts, roles, and permissions. Track performance and streamline payroll across multiple locations.',
+    },
+    {
+      icon: TrendingUp,
+      title: 'Sales & Reports',
+      description: 'Generate detailed sales reports, profit analysis, and trend forecasts. Make data-driven decisions to grow your business.',
+    },
+    {
+      icon: Store,
+      title: 'Multi-Outlet Support',
+      description: 'Manage multiple grocery stores from one dashboard. Centralized inventory, unified reporting, and outlet-level controls.',
     },
   ];
 
-  if (offers.length === 0) {
-    return (
-      <section className="py-6 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {defaultOffers.map((offer, idx) => (
-              <Link key={idx} href={offer.link}
-                className="group relative rounded-2xl overflow-hidden h-48 md:h-56 block">
-                <img src={offer.image} alt={offer.title}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-                <div className="relative z-10 p-6 h-full flex flex-col justify-center">
-                  <p className="text-green-300 text-[10px] font-bold tracking-widest uppercase mb-1">{offer.badge}</p>
-                  <h3 className="text-white text-xl md:text-2xl font-black leading-tight mb-1.5">{offer.title}</h3>
-                  <p className="text-white/70 text-xs max-w-xs mb-3">{offer.description}</p>
-                  <span className="inline-flex items-center gap-1.5 text-white text-xs font-bold group-hover:text-green-300 transition-colors">
-                    {offer.discount ? `${offer.discount} — Shop Now` : 'Explore New In'} <ArrowRight size={12} />
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const howItWorks = [
+    {
+      step: '01',
+      title: 'Sign Up & Configure',
+      description: 'Create your account in minutes. Set up your store profile, add products, and configure your business settings.',
+      icon: Settings,
+    },
+    {
+      step: '02',
+      title: 'Add Your Inventory',
+      description: 'Import your product catalog or add items manually. Set prices, categories, stock levels, and supplier details.',
+      icon: Box,
+    },
+    {
+      step: '03',
+      title: 'Start Selling',
+      description: 'Use our POS system to process sales, accept payments, and manage your daily operations from anywhere.',
+      icon: CreditCard,
+    },
+    {
+      step: '04',
+      title: 'Grow Your Business',
+      description: 'Track performance with real-time analytics. Optimize inventory, reduce waste, and increase profitability.',
+      icon: TrendingUp,
+    },
+  ];
 
-  return (
-    <section className="py-6 px-6">
-      <div className="max-w-7xl mx-auto">
-        {offers.length <= 2 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {offers.map((offer) => (
-              <Link key={offer.id} href={offer.link_url || '/shop'}
-                className="group relative rounded-2xl overflow-hidden h-48 md:h-56 block">
-                {offer.image_url ? (
-                  <img src={offer.image_url} alt={offer.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-amber-800" />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-                <div className="relative z-10 p-6 h-full flex flex-col justify-center">
-                  <p className="text-green-300 text-[10px] font-bold tracking-widest uppercase mb-1">{offer.badge_text}</p>
-                  <h3 className="text-white text-xl md:text-2xl font-black leading-tight mb-1.5">{offer.title}</h3>
-                  <p className="text-white/70 text-xs max-w-xs mb-3">{offer.description}</p>
-                  <span className="inline-flex items-center gap-1.5 text-white text-xs font-bold group-hover:text-green-300 transition-colors">
-                    {offer.discount_text ? `${offer.discount_text} — Shop Now` : 'Shop The Sale'} <ArrowRight size={12} />
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          /* Full carousel for 3+ offers */
-          <div className="relative">
-            <div className="overflow-hidden rounded-2xl">
-              <div className="flex transition-transform duration-500"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-                {offers.map((offer) => (
-                  <Link key={offer.id} href={offer.link_url || '/shop'}
-                    className="min-w-full relative h-48 md:h-56 block group">
-                    {offer.image_url ? (
-                      <img src={offer.image_url} alt={offer.title}
-                        className="absolute inset-0 w-full h-full object-cover" />
-                    ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-amber-800" />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-                    <div className="relative z-10 p-8 h-full flex flex-col justify-center">
-                      <p className="text-green-300 text-[10px] font-bold tracking-widest uppercase mb-1">{offer.badge_text}</p>
-                      <h3 className="text-white text-2xl md:text-3xl font-black leading-tight mb-2">{offer.title}</h3>
-                      <p className="text-white/70 text-sm max-w-md mb-3">{offer.description}</p>
-                      <span className="inline-flex items-center gap-1.5 text-white text-sm font-bold group-hover:text-green-300 transition-colors">
-                        {offer.discount_text ? `${offer.discount_text} — Shop Now` : 'Shop Now'} <ArrowRight size={14} />
-                      </span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-            {/* Carousel controls */}
-            {offers.length > 1 && (
-              <>
-                <button onClick={() => setCurrentSlide(prev => prev === 0 ? offers.length - 1 : prev - 1)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-colors">
-                  <ChevronLeft size={16} />
-                </button>
-                <button onClick={() => setCurrentSlide(prev => (prev + 1) % offers.length)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-colors">
-                  <ChevronRight size={16} />
-                </button>
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-                  {offers.map((_, idx) => (
-                    <button key={idx} onClick={() => setCurrentSlide(idx)}
-                      className={`w-2 h-2 rounded-full transition-colors ${idx === currentSlide ? 'bg-white' : 'bg-white/40'}`} />
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        )}
-      </div>
-    </section>
-  );
-}
+  const testimonials = [
+    {
+      name: 'Grace Muthoni',
+      role: 'Owner, FreshMart Groceries',
+      review: 'SNACKOH transformed how we run our grocery store. The inventory tracking alone has saved us thousands in waste reduction. The real-time dashboard gives me full visibility even when I\'m away.',
+      rating: 5,
+      location: 'Nairobi',
+    },
+    {
+      name: 'James Kiprop',
+      role: 'Manager, GreenBasket Supermarket',
+      review: 'Managing 3 outlets used to be a nightmare. With SNACKOH, I can track sales, inventory, and employees across all locations from one dashboard. The M-Pesa integration is seamless.',
+      rating: 5,
+      location: 'Eldoret',
+    },
+    {
+      name: 'Amina Hassan',
+      role: 'Director, QuickShop Chain',
+      review: 'The POS system is incredibly fast and reliable. Our checkout times have decreased by 40%. The stock reorder alerts ensure we never run out of popular items.',
+      rating: 5,
+      location: 'Mombasa',
+    },
+  ];
 
-// ─── Offers & Wholesale Section ──────────────────────────────────────────────
-function OffersSection() {
-  return (
-    <section className="py-10 bg-green-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-8">
-          <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-1">Special Deals</p>
-          <h2 className="text-3xl font-black text-gray-900">Offers & Promotions</h2>
-          <p className="text-gray-500 mt-2 text-sm max-w-lg mx-auto">Check out our current deals, wholesale offers, and upcoming promotions. Save big on your weekly groceries!</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {/* Current Offers */}
-          <div className="bg-white rounded-2xl p-6 border border-green-100 shadow-sm hover:shadow-md transition-shadow">
-            <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-              <Tag size={20} className="text-green-600" />
-            </div>
-            <h3 className="font-black text-gray-900 text-lg mb-2">Current Offers</h3>
-            <ul className="space-y-2 text-sm text-gray-600 mb-4">
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-green-400 rounded-full shrink-0" /> 20% off all fresh produce this weekend</li>
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-green-400 rounded-full shrink-0" /> Buy 2 dairy items, get 1 free</li>
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-green-400 rounded-full shrink-0" /> Free delivery over KES 2,000</li>
-            </ul>
-            <Link href="/shop" className="text-xs font-bold text-green-600 hover:underline flex items-center gap-1">
-              Shop Now <ArrowRight size={12} />
-            </Link>
-          </div>
+  const pricingPlans = [
+    {
+      name: 'Starter',
+      description: 'Perfect for small grocery shops',
+      monthly: 2500,
+      annual: 2000,
+      features: [
+        '1 outlet',
+        'Up to 500 products',
+        'Basic POS system',
+        'Sales reports',
+        'M-Pesa integration',
+        'Email support',
+      ],
+      cta: 'Start Free Trial',
+      popular: false,
+    },
+    {
+      name: 'Growth',
+      description: 'For growing grocery businesses',
+      monthly: 5000,
+      annual: 4000,
+      features: [
+        'Up to 3 outlets',
+        'Unlimited products',
+        'Advanced POS system',
+        'Full inventory management',
+        'Employee management',
+        'Advanced analytics',
+        'Stock reorder alerts',
+        'Priority support',
+      ],
+      cta: 'Start Free Trial',
+      popular: true,
+    },
+    {
+      name: 'Professional',
+      description: 'For established grocery chains',
+      monthly: 10000,
+      annual: 8000,
+      features: [
+        'Up to 10 outlets',
+        'Everything in Growth',
+        'Multi-outlet dashboard',
+        'Purchase order management',
+        'Supplier management',
+        'Custom reports & exports',
+        'API access',
+        'Dedicated account manager',
+      ],
+      cta: 'Start Free Trial',
+      popular: false,
+    },
+    {
+      name: 'Enterprise',
+      description: 'Custom solutions for large chains',
+      monthly: null,
+      annual: null,
+      features: [
+        'Unlimited outlets',
+        'Everything in Professional',
+        'White-label branding',
+        'Custom integrations',
+        'On-premise deployment option',
+        'SLA guarantee',
+        'Training & onboarding',
+        'Custom development',
+      ],
+      cta: 'Contact Sales',
+      popular: false,
+    },
+  ];
 
-          {/* Wholesale Offers */}
-          <div className="bg-white rounded-2xl p-6 border border-amber-100 shadow-sm hover:shadow-md transition-shadow">
-            <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
-              <Users size={20} className="text-amber-600" />
-            </div>
-            <h3 className="font-black text-gray-900 text-lg mb-2">Wholesale Offers</h3>
-            <ul className="space-y-2 text-sm text-gray-600 mb-4">
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-amber-400 rounded-full shrink-0" /> Bulk pricing from 50+ units</li>
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-amber-400 rounded-full shrink-0" /> Dedicated account manager</li>
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-amber-400 rounded-full shrink-0" /> Weekly delivery scheduling</li>
-            </ul>
-            <Link href="/contact" className="text-xs font-bold text-amber-600 hover:underline flex items-center gap-1">
-              Contact Sales <ArrowRight size={12} />
-            </Link>
-          </div>
+  const stats = [
+    { value: '500', suffix: '+', label: 'Grocery Stores' },
+    { value: '50K', suffix: '+', label: 'Products Tracked' },
+    { value: '99.9', suffix: '%', label: 'Uptime' },
+    { value: '2M', suffix: '+', prefix: 'KES ', label: 'Transactions Processed' },
+  ];
 
-          {/* Upcoming */}
-          <div className="bg-white rounded-2xl p-6 border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
-            <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-              <Megaphone size={20} className="text-blue-600" />
-            </div>
-            <h3 className="font-black text-gray-900 text-lg mb-2">Coming Soon</h3>
-            <ul className="space-y-2 text-sm text-gray-600 mb-4">
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0" /> Seasonal harvest specials</li>
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0" /> Organic produce range launch</li>
-              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0" /> Loyalty rewards program</li>
-            </ul>
-            <span className="text-xs font-bold text-blue-600 flex items-center gap-1">
-              Stay tuned for updates
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-export default function HomePage() {
-  const [dynamicProducts, setDynamicProducts] = useState<Product[]>([]);
-  const [freshProducts, setFreshProducts] = useState<Product[]>([]);
-
-  // Fetch products from grocery inventory (food_info table) — only real products, no dummy fallback
-  useEffect(() => {
-    async function loadProducts() {
-      try {
-        const bakeryProducts = await fetchMainBakeryProducts();
-        if (bakeryProducts && bakeryProducts.length > 0) {
-          setDynamicProducts(bakeryProducts);
-          setFreshProducts(bakeryProducts.filter(p => p.inStock).slice(0, 8));
-          return;
-        }
-      } catch { /* no products available */ }
-      // No fallback to hardcoded dummy products — show empty until real products are added
-      setDynamicProducts([]);
-      setFreshProducts([]);
-    }
-    loadProducts();
-  }, []);
-
-  const bestSellers = dynamicProducts.filter(p => p.isBestSeller || p.stock > 10).slice(0, 8);
+  const faqs = [
+    {
+      question: 'How long does it take to set up SNACKOH?',
+      answer: 'You can set up your store and start selling within 30 minutes. Our onboarding wizard guides you through adding products, setting up payments, and configuring your store. We also offer free onboarding assistance for Growth and above plans.',
+    },
+    {
+      question: 'Does SNACKOH work offline?',
+      answer: 'Yes! Our POS system includes an offline mode that stores transactions locally and syncs automatically when connectivity is restored. You\'ll never miss a sale due to internet issues.',
+    },
+    {
+      question: 'Can I integrate M-Pesa and other payment methods?',
+      answer: 'Absolutely. SNACKOH supports M-Pesa (Lipa Na M-Pesa), cash, card payments, and credit accounts. Payment reconciliation is automatic across all methods.',
+    },
+    {
+      question: 'Is my data secure?',
+      answer: 'Your data is encrypted in transit and at rest. We use enterprise-grade security with regular backups, role-based access controls, and are ODPC (Office of the Data Protection Commissioner) compliant.',
+    },
+    {
+      question: 'Can I manage multiple outlets from one account?',
+      answer: 'Yes! Growth plans and above support multi-outlet management. You get centralized inventory, unified reporting, and the ability to manage each outlet independently or together.',
+    },
+    {
+      question: 'What happens when my trial expires?',
+      answer: 'Your 14-day free trial includes full access to all features. After the trial, you can choose a plan that fits your needs. Your data is preserved, and you can upgrade or downgrade at any time.',
+    },
+  ];
 
   return (
     <div className="bg-white">
 
-      {/* ─── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
-          {/* Text */}
-          <div>
-            <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-3">
-              FREE DELIVERY ON ORDERS OVER KES 2,000
-            </p>
-            <h1 className="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-5">
-              Farm-Fresh<br />
-              <span className="text-green-600">Groceries</span><br />
-              Delivered Daily
+      {/* ─── HERO SECTION ─────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-gray-950">
+        {/* Background gradient effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-600/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+          {/* Trust Badge */}
+          <div className="flex justify-center mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20">
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-green-400 text-sm font-medium">Trusted by 500+ Grocery Stores in Kenya</span>
+            </div>
+          </div>
+
+          {/* Headline */}
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tight">
+              Manage Your Grocery Store{' '}
+              <span className="text-green-400">Like Never Before</span>
             </h1>
-            <p className="text-gray-500 text-base leading-relaxed mb-4 max-w-md">
-              We cater for both <strong className="text-gray-700">retail and wholesale</strong> customers.
-              From fresh produce, dairy, meats, pantry staples, and household essentials —
-              sourced locally and delivered fresh to your door.
+            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-4 leading-relaxed">
+              The all-in-one platform for inventory, sales, POS, employee management, and analytics.{' '}
+              <strong className="text-gray-300">Built for Kenya.</strong>
             </p>
-            <div className="flex items-center gap-4 mb-8">
-              <div className="flex items-center gap-2 text-xs bg-green-50 text-green-700 font-semibold px-3 py-1.5 rounded-full border border-green-200">
-                <Store size={14} /> Retail Orders
-              </div>
-              <div className="flex items-center gap-2 text-xs bg-amber-50 text-amber-700 font-semibold px-3 py-1.5 rounded-full border border-amber-200">
-                <Users size={14} /> Wholesale Orders
-              </div>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/shop"
-                className="px-8 py-3.5 bg-gray-900 text-white font-bold text-sm rounded-full hover:bg-green-600 transition-colors inline-flex items-center gap-2">
-                SHOP NOW <ChevronRight size={15} />
+            <p className="text-sm text-gray-500 mb-8">
+              Manage from anywhere in the world.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <Link href="/auth/register"
+                className="px-8 py-4 bg-green-600 text-white font-bold text-sm rounded-full hover:bg-green-500 transition-all inline-flex items-center gap-2 shadow-lg shadow-green-600/25">
+                Start Free Trial <ArrowRight size={16} />
               </Link>
-              <Link href="/shop?category=Cake"
-                className="px-8 py-3.5 border-2 border-gray-200 text-gray-800 font-bold text-sm rounded-full hover:border-green-400 transition-colors">
-                Fresh Produce
-              </Link>
+              <button className="px-8 py-4 bg-gray-800 text-white font-bold text-sm rounded-full hover:bg-gray-700 transition-all inline-flex items-center gap-2 border border-gray-700">
+                <Play size={16} className="fill-white" /> Watch Demo
+              </button>
             </div>
-            {/* Trust badges */}
-            <div className="flex flex-wrap gap-5 mt-10">
-              {[
-                { icon: Truck, label: 'Same-Day Delivery' },
-                { icon: Clock, label: 'Fresh Daily' },
-                { icon: Shield, label: 'Quality Guaranteed' },
-              ].map(b => (
-                <div key={b.label} className="flex items-center gap-2 text-xs text-gray-500 font-medium">
-                  <b.icon size={14} className="text-green-500" /> {b.label}
+
+            {/* Sub-trust */}
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500">
+              <span className="flex items-center gap-2">
+                <Check size={16} className="text-green-500" /> Free 14-day trial
+              </span>
+              <span className="flex items-center gap-2">
+                <Check size={16} className="text-green-500" /> No credit card required
+              </span>
+              <span className="flex items-center gap-2">
+                <Check size={16} className="text-green-500" /> Cancel anytime
+              </span>
+            </div>
+          </div>
+
+          {/* Dashboard Preview */}
+          <div className="mt-16 relative">
+            <div className="absolute -inset-4 bg-gradient-to-r from-green-600/20 via-green-500/10 to-green-600/20 rounded-2xl blur-xl" />
+            <div className="relative bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+              {/* Browser chrome */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-gray-900 border-b border-gray-800">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Hero Image Grid */}
-          <div className="hidden md:grid grid-cols-2 gap-3 h-[480px]">
-            <div className="rounded-3xl overflow-hidden row-span-2">
-              <img
-                src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80&fit=crop"
-                alt="Fresh Groceries" className="w-full h-full object-cover" />
-            </div>
-            <div className="rounded-3xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80&fit=crop"
-                alt="Fresh Fruits" className="w-full h-full object-cover" />
-            </div>
-            <div className="rounded-3xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&q=80&fit=crop"
-                alt="Fresh Vegetables" className="w-full h-full object-cover" />
-            </div>
-          </div>
-          {/* Mobile hero image */}
-          <div className="md:hidden rounded-3xl overflow-hidden aspect-video">
-            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80&fit=crop"
-              alt="Fresh Groceries" className="w-full h-full object-cover" />
-          </div>
-        </div>
-      </section>
-
-      {/* ─── PROMOTIONAL ADS CAROUSEL ─────────────────────────────────── */}
-      <AdsCarousel />
-
-      {/* ─── SCROLLING CATEGORY CIRCLES ──────────────────────────────────── */}
-      <section className="py-10 border-y border-gray-100 bg-gray-50/50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center gap-8 overflow-x-auto pb-2 scrollbar-hide justify-center flex-wrap">
-            {CIRCLE_CATEGORIES.map(cat => (
-              <Link key={cat.label} href={cat.href}
-                className="flex flex-col items-center gap-2.5 group shrink-0">
-                <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-transparent group-hover:border-green-400 transition-all ring-2 ring-gray-100 group-hover:ring-green-200">
-                  <img src={cat.image} alt={cat.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                <div className="flex-1 flex justify-center">
+                  <div className="px-4 py-1 bg-gray-800 rounded-md text-xs text-gray-400 font-mono">
+                    app.snackoh-groceries.com/dashboard
+                  </div>
                 </div>
-                <span className="text-xs font-bold text-gray-700 group-hover:text-green-600 transition-colors tracking-wide">{cat.label}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── WHAT WE OFFER (RETAIL & WHOLESALE) ──────────────────────── */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-10">
-            <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-1">Retail &amp; Wholesale</p>
-            <h2 className="text-3xl font-black text-gray-900">What We Offer</h2>
-            <p className="text-gray-500 mt-2 text-sm max-w-lg mx-auto">
-              Whether you&apos;re buying for your home or stocking your shop, we&apos;ve got you covered with fresh groceries every day.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { name: 'Fresh Produce', desc: 'Fruits, vegetables & herbs', image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80&fit=crop' },
-              { name: 'Dairy & Eggs', desc: 'Milk, cheese, yoghurt & eggs', image: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=400&q=80&fit=crop' },
-              { name: 'Meat & Seafood', desc: 'Chicken, beef, fish & more', image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=400&q=80&fit=crop' },
-              { name: 'Pantry Essentials', desc: 'Rice, oil, flour, spices & more', image: 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400&q=80&fit=crop' },
-            ].map(item => (
-              <Link key={item.name} href="/shop" className="group relative rounded-2xl overflow-hidden aspect-square block">
-                <img src={item.image} alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <p className="text-white font-black text-sm">{item.name}</p>
-                  <p className="text-white/70 text-xs mt-0.5">{item.desc}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-500 mb-4">
-              Looking for <strong className="text-gray-700">wholesale pricing</strong>? We offer bulk orders for shops, restaurants, events, and corporate clients.
-            </p>
-            <Link href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-bold text-sm rounded-full hover:bg-green-700 transition-colors">
-              Contact Us for Wholesale <ChevronRight size={14} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── BEST SELLERS ─────────────────────────────────────────────────── */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-end justify-between mb-8">
-            <div>
-              <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-1">Our Favourites</p>
-              <h2 className="text-3xl font-black text-gray-900">Best Sellers</h2>
-            </div>
-            <Link href="/shop" className="text-sm font-bold text-gray-600 hover:text-green-600 flex items-center gap-1">
-              View all <ChevronRight size={14} />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
-            {bestSellers.map(p => <HomeProductCard key={p.id} product={p} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── OFFERS & PROMOTIONS SECTION ──────────────────────────────── */}
-      <OffersSection />
-
-      {/* ─── PROMO BANNER ─────────────────────────────────────────────────── */}
-      <section className="py-4 px-6">
-        <div className="max-w-7xl mx-auto rounded-3xl overflow-hidden bg-amber-950 relative h-64 md:h-80 flex items-center">
-          <img
-            src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=1200&q=80&fit=crop"
-            alt="Fresh Groceries" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-          <div className="relative z-10 px-10 md:px-16 max-w-xl">
-            <p className="text-green-300 text-xs font-bold tracking-widest uppercase mb-2">Limited Time</p>
-            <h2 className="text-3xl md:text-4xl font-black text-white leading-tight mb-4">
-              The Freshest Picks<br />For Your Kitchen
-            </h2>
-            <p className="text-white/70 text-sm mb-6">
-              From weeknight dinners to weekend feasts — our seasonal specials are here for a limited time only.
-            </p>
-            <Link href="/shop"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-bold text-sm rounded-full hover:bg-green-600 hover:text-white transition-colors">
-              SHOP NOW <ChevronRight size={14} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── GIFTS SECTION ────────────────────────────────────────────────── */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-10">
-            <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-1">Shop by Need</p>
-            <h2 className="text-3xl font-black text-gray-900">For Every Occasion!</h2>
-            <p className="text-gray-500 mt-2 text-sm max-w-md mx-auto">
-              Whether it&apos;s a family dinner, party prep, or weekly restock — we&apos;ve got everything you need.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { label: 'FAMILY DINNERS', image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=600&q=80&fit=crop', href: '/shop?category=Meat+%26+Seafood' },
-              { label: 'HEALTHY LIVING', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80&fit=crop', href: '/shop?category=Fruits+%26+Vegetables' },
-              { label: 'PARTY PREP', image: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&q=80&fit=crop', href: '/shop?category=Beverages' },
-            ].map(item => (
-              <Link key={item.label} href={item.href}
-                className="group relative rounded-2xl overflow-hidden aspect-[3/4] block">
-                <img src={item.image} alt={item.label}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
-                <div className="absolute bottom-5 inset-x-0 flex justify-center">
-                  <span className="bg-white text-gray-900 font-black text-xs tracking-[0.2em] px-6 py-2.5 rounded-full group-hover:bg-green-600 group-hover:text-white transition-colors">
-                    {item.label}
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── FRESH TODAY (products from database) ─────────────────────── */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-end justify-between mb-8">
-            <div>
-              <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-1">Stocked Today</p>
-              <h2 className="text-3xl font-black text-gray-900">Fresh Arrivals</h2>
-            </div>
-            <Link href="/shop" className="text-sm font-bold text-gray-600 hover:text-green-600 flex items-center gap-1">
-              View all <ChevronRight size={14} />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            {freshProducts.map(p => <HomeProductCard key={p.id} product={p} />)}
-          </div>
-          <div className="mt-10 text-center">
-            <Link href="/shop"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-green-600 text-white font-bold text-sm rounded-full hover:bg-green-700 transition-colors">
-              Shop More <ChevronRight size={15} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── DISCOUNT STRIP ───────────────────────────────────────────────── */}
-      <section className="py-5 bg-green-600">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <p className="text-2xl font-black text-white">25% OFF FRESH PRODUCE ORDERS</p>
-            <p className="text-green-100 text-sm">Stock up on fruits and vegetables, get 25% off. This week only.</p>
-          </div>
-          <Link href="/shop?category=Cake"
-            className="shrink-0 px-6 py-3 bg-white text-green-600 font-black text-sm rounded-full hover:bg-gray-100 transition-colors">
-            SHOP PRODUCE
-          </Link>
-        </div>
-      </section>
-
-      {/* ─── ABOUT US ──────────────────────────────────────────────────── */}
-      <section id="about" className="py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-xs text-green-600 font-bold tracking-widest uppercase mb-2">About Snackoh Groceries</p>
-              <h2 className="text-3xl font-black text-gray-900 mb-6">Committed to Freshness, Quality &amp; Value</h2>
-              <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                <p>
-                  At Snackoh Groceries, we believe that every meal starts with quality ingredients. Our store is built on a foundation of sourcing the freshest produce, dairy, meats, and pantry essentials from trusted local farms and suppliers.
-                </p>
-                <p>
-                  We are committed to maintaining strict quality control at every step — from selecting farm-fresh produce and verified suppliers to our carefully managed cold-chain logistics. Freshness is not just a promise; it&apos;s our daily practice. Every item is sourced and delivered fresh.
-                </p>
-                <p>
-                  Whether you&apos;re a <strong className="text-gray-800">retail customer</strong> doing your weekly grocery run or a <strong className="text-gray-800">wholesale partner</strong> stocking your restaurant or shop, we serve both with the same dedication to quality. We supply homes, restaurants, hotels, and corporate kitchens across Nairobi.
-                </p>
               </div>
-              <div className="mt-6 p-4 bg-green-50 border border-green-100 rounded-xl">
-                <p className="text-sm font-bold text-gray-800 mb-1">Interested in wholesale orders?</p>
-                <p className="text-xs text-gray-600 mb-3">We offer competitive bulk pricing for businesses. Get in touch with our sales team for a custom quote.</p>
-                <Link href="/contact"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-600 text-white font-bold text-xs rounded-full hover:bg-green-700 transition-colors">
-                  Contact Us <ChevronRight size={12} />
-                </Link>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-2xl overflow-hidden aspect-[3/4]">
-                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80&fit=crop" alt="Fresh groceries" className="w-full h-full object-cover" />
-              </div>
-              <div className="rounded-2xl overflow-hidden aspect-[3/4] mt-8">
-                <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80&fit=crop" alt="Fresh produce" className="w-full h-full object-cover" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── REVIEWS ──────────────────────────────────────────────────────── */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-gray-900">What Our Customers Say</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { name: 'Grace M.', review: 'The freshest vegetables I\'ve found anywhere! The avocados are always perfectly ripe and the delivery is so fast.', rating: 5 },
-              { name: 'James K.', review: 'Best grocery delivery in Nairobi! Everything arrives fresh and well-packed. I order every week without fail.', rating: 5 },
-              { name: 'Amina W.', review: 'Stocked my entire restaurant kitchen through Snackoh. Quality produce, competitive wholesale prices, and reliable delivery!', rating: 5 },
-            ].map(r => (
-              <div key={r.name} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex mb-3">
-                  {Array.from({ length: r.rating }).map((_, i) => (
-                    <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
+              {/* Dashboard content mockup */}
+              <div className="p-6 md:p-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                  {[
+                    { label: 'Total Revenue', value: 'KES 2.4M', change: '+12.5%', icon: TrendingUp },
+                    { label: 'Active Products', value: '1,847', change: '+23', icon: Package },
+                    { label: 'Total Orders', value: '12,456', change: '+8.3%', icon: Receipt },
+                    { label: 'Active Outlets', value: '5', change: '+1', icon: Store },
+                  ].map((stat) => (
+                    <div key={stat.label} className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <stat.icon size={16} className="text-gray-500" />
+                        <span className="text-green-400 text-xs font-semibold">{stat.change}</span>
+                      </div>
+                      <p className="text-white font-black text-lg md:text-xl">{stat.value}</p>
+                      <p className="text-gray-500 text-xs mt-0.5">{stat.label}</p>
+                    </div>
                   ))}
                 </div>
-                <p className="text-gray-600 text-sm leading-relaxed mb-4">&ldquo;{r.review}&rdquo;</p>
-                <p className="font-bold text-gray-900 text-sm">{r.name}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="text-white font-bold text-sm">Recent Sales</h4>
+                      <span className="text-green-400 text-xs font-medium flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> Live
+                      </span>
+                    </div>
+                    <div className="space-y-3">
+                      {[
+                        { name: 'Customer #1847', amount: 'KES 5,200', time: '2m ago', method: 'M-Pesa' },
+                        { name: 'Customer #1846', amount: 'KES 1,350', time: '8m ago', method: 'Cash' },
+                        { name: 'Customer #1845', amount: 'KES 12,800', time: '15m ago', method: 'Card' },
+                      ].map((sale, idx) => (
+                        <div key={idx} className="flex items-center justify-between py-2 border-b border-gray-700/30 last:border-0">
+                          <div>
+                            <p className="text-gray-300 text-sm font-medium">{sale.name}</p>
+                            <p className="text-gray-500 text-xs">{sale.method}</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-green-400 font-bold text-sm">{sale.amount}</p>
+                            <p className="text-gray-500 text-xs">{sale.time}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="text-white font-bold text-sm">Stock Alerts</h4>
+                      <span className="text-gray-400 text-xs">5 items low</span>
+                    </div>
+                    <div className="space-y-3">
+                      {[
+                        { item: 'Fresh Milk (500ml)', stock: 12, threshold: 20 },
+                        { item: 'White Bread', stock: 5, threshold: 15 },
+                        { item: 'Sugar (1kg)', stock: 8, threshold: 25 },
+                      ].map((item, idx) => (
+                        <div key={idx} className="py-2 border-b border-gray-700/30 last:border-0">
+                          <div className="flex items-center justify-between mb-1">
+                            <p className="text-gray-300 text-sm font-medium">{item.item}</p>
+                            <p className="text-amber-400 text-xs font-semibold">{item.stock} left</p>
+                          </div>
+                          <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                            <div className="h-full bg-amber-500 rounded-full" style={{ width: `${(item.stock / item.threshold) * 100}%` }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating badge */}
+            <div className="absolute -bottom-4 left-6 md:left-10 bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 flex items-center gap-3 shadow-xl">
+              <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+                <Shield size={16} className="text-white" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-sm">99.9%</p>
+                <p className="text-gray-400 text-xs">Uptime</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── STATS BAR ────────────────────────────────────────────────── */}
+      <section className="py-12 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-3xl md:text-4xl font-black text-gray-900">
+                  <AnimatedStat value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
+                </p>
+                <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ─── FEATURES SECTION ─────────────────────────────────────────── */}
+      <section id="features" className="py-20 md:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-sm text-green-600 font-bold tracking-widest uppercase mb-3">Powerful Features</p>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
+              Everything You Need to Run{' '}
+              <span className="text-green-600">Your Grocery Business</span>
+            </h2>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              From inventory to analytics, SNACKOH gives you the tools to manage every aspect of your grocery store efficiently.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature, idx) => (
+              <div key={idx}
+                className="group p-8 rounded-2xl border border-gray-100 hover:border-green-200 hover:shadow-lg hover:shadow-green-50 transition-all duration-300 bg-white"
+                onMouseEnter={() => setActiveFeature(idx)}>
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors ${activeFeature === idx ? 'bg-green-600 text-white' : 'bg-green-50 text-green-600'}`}>
+                  <feature.icon size={24} />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── HOW IT WORKS ─────────────────────────────────────────────── */}
+      <section id="how-it-works" className="py-20 md:py-28 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-sm text-green-600 font-bold tracking-widest uppercase mb-3">Simple Setup</p>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
+              Get Started in <span className="text-green-600">4 Easy Steps</span>
+            </h2>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              Setting up your grocery management system takes minutes, not days.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {howItWorks.map((step, idx) => (
+              <div key={idx} className="relative">
+                {idx < howItWorks.length - 1 && (
+                  <div className="hidden lg:block absolute top-12 left-full w-full h-px bg-gradient-to-r from-green-300 to-transparent z-10" style={{ width: 'calc(100% - 3rem)' }} />
+                )}
+                <div className="bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow h-full">
+                  <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-5">
+                    <step.icon size={22} className="text-white" />
+                  </div>
+                  <span className="text-green-600 text-xs font-bold tracking-widest">STEP {step.step}</span>
+                  <h3 className="text-lg font-bold text-gray-900 mt-2 mb-2">{step.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── SERVICES / WHAT YOU GET ──────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <p className="text-sm text-green-600 font-bold tracking-widest uppercase mb-3">Why SNACKOH?</p>
+              <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">
+                Built Specifically for{' '}
+                <span className="text-green-600">Kenyan Grocery Stores</span>
+              </h2>
+              <p className="text-gray-500 text-base leading-relaxed mb-8">
+                Unlike generic retail software, SNACKOH is designed from the ground up for the Kenyan grocery market. From M-Pesa integration to local supplier management, every feature is tailored to how grocery businesses operate here.
+              </p>
+
+              <div className="space-y-5">
+                {[
+                  { icon: Smartphone, title: 'M-Pesa Native', desc: 'Seamless Lipa Na M-Pesa integration with automatic reconciliation' },
+                  { icon: Globe, title: 'Works Offline', desc: 'POS continues working even without internet — syncs when reconnected' },
+                  { icon: MonitorSmartphone, title: 'Access Anywhere', desc: 'Manage your store from any device — desktop, tablet, or phone' },
+                  { icon: HeadphonesIcon, title: 'Local Support', desc: 'Dedicated Kenyan support team available via phone, WhatsApp, and email' },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex gap-4">
+                    <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center shrink-0">
+                      <item.icon size={20} className="text-green-600" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 text-sm">{item.title}</h4>
+                      <p className="text-gray-500 text-sm mt-0.5">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Feature showcase card */}
+            <div className="relative">
+              <div className="absolute -inset-4 bg-green-50 rounded-3xl" />
+              <div className="relative bg-white rounded-2xl border border-gray-100 shadow-xl overflow-hidden">
+                <div className="p-6 border-b border-gray-100">
+                  <h3 className="font-bold text-gray-900">Inventory Overview</h3>
+                  <p className="text-sm text-gray-500 mt-1">Real-time stock levels across all outlets</p>
+                </div>
+                <div className="p-6 space-y-4">
+                  {[
+                    { name: 'Fresh Vegetables', stock: 85, color: 'bg-green-500' },
+                    { name: 'Dairy Products', stock: 62, color: 'bg-green-400' },
+                    { name: 'Meat & Poultry', stock: 45, color: 'bg-amber-500' },
+                    { name: 'Beverages', stock: 78, color: 'bg-green-500' },
+                    { name: 'Pantry Staples', stock: 92, color: 'bg-green-600' },
+                  ].map((item) => (
+                    <div key={item.name}>
+                      <div className="flex items-center justify-between text-sm mb-1.5">
+                        <span className="text-gray-700 font-medium">{item.name}</span>
+                        <span className="text-gray-500 text-xs">{item.stock}% stocked</span>
+                      </div>
+                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div className={`h-full ${item.color} rounded-full transition-all duration-1000`} style={{ width: `${item.stock}%` }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="px-6 py-4 bg-green-50 border-t border-green-100">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-bold text-gray-900">Total Products</p>
+                      <p className="text-xs text-gray-500">Across all categories</p>
+                    </div>
+                    <p className="text-2xl font-black text-green-600">1,847</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PRICING SECTION ──────────────────────────────────────────── */}
+      <section id="pricing" className="py-20 md:py-28 bg-gray-950">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <p className="text-sm text-green-400 font-bold tracking-widest uppercase mb-3">Pricing Plans</p>
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-4">
+              Choose the Plan That Fits{' '}
+              <span className="text-green-400">Your Business</span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
+              Start free for 14 days. No credit card required. Upgrade as you grow.
+            </p>
+
+            {/* Toggle */}
+            <div className="inline-flex bg-gray-800 rounded-full p-1">
+              <button
+                onClick={() => setActivePricing('monthly')}
+                className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${activePricing === 'monthly' ? 'bg-green-600 text-white' : 'text-gray-400 hover:text-white'}`}>
+                Monthly
+              </button>
+              <button
+                onClick={() => setActivePricing('annual')}
+                className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${activePricing === 'annual' ? 'bg-green-600 text-white' : 'text-gray-400 hover:text-white'}`}>
+                Annual <span className="text-green-400 text-xs ml-1">Save 20%</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {pricingPlans.map((plan) => (
+              <div key={plan.name}
+                className={`relative rounded-2xl p-6 ${plan.popular ? 'bg-gray-800 border-2 border-green-500 shadow-lg shadow-green-500/10' : 'bg-gray-900 border border-gray-800'}`}>
+                {plan.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="px-4 py-1 bg-green-600 text-white text-xs font-bold rounded-full">Most Popular</span>
+                  </div>
+                )}
+                <div className="mb-6 pt-2">
+                  <h3 className="text-white font-bold text-lg">{plan.name}</h3>
+                  <p className="text-gray-400 text-sm mt-1">{plan.description}</p>
+                </div>
+                <div className="mb-6">
+                  {plan.monthly ? (
+                    <>
+                      <span className="text-3xl font-black text-white">
+                        KES {(activePricing === 'annual' ? plan.annual : plan.monthly)?.toLocaleString()}
+                      </span>
+                      <span className="text-gray-400 text-sm ml-1">per month</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-3xl font-black text-white">Custom</span>
+                      <p className="text-gray-400 text-sm mt-1">Contact sales</p>
+                    </>
+                  )}
+                </div>
+                <Link href={plan.cta === 'Contact Sales' ? '/contact' : '/auth/register'}
+                  className={`block w-full py-3 rounded-xl font-bold text-sm text-center transition-all mb-6 ${plan.popular ? 'bg-green-600 text-white hover:bg-green-500' : 'bg-gray-800 text-white hover:bg-gray-700 border border-gray-700'}`}>
+                  {plan.cta}
+                </Link>
+                <ul className="space-y-3">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2 text-sm">
+                      <Check size={16} className="text-green-400 shrink-0 mt-0.5" />
+                      <span className="text-gray-300">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── TESTIMONIALS ─────────────────────────────────────────────── */}
+      <section id="testimonials" className="py-20 md:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-sm text-green-600 font-bold tracking-widest uppercase mb-3">Testimonials</p>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
+              Loved by Grocery Stores{' '}
+              <span className="text-green-600">Across Kenya</span>
+            </h2>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              See why hundreds of grocery businesses trust SNACKOH to run their operations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t) => (
+              <div key={t.name} className="bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                <div className="flex mb-4">
+                  {Array.from({ length: t.rating }).map((_, i) => (
+                    <Star key={i} size={16} className="text-amber-400 fill-amber-400" />
+                  ))}
+                </div>
+                <p className="text-gray-600 text-sm leading-relaxed mb-6">&ldquo;{t.review}&rdquo;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                    <span className="text-green-600 font-bold text-sm">{t.name.split(' ').map(n => n[0]).join('')}</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-gray-900 text-sm">{t.name}</p>
+                    <p className="text-gray-500 text-xs">{t.role} &middot; {t.location}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ SECTION ──────────────────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <p className="text-sm text-green-600 font-bold tracking-widest uppercase mb-3">FAQ</p>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-500 text-base">
+              Have a question? We&apos;ve got answers.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className="bg-white border border-gray-100 rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                  className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors">
+                  <span className="font-bold text-gray-900 text-sm">{faq.question}</span>
+                  <ChevronDown size={18} className={`text-gray-400 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
+                </button>
+                {openFaq === idx && (
+                  <div className="px-6 pb-4">
+                    <p className="text-gray-500 text-sm leading-relaxed">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── BOOK A DEMO / CTA ────────────────────────────────────────── */}
+      <section id="book-demo" className="py-20 md:py-28 bg-green-600 relative overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-green-500/50 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-green-700/50 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-6">
+            Ready to Transform Your Grocery Business?
+          </h2>
+          <p className="text-green-100 text-lg max-w-2xl mx-auto mb-10">
+            Join 500+ grocery stores across Kenya that use SNACKOH to manage inventory, boost sales, and grow their business. Start your free trial today — no credit card required.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/auth/register"
+              className="px-10 py-4 bg-white text-green-700 font-bold text-base rounded-full hover:bg-gray-100 transition-all inline-flex items-center gap-2 shadow-lg">
+              Start Free Trial <ArrowRight size={18} />
+            </Link>
+            <Link href="/contact"
+              className="px-10 py-4 bg-green-700/50 text-white font-bold text-base rounded-full hover:bg-green-700 transition-all inline-flex items-center gap-2 border border-green-400/30">
+              Book a Demo <Zap size={18} />
+            </Link>
+          </div>
+          <p className="text-green-200/70 text-sm mt-6">
+            14-day free trial &middot; No credit card required &middot; Full feature access
+          </p>
         </div>
       </section>
     </div>
