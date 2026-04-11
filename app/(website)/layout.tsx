@@ -2,90 +2,19 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { CartProvider, useCart } from '@/lib/cart-context';
 import { supabase } from '@/lib/supabase';
-import { ShoppingBag, Search, User, Heart, X, Plus, Minus, Menu, ChevronRight, ChevronLeft, Mail } from 'lucide-react';
+import { ShoppingBag, X, Plus, Minus, Menu, ChevronRight, Mail, ArrowRight } from 'lucide-react';
 import CookieConsent from '@/components/cookie-consent';
-
-// ─── Marquee Announcement Bar ────────────────────────────────────────────────
-function AnnouncementBar() {
-  const [navbarAds, setNavbarAds] = useState<string[]>([]);
-
-  useEffect(() => {
-    async function loadNavbarAds() {
-      try {
-        const { data, error } = await supabase
-          .from('business_settings')
-          .select('value')
-          .eq('key', 'navbarAds')
-          .single();
-        if (!error && data?.value) {
-          const config = data.value as { enabled?: boolean; items?: string[] };
-          if (config.enabled && config.items && config.items.length > 0) {
-            setNavbarAds(config.items.filter((i: string) => i.trim()));
-            return;
-          }
-        }
-      } catch { /* table may not exist */ }
-      try {
-        const saved = localStorage.getItem('snackoh_settings');
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (parsed.navbarAds?.enabled && parsed.navbarAds?.items?.length > 0) {
-            setNavbarAds(parsed.navbarAds.items.filter((i: string) => i.trim()));
-            return;
-          }
-        }
-      } catch { /* ignore */ }
-    }
-    loadNavbarAds();
-  }, []);
-
-  const defaultItems = [
-    'FREE DELIVERY ON ORDERS OVER KES 2,000',
-    'FRESH GROCERIES DAILY',
-    'ORDER BY 5PM FOR NEXT-DAY DELIVERY',
-    'FARM-FRESH PRODUCE SOURCED LOCALLY',
-    'WHOLESALE ORDERS AVAILABLE',
-  ];
-
-  const marqueeItems = navbarAds.length > 0 ? navbarAds : defaultItems;
-  const marqueeText = marqueeItems.map(item => `  •  ${item}`).join('');
-
-  return (
-    <div className="bg-green-600 text-white text-xs py-2.5 font-medium tracking-wide overflow-hidden whitespace-nowrap">
-      <div className="inline-flex animate-marquee">
-        <span className="inline-block">{marqueeText}{marqueeText}</span>
-      </div>
-      <style jsx>{`
-        @keyframes marquee {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
-        }
-        .animate-marquee:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
-    </div>
-  );
-}
 
 // ─── Navbar ─────────────────────────────────────────────────────────────────
 function Navbar() {
-  const { itemCount, openCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const [logoUrl, setLogoUrl] = useState('');
   const [businessName, setBusinessName] = useState('SNACKOH');
   const [logoHeight, setLogoHeight] = useState(40);
-  const [logoPosition, setLogoPosition] = useState<'left' | 'center'>('left');
-  const router = useRouter();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 10);
@@ -103,7 +32,6 @@ function Navbar() {
           if (g.logoUrl) setLogoUrl(g.logoUrl);
           if (g.businessName) setBusinessName(g.businessName);
           if (g.logoHeight) setLogoHeight(parseInt(g.logoHeight as string) || 40);
-          if (g.logoPosition) setLogoPosition(g.logoPosition as 'left' | 'center');
           return;
         }
       } catch { /* table may not exist */ }
@@ -114,170 +42,60 @@ function Navbar() {
           if (parsed.general?.logoUrl) setLogoUrl(parsed.general.logoUrl);
           if (parsed.general?.businessName) setBusinessName(parsed.general.businessName);
           if (parsed.general?.logoHeight) setLogoHeight(parseInt(parsed.general.logoHeight) || 40);
-          if (parsed.general?.logoPosition) setLogoPosition(parsed.general.logoPosition);
         }
       } catch { /* ignore */ }
     }
     loadBranding();
   }, []);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/shop?q=${encodeURIComponent(searchQuery)}`);
-      setSearchOpen(false);
-      setSearchQuery('');
-    }
-  };
-
   const navLinks = [
-    { label: 'HOME', href: '/' },
-    { label: 'SHOP', href: '/shop' },
-    { label: 'ABOUT', href: '/about' },
-    { label: 'CONTACT', href: '/contact' },
+    { label: 'Features', href: '/#features' },
+    { label: 'How It Works', href: '/#how-it-works' },
+    { label: 'Pricing', href: '/#pricing' },
+    { label: 'Testimonials', href: '/#testimonials' },
+    { label: 'Contact', href: '/contact' },
   ];
-
-  const LogoElement = (
-    <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity overflow-hidden">
-      {logoUrl ? (
-        <img src={logoUrl} alt={businessName} style={{ height: `${logoHeight}px`, maxHeight: '3.25rem' }} className="w-auto object-contain rounded-lg" />
-      ) : (
-        <span className="text-2xl font-black tracking-tight text-gray-900 hover:text-green-600 transition-colors">
-          {businessName}
-        </span>
-      )}
-    </Link>
-  );
-
-  // Split nav links into two halves for centered logo layout
-  const midIndex = Math.ceil(navLinks.length / 2);
-  const leftLinks = navLinks.slice(0, midIndex);
-  const rightLinks = navLinks.slice(midIndex);
 
   return (
     <>
-      <header className={`sticky top-0 z-40 bg-white transition-shadow ${scrolled ? 'shadow-md' : 'border-b border-gray-100'}`}>
-        {logoPosition === 'center' ? (
-          /* ── Centered Logo Layout ── */
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-            {/* Mobile menu button (left on mobile) */}
+      <header className={`sticky top-0 z-40 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-18">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity overflow-hidden">
+            {logoUrl ? (
+              <img src={logoUrl} alt={businessName} style={{ height: `${logoHeight}px`, maxHeight: '3.25rem' }} className="w-auto object-contain rounded-lg" />
+            ) : (
+              <span className={`text-xl font-black tracking-tight transition-colors ${scrolled ? 'text-gray-900' : 'text-white'}`}>
+                {businessName}
+              </span>
+            )}
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map(l => (
+              <Link key={l.href} href={l.href}
+                className={`text-sm font-medium transition-colors ${scrolled ? 'text-gray-600 hover:text-green-600' : 'text-gray-300 hover:text-white'}`}>
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right actions */}
+          <div className="flex items-center gap-3">
+            <Link href="/auth/login"
+              className={`hidden md:inline-flex text-sm font-semibold transition-colors ${scrolled ? 'text-gray-700 hover:text-green-600' : 'text-gray-300 hover:text-white'}`}>
+              Login
+            </Link>
+            <Link href="/auth/register"
+              className="hidden md:inline-flex px-5 py-2 bg-green-600 text-white text-sm font-bold rounded-full hover:bg-green-500 transition-all items-center gap-1.5">
+              Get Started <ArrowRight size={14} />
+            </Link>
             <button className="md:hidden w-9 h-9 flex items-center justify-center" onClick={() => setMenuOpen(true)}>
-              <Menu size={20} />
+              <Menu size={22} className={scrolled ? 'text-gray-900' : 'text-white'} />
             </button>
-
-            {/* Desktop: Left nav links */}
-            <nav className="hidden md:flex items-center gap-6 flex-1 justify-end">
-              {leftLinks.map(l => (
-                <Link key={l.href} href={l.href}
-                  className="text-xs font-bold tracking-widest text-gray-700 hover:text-green-600 transition-colors">
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Center Logo */}
-            <div className="mx-6 flex-shrink-0">
-              {LogoElement}
-            </div>
-
-            {/* Desktop: Right nav links */}
-            <nav className="hidden md:flex items-center gap-6 flex-1">
-              {rightLinks.map(l => (
-                <Link key={l.href} href={l.href}
-                  className="text-xs font-bold tracking-widest text-gray-700 hover:text-green-600 transition-colors">
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Icons */}
-            <div className="flex items-center gap-1">
-              <button onClick={() => setSearchOpen(true)}
-                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700">
-                <Search size={18} />
-              </button>
-              <Link href="/admin"
-                className="hidden sm:flex w-9 h-9 items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700"
-                title="Staff Admin">
-                <User size={18} />
-              </Link>
-              <button
-                className="hidden sm:flex w-9 h-9 items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700">
-                <Heart size={18} />
-              </button>
-              <button onClick={openCart}
-                className="relative w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700">
-                <ShoppingBag size={18} />
-                {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-green-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                    {itemCount > 9 ? '9+' : itemCount}
-                  </span>
-                )}
-              </button>
-            </div>
           </div>
-        ) : (
-          /* ── Default Left Logo Layout ── */
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-            {/* Logo */}
-            {LogoElement}
-
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map(l => (
-                <Link key={l.href} href={l.href}
-                  className="text-xs font-bold tracking-widest text-gray-700 hover:text-green-600 transition-colors">
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Icons */}
-            <div className="flex items-center gap-1">
-              <button onClick={() => setSearchOpen(true)}
-                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700">
-                <Search size={18} />
-              </button>
-              <Link href="/admin"
-                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700"
-                title="Staff Admin">
-                <User size={18} />
-              </Link>
-              <button
-                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700">
-                <Heart size={18} />
-              </button>
-              <button onClick={openCart}
-                className="relative w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700">
-                <ShoppingBag size={18} />
-                {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-green-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                    {itemCount > 9 ? '9+' : itemCount}
-                  </span>
-                )}
-              </button>
-              <button className="md:hidden ml-1 w-9 h-9 flex items-center justify-center" onClick={() => setMenuOpen(true)}>
-                <Menu size={20} />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Search overlay */}
-        {searchOpen && (
-          <div className="absolute inset-0 bg-white z-50 flex items-center px-6" style={{ height: 64 }}>
-            <form onSubmit={handleSearch} className="flex-1 flex items-center gap-3">
-              <Search size={18} className="text-gray-400 shrink-0" />
-              <input autoFocus type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                placeholder="Search groceries, produce, dairy…"
-                className="flex-1 outline-none text-sm text-gray-800 placeholder-gray-400" />
-              <button type="submit" className="text-xs font-bold text-green-600 hover:underline">Search</button>
-              <button type="button" onClick={() => setSearchOpen(false)}>
-                <X size={20} className="text-gray-500" />
-              </button>
-            </form>
-          </div>
-        )}
+        </div>
       </header>
 
       {/* Mobile Menu */}
@@ -285,17 +103,27 @@ function Navbar() {
         <div className="fixed inset-0 z-50 bg-black/50" onClick={() => setMenuOpen(false)}>
           <div className="absolute left-0 top-0 h-full w-72 bg-white shadow-xl" onClick={e => e.stopPropagation()}>
             <div className="p-5 border-b flex justify-between items-center">
-              <span className="text-xl font-black">SNACKOH</span>
+              <span className="text-xl font-black text-gray-900">{businessName}</span>
               <button onClick={() => setMenuOpen(false)}><X size={20} /></button>
             </div>
-            <nav className="p-5 space-y-4">
+            <nav className="p-5 space-y-1">
               {navLinks.map(l => (
                 <Link key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-between text-sm font-bold tracking-wider text-gray-800 hover:text-green-600 py-2 border-b border-gray-50">
+                  className="flex items-center justify-between text-sm font-medium text-gray-700 hover:text-green-600 py-3 border-b border-gray-50">
                   {l.label} <ChevronRight size={14} className="text-gray-400" />
                 </Link>
               ))}
             </nav>
+            <div className="p-5 space-y-3 border-t border-gray-100 mt-2">
+              <Link href="/auth/login" onClick={() => setMenuOpen(false)}
+                className="block w-full py-3 text-center text-sm font-bold text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50">
+                Login
+              </Link>
+              <Link href="/auth/register" onClick={() => setMenuOpen(false)}
+                className="block w-full py-3 text-center text-sm font-bold text-white bg-green-600 rounded-xl hover:bg-green-500">
+                Get Started Free
+              </Link>
+            </div>
           </div>
         </div>
       )}
@@ -313,20 +141,14 @@ function CartDrawer() {
 
   return (
     <>
-      {/* Backdrop */}
       {isOpen && <div className="fixed inset-0 bg-black/40 z-50" onClick={closeCart} />}
-
-      {/* Drawer */}
       <div className={`fixed top-0 right-0 h-full w-[400px] max-w-full bg-white z-50 flex flex-col shadow-2xl transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <h2 className="font-bold text-base">Shopping Cart</h2>
           <button onClick={closeCart} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
             <X size={18} />
           </button>
         </div>
-
-        {/* Free delivery bar */}
         <div className="px-5 py-3 border-b border-gray-50">
           {remaining > 0 ? (
             <p className="text-xs text-gray-600 mb-1.5">
@@ -339,8 +161,6 @@ function CartDrawer() {
             <div className="h-full bg-green-500 rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
           </div>
         </div>
-
-        {/* Items */}
         <div className="flex-1 overflow-y-auto px-5 py-3 space-y-4">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -380,10 +200,7 @@ function CartDrawer() {
               </div>
             ))
           )}
-
         </div>
-
-        {/* Footer */}
         {items.length > 0 && (
           <div className="border-t border-gray-100 px-5 py-4 space-y-3">
             <div className="flex items-center justify-between text-sm">
@@ -416,16 +233,15 @@ function NewsletterModal() {
   const [imgError, setImgError] = useState(false);
   const [config, setConfig] = useState({
     enabled: true,
-    title: 'Subscribe Now',
-    subtitle: 'Newsletter',
-    description: 'Get 15% off your first order when you subscribe to our newsletter. Stay updated with exclusive offers and new arrivals.',
+    title: 'Get Started Free',
+    subtitle: 'Free Trial',
+    description: 'Try SNACKOH free for 14 days. Full access to all features — no credit card required. See how our grocery management system can transform your business.',
     image: '',
     discountCode: 'WELCOME15',
-    delaySeconds: 5,
+    delaySeconds: 8,
   });
 
   useEffect(() => {
-    // Load config from DB or localStorage
     async function loadConfig() {
       try {
         const { data, error } = await supabase
@@ -451,7 +267,6 @@ function NewsletterModal() {
 
   useEffect(() => {
     if (!config.enabled) return;
-    // Check if user has already dismissed
     const dismissed = localStorage.getItem('snackoh_newsletter_dismissed');
     if (dismissed === 'true') return;
     const alreadySubscribed = localStorage.getItem('snackoh_newsletter_subscribed');
@@ -459,7 +274,7 @@ function NewsletterModal() {
 
     const timer = setTimeout(() => {
       setShow(true);
-    }, (config.delaySeconds || 5) * 1000);
+    }, (config.delaySeconds || 8) * 1000);
 
     return () => clearTimeout(timer);
   }, [config.enabled, config.delaySeconds]);
@@ -474,7 +289,7 @@ function NewsletterModal() {
         discount_code: config.discountCode,
       });
     } catch {
-      // Table may not exist, save locally
+      // Table may not exist
     }
     localStorage.setItem('snackoh_newsletter_subscribed', 'true');
     setSubmitted(true);
@@ -493,27 +308,23 @@ function NewsletterModal() {
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50" onClick={handleClose}>
       <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full overflow-hidden flex flex-col sm:flex-row" onClick={e => e.stopPropagation()}>
-        {/* Image side */}
         <div className="sm:w-1/2 h-56 sm:h-auto relative hidden sm:block bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600">
           {config.image && !imgError ? (
             <img src={config.image} alt="Newsletter" className="w-full h-full object-cover" onError={() => setImgError(true)} />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center text-white p-8">
-              {/* Shopping basket icon */}
               <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-90 mb-3">
                 <path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"/><path d="m9 11 1 9"/><path d="M4.5 15.5h15"/><path d="m5 11 4-7"/>
               </svg>
-              <p className="text-xl font-black tracking-tight text-center">Fresh Deals Weekly</p>
-              <p className="text-sm opacity-80 mt-1 text-center">Save on groceries & seasonal produce</p>
+              <p className="text-xl font-black tracking-tight text-center">Grocery Management</p>
+              <p className="text-sm opacity-80 mt-1 text-center">Made simple & powerful</p>
             </div>
           )}
         </div>
-        {/* Content side */}
         <div className="sm:w-1/2 p-8 relative">
           <button onClick={handleClose} className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500">
             <X size={16} />
           </button>
-
           {submitted ? (
             <div className="text-center py-4">
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -522,7 +333,7 @@ function NewsletterModal() {
               <h3 className="text-lg font-black text-gray-900 mb-2">Thank You!</h3>
               <p className="text-sm text-gray-600 mb-3">You&apos;re now subscribed. Use code <strong className="text-emerald-600">{config.discountCode}</strong> for your discount.</p>
               <button onClick={handleClose} className="px-5 py-2 bg-emerald-600 text-white font-bold text-sm rounded-full hover:bg-emerald-700">
-                Start Shopping
+                Continue
               </button>
             </div>
           ) : (
@@ -530,7 +341,6 @@ function NewsletterModal() {
               <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">{config.subtitle}</p>
               <h3 className="text-2xl font-black text-gray-900 mb-3">{config.title}</h3>
               <p className="text-sm text-gray-600 mb-5 leading-relaxed">{config.description}</p>
-
               <div className="space-y-3">
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 mb-1">Email Address <span className="text-red-500">*</span></label>
@@ -550,7 +360,6 @@ function NewsletterModal() {
                   {loading ? 'Subscribing...' : 'Subscribe'}
                 </button>
               </div>
-
               <label className="flex items-center gap-2 mt-3 cursor-pointer">
                 <input type="checkbox" checked={dontShow} onChange={e => setDontShow(e.target.checked)}
                   className="accent-gray-600 w-3.5 h-3.5" />
@@ -584,18 +393,17 @@ function Footer() {
   };
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-6 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+    <footer className="bg-gray-950 text-gray-300">
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           {/* Brand */}
-          <div>
+          <div className="md:col-span-2">
             <h3 className="text-white text-2xl font-black mb-4">SNACKOH</h3>
-            <p className="text-sm leading-relaxed text-gray-400 mb-4">
-              Fresh groceries delivered to your doorstep. Quality produce, dairy, meats, and household essentials.
+            <p className="text-sm leading-relaxed text-gray-400 mb-4 max-w-sm">
+              The all-in-one grocery management platform. Inventory, POS, sales analytics, and employee management — built for Kenyan grocery businesses.
             </p>
             <p className="text-xs text-gray-500">Nairobi, Kenya</p>
-            <p className="text-xs text-gray-500 mt-1">0733 67 52 67 (Orders)</p>
-            <p className="text-xs text-gray-500 mt-1">0722 587 222 (Feedback)</p>
+            <p className="text-xs text-gray-500 mt-1">0733 67 52 67 (Sales)</p>
             <p className="text-xs text-gray-500 mt-1">support@snackoh-groceries.com</p>
             <div className="flex gap-3 mt-4">
               <a href="https://www.instagram.com/snackohgroceries" target="_blank" rel="noopener noreferrer"
@@ -619,43 +427,48 @@ function Footer() {
             </div>
           </div>
 
-          {/* About */}
+          {/* Product */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">About Us</h4>
+            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">Product</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
               {[
-                { label: 'Our Story', href: '/about' },
-                { label: 'Privacy Policy', href: '/privacy-policy' },
-                { label: 'Terms & Conditions', href: '/terms' },
-                { label: 'Cookie Policy', href: '/cookie-policy' },
-                { label: 'Contact Us', href: '/contact' },
-                { label: 'Careers', href: '#' },
+                { label: 'Features', href: '/#features' },
+                { label: 'Pricing', href: '/#pricing' },
+                { label: 'How It Works', href: '/#how-it-works' },
+                { label: 'Testimonials', href: '/#testimonials' },
+                { label: 'Shop', href: '/shop' },
               ].map(l => (
                 <li key={l.label}><Link href={l.href} className="hover:text-green-400 transition-colors">{l.label}</Link></li>
               ))}
             </ul>
           </div>
 
-          {/* Categories */}
+          {/* Company */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">Categories</h4>
+            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">Company</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
-              {['Fruits & Vegetables', 'Dairy & Eggs', 'Meat & Seafood', 'Beverages', 'Pantry Staples', 'Household'].map(l => (
-                <li key={l}><Link href="/shop" className="hover:text-green-400 transition-colors">{l}</Link></li>
+              {[
+                { label: 'About Us', href: '/about' },
+                { label: 'Contact', href: '/contact' },
+                { label: 'Privacy Policy', href: '/privacy-policy' },
+                { label: 'Terms & Conditions', href: '/terms' },
+                { label: 'Cookie Policy', href: '/cookie-policy' },
+                { label: 'Refund Policy', href: '/refund-policy' },
+              ].map(l => (
+                <li key={l.label}><Link href={l.href} className="hover:text-green-400 transition-colors">{l.label}</Link></li>
               ))}
             </ul>
           </div>
 
-          {/* Help */}
+          {/* Support */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">Let Us Help You</h4>
+            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">Support</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
               {[
-                { label: 'Delivery Information', href: '#' },
-                { label: 'Order Tracking', href: '#' },
-                { label: 'FAQs', href: '#' },
-                { label: 'Refund Policy', href: '/refund-policy' },
-                { label: 'Bulk Orders', href: '/contact' },
+                { label: 'Help Center', href: '/contact' },
+                { label: 'Book a Demo', href: '/#book-demo' },
+                { label: 'System Status', href: '#' },
+                { label: 'API Documentation', href: '#' },
               ].map(l => (
                 <li key={l.label}><Link href={l.href} className="hover:text-green-400 transition-colors">{l.label}</Link></li>
               ))}
@@ -664,14 +477,14 @@ function Footer() {
         </div>
       </div>
 
-      {/* Bottom newsletter + payments */}
+      {/* Bottom bar */}
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="bg-green-600 text-white px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap">
-              Get 10% Off
+              Stay Updated
             </div>
-            <span className="text-xs text-gray-500">Subscribe to our newsletter for the latest updates and offers</span>
+            <span className="text-xs text-gray-500">Subscribe to product updates and grocery management tips</span>
           </div>
           <div className="flex gap-2">
             <input type="email" placeholder="Your email address" value={footerEmail}
@@ -685,16 +498,11 @@ function Footer() {
         </div>
         <div className="max-w-7xl mx-auto px-6 pb-5 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-xs text-gray-600">&copy; {new Date().getFullYear()} Snackoh Grocery System &middot; All rights reserved</p>
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-gray-600">We accept:</span>
-            <img src="/visa-cards.png" alt="Visa & Mastercard" className="h-10 object-contain" />
-            <img src="/mpesa.png" alt="M-Pesa" className="h-10 object-contain" />
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 pb-4 flex items-center justify-center">
-          <div className="flex items-center gap-3 bg-gray-800/50 rounded-lg px-4 py-2.5">
-            <img src="/odpc-logo.png" alt="ODPC - Office of the Data Protection Commissioner" className="h-10 object-contain" />
-            <span className="text-xs text-gray-400">ODPC Certified — Office of the Data Protection Commissioner</span>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 bg-gray-800/50 rounded-lg px-3 py-2">
+              <img src="/odpc-logo.png" alt="ODPC" className="h-6 object-contain" />
+              <span className="text-xs text-gray-400">ODPC Certified</span>
+            </div>
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 pb-5 flex items-center justify-center">
@@ -715,7 +523,6 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
   return (
     <CartProvider>
       <div className="min-h-screen flex flex-col">
-        <AnnouncementBar />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
