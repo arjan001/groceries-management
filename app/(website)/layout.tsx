@@ -58,14 +58,14 @@ function Navbar() {
 
   return (
     <>
-      <header className={`sticky top-0 z-40 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
+      <header className={`sticky top-0 z-40 transition-all duration-300 ${scrolled ? 'bg-green-700/95 backdrop-blur-md shadow-lg' : 'bg-green-800/80 backdrop-blur-sm'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-18">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity overflow-hidden">
             {logoUrl ? (
               <img src={logoUrl} alt={businessName} style={{ height: `${logoHeight}px`, maxHeight: '3.25rem' }} className="w-auto object-contain rounded-lg" />
             ) : (
-              <span className={`text-xl font-black tracking-tight transition-colors ${scrolled ? 'text-gray-900' : 'text-white'}`}>
+              <span className="text-xl font-black tracking-tight text-white">
                 {businessName}
               </span>
             )}
@@ -75,7 +75,7 @@ function Navbar() {
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map(l => (
               <Link key={l.href} href={l.href}
-                className={`text-sm font-medium transition-colors ${scrolled ? 'text-gray-600 hover:text-green-600' : 'text-gray-300 hover:text-white'}`}>
+                className="text-sm font-medium transition-colors text-green-100 hover:text-white">
                 {l.label}
               </Link>
             ))}
@@ -84,15 +84,15 @@ function Navbar() {
           {/* Right actions */}
           <div className="flex items-center gap-3">
             <Link href="/auth/login"
-              className={`hidden md:inline-flex text-sm font-semibold transition-colors ${scrolled ? 'text-gray-700 hover:text-green-600' : 'text-gray-300 hover:text-white'}`}>
+              className="hidden md:inline-flex text-sm font-semibold transition-colors text-green-100 hover:text-white">
               Login
             </Link>
             <Link href="/auth/register"
-              className="hidden md:inline-flex px-5 py-2 bg-green-600 text-white text-sm font-bold rounded-full hover:bg-green-500 transition-all items-center gap-1.5">
+              className="hidden md:inline-flex px-5 py-2 bg-white text-green-700 text-sm font-bold rounded-full hover:bg-green-50 transition-all items-center gap-1.5">
               Get Started <ArrowRight size={14} />
             </Link>
             <button className="md:hidden w-9 h-9 flex items-center justify-center" onClick={() => setMenuOpen(true)}>
-              <Menu size={22} className={scrolled ? 'text-gray-900' : 'text-white'} />
+              <Menu size={22} className="text-white" />
             </button>
           </div>
         </div>
@@ -102,21 +102,21 @@ function Navbar() {
       {menuOpen && (
         <div className="fixed inset-0 z-50 bg-black/50" onClick={() => setMenuOpen(false)}>
           <div className="absolute left-0 top-0 h-full w-72 bg-white shadow-xl" onClick={e => e.stopPropagation()}>
-            <div className="p-5 border-b flex justify-between items-center">
-              <span className="text-xl font-black text-gray-900">{businessName}</span>
-              <button onClick={() => setMenuOpen(false)}><X size={20} /></button>
+            <div className="p-5 bg-green-700 flex justify-between items-center">
+              <span className="text-xl font-black text-white">{businessName}</span>
+              <button onClick={() => setMenuOpen(false)} className="text-green-100 hover:text-white"><X size={20} /></button>
             </div>
             <nav className="p-5 space-y-1">
               {navLinks.map(l => (
                 <Link key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
                   className="flex items-center justify-between text-sm font-medium text-gray-700 hover:text-green-600 py-3 border-b border-gray-50">
-                  {l.label} <ChevronRight size={14} className="text-gray-400" />
+                  {l.label} <ChevronRight size={14} className="text-green-400" />
                 </Link>
               ))}
             </nav>
             <div className="p-5 space-y-3 border-t border-gray-100 mt-2">
               <Link href="/auth/login" onClick={() => setMenuOpen(false)}
-                className="block w-full py-3 text-center text-sm font-bold text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50">
+                className="block w-full py-3 text-center text-sm font-bold text-green-700 border border-green-200 rounded-xl hover:bg-green-50">
                 Login
               </Link>
               <Link href="/auth/register" onClick={() => setMenuOpen(false)}
@@ -465,10 +465,10 @@ function Footer() {
             <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">Support</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
               {[
-                { label: 'Help Center', href: '/contact' },
-                { label: 'Book a Demo', href: '/#book-demo' },
-                { label: 'System Status', href: '#' },
-                { label: 'API Documentation', href: '#' },
+                { label: 'Help Center', href: '/help-center' },
+                { label: 'Book a Demo', href: '/book-demo' },
+                { label: 'System Status', href: '/system-status' },
+                { label: 'API Documentation', href: '/api-docs' },
               ].map(l => (
                 <li key={l.label}><Link href={l.href} className="hover:text-green-400 transition-colors">{l.label}</Link></li>
               ))}
