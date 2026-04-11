@@ -52,11 +52,31 @@ interface NavGroup {
 
 const allNavGroups: NavGroup[] = [
   {
-    title: 'CORE',
+    title: 'OVERVIEW',
     color: 'border-l-green-600',
     items: [
       { label: 'Dashboard', href: '/admin', tip: 'Overview of key metrics, recent activity & quick actions', icon: LayoutDashboard },
       { label: 'POS System', href: '/admin/pos', tip: 'Point of Sale — process sales, payments & receipts', icon: ShoppingCart },
+    ],
+  },
+  {
+    title: 'SALES & ORDERS',
+    color: 'border-l-emerald-500',
+    items: [
+      { label: 'Orders', href: '/admin/orders', tip: 'Create & manage customer orders', icon: FileText },
+      { label: 'Customers', href: '/admin/customers', tip: 'Customer profiles & segmentation', icon: Users },
+      { label: 'Distribution', href: '/admin/distribution', tip: 'Track distribution agents, routes & commissions', icon: Truck },
+    ],
+  },
+  {
+    title: 'FINANCE',
+    color: 'border-l-rose-500',
+    items: [
+      { label: 'Reports', href: '/admin/reports', tip: 'Financial reports, P&L, sales & ledger', icon: BarChart3 },
+      { label: 'Expenses', href: '/admin/expenses', tip: 'Track & manage business expenses', icon: Receipt },
+      { label: 'Credit Invoices', href: '/admin/credit-invoices', tip: 'Manage customer credit invoices & payment tracking', icon: CreditCard },
+      { label: 'Debtors', href: '/admin/debtors', tip: 'Track customer debts & outstanding balances', icon: UserMinus },
+      { label: 'Creditors', href: '/admin/creditors', tip: 'Track amounts owed to suppliers & creditors', icon: Landmark },
     ],
   },
   {
@@ -67,35 +87,15 @@ const allNavGroups: NavGroup[] = [
     ],
   },
   {
-    title: 'INVENTORY & SUPPLY CHAIN',
+    title: 'INVENTORY & SUPPLY',
     color: 'border-l-orange-500',
     items: [
       { label: 'Inventory', href: '/admin/inventory', tip: 'Stock levels, categories & warehouse management', icon: Package },
       { label: 'Stock Reorder', href: '/admin/stock-reorder', tip: 'Automatic & manual stock reordering & reorder points', icon: RefreshCw },
       { label: 'Purchase Orders', href: '/admin/purchasing', tip: 'Create & manage purchase orders to suppliers', icon: ClipboardList },
       { label: 'Suppliers', href: '/admin/distributors', tip: 'Manage suppliers, pricing & lead times', icon: Building2 },
-      { label: 'Distribution', href: '/admin/distribution', tip: 'Track distribution agents, routes & commissions', icon: Truck },
-      { label: 'Assets & Equipment', href: '/admin/assets', tip: 'Track fixed assets, maintenance & depreciation', icon: Wrench },
       { label: 'Stock Take', href: '/admin/stock-take', tip: 'Physical stock counts, audits & discrepancy tracking', icon: ClipboardCheck },
-    ],
-  },
-  {
-    title: 'SALES & ORDERS',
-    color: 'border-l-green-500',
-    items: [
-      { label: 'Customers', href: '/admin/customers', tip: 'Customer profiles & segmentation', icon: Users },
-      { label: 'Orders', href: '/admin/orders', tip: 'Create & manage customer orders', icon: FileText },
-    ],
-  },
-  {
-    title: 'FINANCE',
-    color: 'border-l-rose-500',
-    items: [
-      { label: 'Expenses', href: '/admin/expenses', tip: 'Track & manage business expenses', icon: Receipt },
-      { label: 'Credit Invoices', href: '/admin/credit-invoices', tip: 'Manage customer credit invoices & payment tracking', icon: CreditCard },
-      { label: 'Creditors', href: '/admin/creditors', tip: 'Track amounts owed to suppliers & creditors', icon: Landmark },
-      { label: 'Debtors', href: '/admin/debtors', tip: 'Track customer debts & outstanding balances', icon: UserMinus },
-      { label: 'Reports', href: '/admin/reports', tip: 'Financial reports, P&L, sales & ledger', icon: BarChart3 },
+      { label: 'Assets & Equipment', href: '/admin/assets', tip: 'Track fixed assets, maintenance & depreciation', icon: Wrench },
     ],
   },
   {
