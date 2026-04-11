@@ -4,10 +4,11 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import { logAudit } from '@/lib/audit-logger';
 import { useRouter } from 'next/navigation';
-import { Bell, ShoppingBag, Volume2, VolumeX, Download } from 'lucide-react';
+import { Bell, ShoppingBag, Volume2, VolumeX, Download, Sun, Moon, Monitor } from 'lucide-react';
 import Link from 'next/link';
 import { usePwaInstall } from '@/components/pwa-install-prompt';
 import { useUserPermissions } from '@/lib/user-permissions';
+import { useTheme } from 'next-themes';
 
 interface OnlineOrderNotif {
   id: string;
@@ -118,6 +119,8 @@ export function Header() {
   const [muted, setMuted] = useState(false);
   const { canInstall, isInstalled, triggerInstall } = usePwaInstall();
   const { isAdmin } = useUserPermissions();
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const alarmRef = useRef<OrderAlarm | null>(null);
   // Track IDs of orders that have been acknowledged (clicked/dismissed)
   const acknowledgedRef = useRef<Set<string>>(new Set());
@@ -159,6 +162,7 @@ export function Header() {
 
   // Initialize alarm on mount
   useEffect(() => {
+    setMounted(true);
     alarmRef.current = new OrderAlarm();
     return () => {
       alarmRef.current?.dispose();
@@ -398,10 +402,37 @@ export function Header() {
           </button>
         )}
 
+        {/* ── Theme Toggle ── */}
+        {mounted && (
+          <div className="flex items-center bg-secondary/60 rounded-lg p-0.5 border border-border/40">
+            <button
+              onClick={() => setTheme('light')}
+              className={`w-7 h-7 flex items-center justify-center rounded-md transition-all ${resolvedTheme === 'light' && theme !== 'system' ? 'bg-background shadow-sm text-amber-500' : 'text-muted-foreground hover:text-foreground'}`}
+              title="Light mode"
+            >
+              <Sun size={14} strokeWidth={2} />
+            </button>
+            <button
+              onClick={() => setTheme('system')}
+              className={`w-7 h-7 flex items-center justify-center rounded-md transition-all ${theme === 'system' ? 'bg-background shadow-sm text-primary' : 'text-muted-foreground hover:text-foreground'}`}
+              title="System theme"
+            >
+              <Monitor size={14} strokeWidth={2} />
+            </button>
+            <button
+              onClick={() => setTheme('dark')}
+              className={`w-7 h-7 flex items-center justify-center rounded-md transition-all ${resolvedTheme === 'dark' && theme !== 'system' ? 'bg-background shadow-sm text-blue-400' : 'text-muted-foreground hover:text-foreground'}`}
+              title="Dark mode"
+            >
+              <Moon size={14} strokeWidth={2} />
+            </button>
+          </div>
+        )}
+
         {/* ── Mute Toggle ── */}
         <button
           onClick={toggleMute}
-          className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors ${muted ? 'text-red-500 bg-red-50' : 'text-muted-foreground hover:bg-secondary'}`}
+          className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors ${muted ? 'text-red-500 bg-red-50 dark:bg-red-950' : 'text-muted-foreground hover:bg-secondary'}`}
           title={muted ? 'Unmute alarm' : 'Mute alarm'}
         >
           {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
@@ -462,19 +493,19 @@ export function Header() {
               ) : (
                 <div className="max-h-72 overflow-y-auto divide-y divide-border">
                   {notifications.map(n => (
-                    <div key={n.id} className={`flex items-start gap-3 px-4 py-3 hover:bg-secondary/50 transition-colors ${!acknowledgedRef.current.has(n.id) ? 'bg-red-50/50' : ''}`}>
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${n.status === 'On Hold' ? 'bg-amber-100' : !acknowledgedRef.current.has(n.id) ? 'bg-red-100 animate-pulse' : 'bg-blue-100'}`}>
+                    <div key={n.id} className={`flex items-start gap-3 px-4 py-3 hover:bg-secondary/50 transition-colors ${!acknowledgedRef.current.has(n.id) ? 'bg-red-50/50 dark:bg-red-950/30' : ''}`}>
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${n.status === 'On Hold' ? 'bg-amber-100 dark:bg-amber-900' : !acknowledgedRef.current.has(n.id) ? 'bg-red-100 dark:bg-red-900 animate-pulse' : 'bg-blue-100 dark:bg-blue-900'}`}>
                         <ShoppingBag size={14} className={n.status === 'On Hold' ? 'text-amber-600' : !acknowledgedRef.current.has(n.id) ? 'text-red-600' : 'text-blue-600'} />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-semibold truncate">{n.customerName}</p>
                         <p className="text-xs text-muted-foreground">{n.orderNumber} &bull; KES {n.total.toLocaleString()}</p>
                         <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${n.status === 'On Hold' ? 'bg-amber-100 text-amber-700' : 'bg-blue-100 text-blue-700'}`}>
+                          <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${n.status === 'On Hold' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'}`}>
                             {n.status}
                           </span>
                           {n.paymentMethod && (
-                            <span className="text-[10px] px-1.5 py-0.5 rounded font-bold bg-gray-100 text-gray-600">
+                            <span className="text-[10px] px-1.5 py-0.5 rounded font-bold bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300">
                               {n.paymentMethod}
                             </span>
                           )}
@@ -562,8 +593,8 @@ export function Header() {
               </div>
 
               <div className="border-t border-border py-1">
-                <button onClick={handleLogout}
-                  className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors">
+                  <button onClick={handleLogout}
+                  className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950 transition-colors">
                   <span className="text-base">🚪</span><span className="font-medium">Sign Out</span>
                 </button>
               </div>

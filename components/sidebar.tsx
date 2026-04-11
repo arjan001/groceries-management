@@ -60,30 +60,19 @@ const allNavGroups: NavGroup[] = [
     ],
   },
   {
+    title: 'PRODUCTS',
+    color: 'border-l-amber-500',
+    items: [
+      { label: 'Products', href: '/admin/recipes', tip: 'Manage grocery products — pricing, categories & details', icon: BookOpen },
+    ],
+  },
+  {
     title: 'SALES & ORDERS',
     color: 'border-l-emerald-500',
     items: [
       { label: 'Orders', href: '/admin/orders', tip: 'Create & manage customer orders', icon: FileText },
       { label: 'Customers', href: '/admin/customers', tip: 'Customer profiles & segmentation', icon: Users },
       { label: 'Distribution', href: '/admin/distribution', tip: 'Track distribution agents, routes & commissions', icon: Truck },
-    ],
-  },
-  {
-    title: 'FINANCE',
-    color: 'border-l-rose-500',
-    items: [
-      { label: 'Reports', href: '/admin/reports', tip: 'Financial reports, P&L, sales & ledger', icon: BarChart3 },
-      { label: 'Expenses', href: '/admin/expenses', tip: 'Track & manage business expenses', icon: Receipt },
-      { label: 'Credit Invoices', href: '/admin/credit-invoices', tip: 'Manage customer credit invoices & payment tracking', icon: CreditCard },
-      { label: 'Debtors', href: '/admin/debtors', tip: 'Track customer debts & outstanding balances', icon: UserMinus },
-      { label: 'Creditors', href: '/admin/creditors', tip: 'Track amounts owed to suppliers & creditors', icon: Landmark },
-    ],
-  },
-  {
-    title: 'PRODUCTS',
-    color: 'border-l-amber-500',
-    items: [
-      { label: 'Products', href: '/admin/recipes', tip: 'Manage grocery products — pricing, categories & details', icon: BookOpen },
     ],
   },
   {
@@ -96,6 +85,17 @@ const allNavGroups: NavGroup[] = [
       { label: 'Suppliers', href: '/admin/distributors', tip: 'Manage suppliers, pricing & lead times', icon: Building2 },
       { label: 'Stock Take', href: '/admin/stock-take', tip: 'Physical stock counts, audits & discrepancy tracking', icon: ClipboardCheck },
       { label: 'Assets & Equipment', href: '/admin/assets', tip: 'Track fixed assets, maintenance & depreciation', icon: Wrench },
+    ],
+  },
+  {
+    title: 'FINANCE & REPORTS',
+    color: 'border-l-rose-500',
+    items: [
+      { label: 'Reports', href: '/admin/reports', tip: 'Financial reports, P&L, sales & ledger', icon: BarChart3 },
+      { label: 'Expenses', href: '/admin/expenses', tip: 'Track & manage business expenses', icon: Receipt },
+      { label: 'Credit Invoices', href: '/admin/credit-invoices', tip: 'Manage customer credit invoices & payment tracking', icon: CreditCard },
+      { label: 'Debtors', href: '/admin/debtors', tip: 'Track customer debts & outstanding balances', icon: UserMinus },
+      { label: 'Creditors', href: '/admin/creditors', tip: 'Track amounts owed to suppliers & creditors', icon: Landmark },
     ],
   },
   {
@@ -328,11 +328,11 @@ export function Sidebar() {
   }, [badges]);
 
   return (
-    <aside className={`flex flex-col border-r border-border bg-sidebar transition-all duration-300 ${collapsed ? 'w-[60px]' : 'w-64'}`}>
+    <aside className={`flex flex-col border-r border-border/60 bg-sidebar transition-all duration-300 ease-in-out ${collapsed ? 'w-[60px]' : 'w-64'} shadow-sm`}>
       {/* Header with logo and collapse button */}
-      <div className="border-b border-border p-4 flex items-center justify-between">
+      <div className="border-b border-border/60 px-4 py-3.5 flex items-center justify-between">
         {!collapsed && (
-          <Link href="/admin" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <Link href="/admin" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
             {logoUrl ? (
               <img src={logoUrl} alt={businessName} className="h-8 w-auto object-contain rounded-lg" />
             ) : (
@@ -349,7 +349,7 @@ export function Sidebar() {
           <TooltipTrigger asChild>
             <button
               onClick={() => setCollapsed(!collapsed)}
-              className={`rounded p-1.5 hover:bg-secondary text-muted-foreground text-xs ${collapsed ? 'mx-auto' : ''}`}
+              className={`rounded-lg p-1.5 hover:bg-secondary/80 text-muted-foreground text-xs transition-colors ${collapsed ? 'mx-auto' : ''}`}
             >
               {collapsed ? '▶' : '◀'}
             </button>
@@ -361,7 +361,7 @@ export function Sidebar() {
       </div>
 
       {/* Search bar */}
-      <div className={`border-b border-border ${collapsed ? 'px-1.5 py-2' : 'px-3 py-2.5'}`}>
+      <div className={`border-b border-border/60 ${collapsed ? 'px-1.5 py-2' : 'px-3 py-2.5'}`}>
         {collapsed ? (
           <button
             onClick={() => {
@@ -463,12 +463,15 @@ export function Sidebar() {
         ) : (
           /* Normal navigation view */
           navGroups.map((group) => (
-            <div key={group.title} className="mb-4">
+            <div key={group.title} className="mb-3">
               {!collapsed && (
-                <p className="px-3 mb-1.5 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{group.title}</p>
+                <div className="px-3 mb-1 flex items-center gap-2">
+                  <p className="text-[10px] font-extrabold text-muted-foreground/70 uppercase tracking-[0.15em]">{group.title}</p>
+                  <div className="flex-1 h-px bg-border/40" />
+                </div>
               )}
-              {collapsed && <div className="mb-1 border-b border-border/40 mx-1" />}
-              <div className="space-y-0.5">
+              {collapsed && <div className="mb-1 border-b border-border/30 mx-2" />}
+              <div className="space-y-0.5 px-1">
                 {group.items.map((item) => {
                   const isActive = pathname === item.href;
                   const Icon = item.icon;
@@ -478,16 +481,16 @@ export function Sidebar() {
                       key={item.href}
                       href={item.href}
                       title={badge ? `${item.tip} (${badge.count} ${badge.label || 'pending'})` : item.tip}
-                      className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[14.5px] font-semibold transition-colors border-l-2 ${
+                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13.5px] font-medium transition-all duration-150 border-l-2 ${
                         isActive
-                          ? `bg-primary/10 text-primary ${group.color}`
-                          : `border-l-transparent text-sidebar-foreground hover:bg-secondary/70`
+                          ? `bg-primary/10 text-primary font-semibold ${group.color} shadow-sm`
+                          : `border-l-transparent text-sidebar-foreground hover:bg-secondary/60 hover:text-foreground`
                       } ${collapsed ? 'justify-center px-0 relative' : ''}`}
                     >
                       <Icon
-                        size={collapsed ? 20 : 17}
-                        strokeWidth={isActive ? 2.5 : 2}
-                        className="shrink-0"
+                        size={collapsed ? 19 : 16}
+                        strokeWidth={isActive ? 2.5 : 1.8}
+                        className={`shrink-0 transition-colors ${isActive ? '' : 'text-muted-foreground'}`}
                       />
                       {!collapsed && (
                         <>
@@ -505,19 +508,19 @@ export function Sidebar() {
         )}
       </nav>
 
-      <div className="border-t border-border p-3 space-y-2">
+      <div className="border-t border-border/60 p-3 space-y-2">
         {canInstall && !isInstalled && (
           <button
             onClick={triggerInstall}
             title="Install Snackoh App"
-            className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors bg-green-50 text-green-700 hover:bg-green-100 border border-green-200 ${collapsed ? 'justify-center px-0' : ''}`}
+            className={`flex items-center gap-2.5 w-full px-3 py-2 rounded-lg text-sm font-semibold transition-all bg-green-50 text-green-700 hover:bg-green-100 border border-green-200/80 dark:bg-green-950 dark:text-green-300 dark:border-green-800 dark:hover:bg-green-900 ${collapsed ? 'justify-center px-0' : ''}`}
           >
             <Download size={collapsed ? 20 : 16} strokeWidth={2.5} className="shrink-0" />
             {!collapsed && <span>Install App</span>}
           </button>
         )}
         {!collapsed && (
-          <p className="text-[10px] text-muted-foreground text-center">v2.0 | Snackoh Grocery System</p>
+          <p className="text-[10px] text-muted-foreground/60 text-center">v2.0 | Snackoh Grocery System</p>
         )}
       </div>
     </aside>
