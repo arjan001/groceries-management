@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { CartProvider, useCart } from '@/lib/cart-context';
 import { supabase } from '@/lib/supabase';
 import { ShoppingBag, X, Plus, Minus, Menu, ChevronRight, Mail, ArrowRight } from 'lucide-react';
-import CookieConsent from '@/components/cookie-consent';
 
 // ─── Navbar ─────────────────────────────────────────────────────────────────
 function Navbar() {
@@ -528,7 +527,6 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
         <Footer />
         <CartDrawer />
         <NewsletterModal />
-        <CookieConsent />
       </div>
     </CartProvider>
   );
